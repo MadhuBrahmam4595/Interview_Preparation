@@ -1,0 +1,148 @@
+1. What is the difference between == operator and .equals() method?
+Ans: .equals() for content comparison, where == operator is reference comparison.
+    String s1= new String("ashok");
+    String s2= new String("ashok");
+    System.out.println(s1==s2); //false
+    System.out.println(s1.equals(s2)); //true
+==========================================================================================
+2. Difference between new and newInstance() ?
+Ans: 
+new:
+----
+1. new is a operator, which can be used to create an object.
+2. We can use new operator if we know the class name ath he beginning. Test t = new Test();
+3. If the corresponding .class file  not available at Runtime then we will get RuntimeException saying NoClassDefFoundError, It is unchecked.
+4. To used new operator the corresponding class not required to contain no argument constructor.
+
+newInstance()
+-------------
+1. newInstance() is a method, present in class Class, which can be used to create an object.
+2. We can use the newInstance() method, If we don't class name at the beginning and available dynamically Runtime.
+Object o = Class.forName(arg[0]).newInstance();
+3. If the corresponding .class file  not available at Runtime then we will get RuntimeException saying NoClassDefFoundError, It is checked.
+4. To used newInstance() method the corresponding class should compulsory contain no argument constructor, Otherwise we will get RuntimeException saying InstantiationException.
+=================================================================================================================================================================================
+3. Difference between ClassNotFoundException and NoClassDefFoundError ?
+Ans:
+NoClassDefFoundError: For hard coded class names at Runtime in the corresponding .class files not available we will get NoClassDefFoundError, which is unchecked
+Ex: Test t = new Test(); 
+In Runtime Test.class file is not available then we will get NoClassDefFoundError
+
+ClassNotFoundException: For dynamically provided class names at Runtime. If the corresponding .class files is not available then we will get the RuntimeException saying 
+ClassNotFoundException.
+Ex: Object o = Class.forname("Test").newInstance();
+At Runtime if Test.class file not available then we will get the ClassNotFoundException, which is checked exception.
+=================================================================================================================================================================================
+4. Difference between instanceof and isInstance() ?
+Ans: 
+instanceof: instanceof an operator whcih can be used to check whether the given object is particular type or not, we know the type at beginning it is available.
+Example: String s = new String("Ashok");
+System.out.println(s.instanceof Object); //true
+If we know the type at the beginning only.
+
+isInstance(): isInstance() is method, present in class Class, we can use isInstance() method to checked whether the given object is particular type or not
+we don't know the type at beginning it is available dynamically at Runtime.
+Ex:
+class Test{
+  public static void main(String[] args){
+    Test t = new Test();
+      System.out.println(args[0]).isInstance());
+}
+}
+java Test Test //true
+java Test String //false
+java Test Ojbect //true
+==================================================================================================================================================================================
+5. What is your favorite package? Why java.lang is your favorite package?
+Ans: It is not required to import lang package explicitly but the remaining packages we have to import.
+===================================================================================================================================================================================
+6. Which cloning is best?
+Ans:
+If the object contain only primitive varible then swallow cloning is the best choice.
+If the object contain reference variables then Deep cloning is the best choice.
+==================================================================================================================================================================================
+7. Other than immutability and mutability is there any other difference between String and StringBuffer ?
+Ans: In String .equals() method meant for content comparison where as in StringBuffer meant for reference comparision.
+==================================================================================================================================================================================
+8. What is the SCP(String Constant Pool) advantage and disadvantage ?
+Ans: 
+Advantage: Instead of creating a separte object for every requirement we can create only one object and we can reuse same object for every requirement. This approach improves performances
+and memory utilization.
+Disadvantage: In SCP as several references pointing to the same object by using one reference if we are performing any changes the remaining references will be inflected. To
+prevent this compulsory String objects should be immutable. That is immutability is the disadvantage of SCP.
+=================================================================================================================================================================================
+9. Why String objects are immutable where as StringBuffer objects are mutable?
+Ans: In the case of String as several references pointing to the same object, by using one reference if we are allowed perform the change the remaining references will be impacted.
+To prevent this once we created a String object we can't perform any change in the existing object that is immutability is only due to SCP.
+But in the case of StringBuffer for every requirement we are creating a separate object will be created by using one reference if we are performing any change in the object the 
+remaining references won't be impacted hence immutability concept is not require for the StringBuffer.
+==================================================================================================================================================================================
+10. What is Autoboxing and Autounboxing ?
+Ans: 
+Automatic conversion of primitive to wrapper object by compiler is called Autoboxing.
+Example: Integer i = 10;  [compiler converts 'int' to 'Integer' automatically by Autoboxing]
+After compilation the above line will become.
+Integer i = Integer.valueOf(10);
+That is internally Autoboxing concept is implemented by using valueOf() method.
+
+Automatic conversion of wrapper object to primitive by compiler is called Autounboxing.
+Example:
+Integer I = new Integer(10);
+Int i = r;
+[compiler converts "Integer" to "int" automatically by Autounboxing]
+After compilation the above line will become.
+Int i = I.intValue();
+That is Autounboxing concept is internally implemented by using xxxValue() method.
+===================================================================================================================================================================================
+11. What is the difference between general import and static import?
+Ans: 
+general import: we can use normal imports to import classes and interfaces of a package. whenever we are using normal import we can access class and interfaces directly
+by their short name it is not require to use fully qualified names.
+static import: we can use static import to import static members of a particular class. whenever we are using static import it is not require to use class name we can access 
+static members directly.
+====================================================================================================================================================================================
+12. What is the difference between access specifier and access modifier ?
+Ans: 
+In old languages 'C' (or) 'C++' public, private, protected, default are considered as access specifiers and all the remaining are considered as access modifiers.
+But in java there is no such type of division all are considered as access modifiers.
+====================================================================================================================================================================================
+13. What is the difference between abstract class and abstract method ?
+Ans: 
+If a class contain atleast one abstract method then compulsory the corresponding class should be declare with abstract modifier. Because implementation is not complete and 
+hence we can't create object of that class.
+Even through class doesn't contain any abstract methods still we can declare the class as abstract that is an abstract class can contain zero no of abstract methods also.
+Examples: HttpServlet class is abstract but it doesn't contain any abstract method. Every adapter class is abstract but it doesn't contain any abstract method.
+====================================================================================================================================================================================
+14. What is the difference between final and abstract ?
+Ans: 
+* For abstract methods compulsory we should override in the child class to provide implementation. Whereas for final methods we can't override hence abstract final combination 
+is illegal for methods.
+* For abstract classes we should compulsory create child class to provide implementation whereas for final class we can't create child class. Hence final abstract combination 
+is illegal for classes.
+* Final class cannot contain abstract methods whereas abstract class can contain final method.
+=================================================================================================================================================================================
+15. What is the difference between abstract and strictfp ?
+Ans: 
+* Strictfp method talks about implementation where as abstract method never talks about implementation hence abstract, strictfp combination is illegal for methods.
+* But we can declare a class with abstract and strictfp modifier simultaneously. That is abstract strictfp combination is legal for classes but illegal for methods.
+===============================================================================================================================================================================
+16. What is Marker Inteface ?
+Ans: If an interface doesn't contain any methods and by implementing that interface if our objects will get some ability such type of interfaces are called Marker Interfaces(Or)
+Tag Interfaces (Or) Ability interface.
+Example: Serializable, Cloneable, RandomAccess, SingleThreadModel,...
+* By implementing serializable-interface we can send that object across the network and we can save state of an object into a file.
+* By implementing SingleThreadModel interface Servlet can process only one client request at a time so that we can get "ThreadSafety".
+* By implementing Cloneable interface our object is in position to provide exactly duplicate cloned object.
+Q. Without having any methods in marker interface how objects will get ability ?
+Ans: Internally JVM is responsible to provide required ability.
+Q. Why JVM is providing the required ability in marker interfaces ?
+Ans: To reduce complexity of the programming.
+Q. Is it possible to create our own marker interface ?
+Ans: Yes, but customization of JVM must be required.
+================================================================================================================================================================================
+17. What is the difference between interface, abstract class and concrete class ? When we should go for interface, abstract class and concrete class ?
+Ans: 
+* If we don't know anything about implementation just we have requirement specification then we should go for interface.
+* If we are talking about implementation but not completely (partial implementation) then we should go for abstract class.
+* If we are talking about implementation completely and ready to provide service then we should go for concrete class.
+==========================================================================================================================================================================
