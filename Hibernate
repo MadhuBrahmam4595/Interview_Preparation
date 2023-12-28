@@ -1,0 +1,21 @@
+ORM: 
+----
+* ORM stands for Object Relational Mapping.
+* It is a theory concept used at database programming to perform operation like insert, update, delete and select in object format only.
+* JDBC converts object to primitive data and SQL Query should be writtern by programmer using primitives, which is not following OOPs. 
+ORM says “Do not convet object data, do operations in OOPs. Format only”.
+• For this concept programmer gend follow mapping rule. Given as 
+1. className- Must be mapped with – tableName
+2. VariableName- Must be mapped with – columnName
+** should be done by programmer using XML/Annotatios concept.
+** Then ORM convert 
+Object <----> ROW
+** Here , ORM only generates SQL Query.
+===============================================================================================================================================================================
+Framework:
+---------
+FrameWork is a Combination of diierent technologies and design patterns by 
+using framework we can develop complete application or a part of application faster. It is also 
+called as RAD.
+RAD= Rapid Application Development (faster coding)
+===============================================================================================================================================================================
