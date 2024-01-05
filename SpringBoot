@@ -325,8 +325,7 @@ Method Descriptions:
 Note:--
 =>Dynamic Projections are slow compare to static Projections.
 =>For dynamic Projections “Type selection, validate and execution” done at Runtime, where as for static select and validate done at compile time, only execution done at runtime.
-=>Static Projections also called as compile time (selected) Projections and Dynamic 
-Projections also called as Runtime (selected) Projections.
+=>Static Projections also called as compile time (selected) Projections and Dynamic Projections also called as Runtime (selected) Projections.
 
 Special Types in Query methods:
 *******************************
