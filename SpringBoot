@@ -116,12 +116,12 @@ Scope (<scope> </scope> in dependency:
       </dependency>
 
 Possible Maven dependency scopes are (5) :
-  1> compile:-- A jar Required from compilation time onwards. It is only default scope.
-  2> runtime:-- A jar required when we are running an Application, not before that.
-  3> test:-- A Jar required only for UnitTesting time.
-  4> provided:-- A jar provided by servers or Frameworks (Container….).
-  5> system:-- A Jar loaded from File System (like D:/abc/myjar/…)
-      =>In this case we should also give <SystemPath> with location of JAR.Ex:-- <systemPath>D:/asf/lib/</systemPath>
+  1> compile: A jar Required from compilation time onwards. It is only default scope.
+  2> runtime: A jar required when we are running an Application, not before that.
+  3> test:    A Jar required only for UnitTesting time.
+  4> provided:A jar provided by servers or Frameworks (Container….).
+  5> system:  A Jar loaded from File System (like D:/abc/myjar/…)
+              =>In this case we should also give <SystemPath> with location of JAR.Ex:-- <systemPath>D:/asf/lib/</systemPath>
       
 NOTE:-- There is a dependency jar which not existing in the maven centre but locally.After mvn clean install, this dependency jar can't be found from the fat jar. is this an 
 known-issue? the workaround is have to install it into local maven repo with command:
@@ -361,16 +361,348 @@ Special Types in Query methods:
     spring.datasource.hikari.auto-commit =true
 
 
+********************************************************** SB WEB MVC ******************************************************************************************************************
+1. Introduction:
+================
+  => Spring Boot has provided one starter for web application. 
+  => It is similar to spring WEB MVC execution process but reduces work done by programmer for,
+   a. Maven project creation and setup.
+   b. Pom.xml dependencies and plugins.
+   c. Writing common code (AppInit, AppConfig).
+   d. Handle Runtime Environment and creating JAR/WARs.
+  => Such process is taken care by spring boot and called as “AutoConfiguration”.
+  => Even coming to Handler Mapping is configured by FC.
+  => ViewResovler needs not to be configured. But Programmer has to provide (Prefix and Suffix) using properties/yml file.
+  => FC (DispatcherServlet) is configured by spring boot and mapped to URL = “/”.
+  =>FC, ViewResolver, HandlerMapper taken care by Boot, Controller and UI files should be defined by Programmer.
+    Data Rendering:-- Reading data from Model (I) or ModelMap(C) at runtime and send to UI is known as Data Rendering, It is implemented using EL Programming.
+      =>Programmer should provide inputs like port number view resolver details using Properties or yml file. Example files like
+      application.properties:--
+        server.port=9898
+        spring.mvc.view.prefix=/WEB-INF/views/
+        spring.mvc.view.suffix=.jsp
+      =>Default port no mapped to ‘8080’ by using key ‘server.port’. We can change even.
+      =>Spring boot has provided 3 embedded servers. [No download and No install]
+      Those are : Tomcat (default server), Jetty and Undertow.
+      =>In General Tomcat container 2 engines Servlet Engine (Catalina) and JSP Engine (JASPER). In Spring boot, tomcat comes with only Servlet engine. That’s why it is also called as 
+        light weight engine that works for “DispatcherServlet”, nothing else.
+      => Default Static Resource Handler is added to folder static and template which are provided under src/main/resources folder.
+      =>To work with JSP files in Spring Boot WEB apps, we need to add dependencies in pom.xml.
+        <dependency>
+         <groupId>org.apache.tomcat.embed</groupId>
+         <artifactId>tomcat-embed-jasper</artifactId>
+         <scope>provided</scope> //Version taken care by Spring boot (and Tomcat)
+        </dependency>
+      =>To avoid/remove tomcat server (default server) from Boot application, we need to add <Exclusion> for Tomcat under web dependency. Given as,
+        <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-web</artifactId>
+          <exclusions>
+            <exclusion>
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-tomcat</artifactId>
+            </exclusion>
+           </exclusions>
+          </dependency>
+
+        =>To use jetty in spring boot, first we need to exclude ‘tomcat’, then add below dependency in pom.xml.
+          <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+          </dependency>
+        =>In case of ‘JBoss Undertow Server’ add below dependency.
+          <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+          </dependency>
+        =>Tomcat provided by Apache.
+        =>Jetty Provided by Eclipse.
+        =>Undertow provided by JBoss.
+        =>Final packing of Spring Boot Application: after coding and unit testing, our project will be converted to JAR/WAR based on <packing> type selected while creating project.
+        Execute commands:-
+        Step#1:- Do JDK setup.
+        Step#2:- Clear target folder.
+        Step#3:- Generate jar/war file.
+        =>Refresh target folder after message “build success”. 
+        =>If pom.xml contains <packing>war</packing> then it will be converted to [ProjectName]-[version].war 
+        =>Else it is considered as jar[ProjectName]-[version].jar
+        =>To indicate Spring container, spring f/w has provided two container interfaces. 
+        Those are.
+         a. BeanFactory (I) [Legacy]
+         b. ApplicationContext (I) [new]
+
+        =>In Spring boot programming, for stand-alone type application impl class used “AnnotationConfigApplicationContext”.
+        =>For Spring Boot web and related application impl class used: “AnnotationConfigServletWebServerApplicationContext”.
+        =>In case of Spring Application for web Programming Programmer has to define 
+        Configuration code as.
+        Ex:--
+          @Configuration
+          @ComponentScan (basePackage=”---“)
+          public class AppConfig {----}
+          =>Here, basePackage must be provided by programmer. If we are using Spring boot then ‘basePackage’ is set to Spring Boot Starter class package.
+          =>All our classes which are annotated with StereoType annotation must be under starter class package or its sub package.
+          =>All our classes which are annotated with stereotype annotations must be under starter class manually. It is not a good approach.
+          =>We can run Starter class only one time if type is web application with one port number.
+          =>If we want to run again, then must stop last process which is already running.
+           -> Goto Console option.
+           -> Look at Console Symbol.
+           -> Click on DropDown (In case of multiple).
+           -> Click on Red Color Box Symbol (Stop Symbol).
+
+        =>URL gets changed from server to server where as URI remains same.
+        =>If URL doesn’t contain any PORT number then default mapped to ‘80’ [HTTP Default port number].
+        Ex:-- http://locahost/MyApp/show
+        -> In above example PORT number is : 80
+        ***It means if server is running on PORT number: 80, then PORT number not required to write in URL.
+
+Q>What is the difference between Model (I) and ModelMap (C) ?.
+A> ModelMap:-- It is a shared Memory holds data in key=val which allocates memory based on data added to it In simple onDemand Memory Creation.
+B> Model:-- Model also similar to ModelMap, but un-used key=val pairs (at UI) are removed from memory.
+NOTE:-- In above example “AppInt” and AppConfig” are provided by spring Boot.Annotation like @EnableWebMvc, @ComponentScan, @PropertySource not required to provide.
+
+2. Hot Deployment using DevTools:--
+  =>If we do any modification in application files after starting server, Boot will not update them into server (war/jar) unless we started i.e. to see changes “STOP and START” 
+    server again.
+  =>To avoid this process “Spring Boot DevTools” are introduced which runs as parallel execution and links to war file.
+  =>It is also called as HotDeployment/ HotSwapping. This process is used only to save development time not recommend using in Production.
+  =>DevTools executions LiveReload in server on port 35729
+  Dependency:--
+    <dependency>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-devtools</artifactId>
+     <scope>runtime</scope>
+    <dependency>
+  =>Choose Spring DevTools while creating your project.
+  Deployment:-- Place jar/war in server and start server
+  HotDeployement:-- Without stopping server, update only new files into jar/war which is in server.
+  NOTE:--
+  1. To change PORT Number use key spring.devtoolds.liveload.port=---
+  2. By default few files are not re-loaded by devTools Given using key “spring.devTools.restart.exclude” 
+  Locations are:-
+  META-INF/maven/** META-INF/resources/**,
+  resources/** static/**,
+  public/** template/**,
+  **/*Test.class **/*Tests.class,
+  git.properties, META-INF/build-info.properties
+  1. To avoid extra files which need to be re-loaded can be given key (with example values) spring.devtools.restart.additional-exclude=/sample/app.properties
+  =>To specify location which need to be included for re-loading (key-val example) use 
+  key: spring.devtools.restart.additional-paths=static/**, templates/**
+
+4. Cache Management in Spring Boot:
+===================================
+=>Cache is Temp memory used at application side to reduce network calls between Application and Database for commonly accessed data.
+=>Caches are used to save time for network calls that improves the app performance.
+=>Cache should never hold large data, apply only for few modules which are accepted more times by client.
+***Do’t apply cache for findAll() type method
+=>To implement Cache Management in Spring Boot Application. We should use any one vendor. ex: HazelCast Cache
+=>First, we need to indicate “Create Cache Memory at application side, using class Config (com.hazelcast.config)”.
+***This Cache Memory can also be called as “HazelCast Instance”.
+=>To enable cache for one module, use MapConfig(C) object and provide details like “name, lifeTime, cacheSize, Eviction…” one time.
+=>This MapConfig (C) can be repeated for multiple module [i.e one module = one MapConfig object].
+=>MapConfig stores data in key=val format Here key=PrimaryKey (ID) and val=Model class object.
+=>EvictionPolicy is an enum defined with Eviction possible values. It means removing one object from cache based on Condition.
+=>EvictionPolicy Possible values and meaning are.
+   LRU:- Least Recently used.
+   LFU:- Least Frequently Used.
+   NONE:- Don’t remove any Object.
+   RANDOM:- Any one Object
+  Frequency:-- No. of times object is accessed.
+  Recent:-- Which is seen last in order (or) latest object
+  =>Here, Config is used to create Cache Instance where as MapConfig is used to module memory. Example, looks like below.
+  Hazelcast-cache Config :-- It is a 3rd party Cache configuration process, supported for any java application caching
+
+Step#1:- Provide Dependencies for Starter-cache, HazelCast and Hazelcast-spring integration.
+=>Choose Spring cache abstraction dependency
+<dependency>
+ <groupId>org.springframework.boot</groupId>
+ <artifactId>spring-boot-starter-cache</artifactId>
+</dependency>
+<dependency>
+ <groupId>com.hazelcast</groupId>
+ <artifactId>hazelcast</artifactId>
+</dependency>
+<dependency>
+ <groupId>com.hazelcast</groupId>
+ <artifactId>hazelcast-spring</artifactId>
+</dependency>
+
+Step#2:- On starter class level we need to specify enable annotation for Cache Management. @EnableCaching
+Step#3:- Model class which needs cache support must implement one interface
+java.io.serializable
+Ex:-- class Employee implements Serializable { }
+
+Step#4:- Define Java config class for HazelCast Cache Configuration and MapConfig 
+Objects code looks like:
+=> In application write Java configuration code for Config (C) (com.hazelcast).
+
+Step#5:- At service Layer methods need to apply cache annotation given by spring.
+ a. @Cacheable:- This one must be applied over select method (getOneById).
+ b. @CacheEvict:- This one must be applied over delete method (deleteById).
+ c. @CachePut:- CachePut annotation is used to update object in cache before
+ updating in Database.
+A >Over getOne (findOne) method @Cacheable(value=”cache-name”, key=”#PKId”)
+b>Over delete method (delete byId) @CacheEvict(vale=”cache-name”, key=”#PKId”)
+------Example service layer methods with cache annotation:-----
+@Service
+public class Employee {
+@Cacheable (value="emp-cache", key="#empId")
+public Employee getOneEmployee(Integer empId) {
+//select * from empTab where eid=?
+}
+@CacheEvict(value="emp-cache", key="#empId")
+public void deleteById(Integer empId) {
+//delete * from emptab where eid=?
+}}
+
+1>@CacheEvict :-- This annotation is used to remove object from cache (not from DB).
+=>On calling service.delete..() method, SQL query delete row only in DB but not in 
+cache.
+=>At same time object to be removed from cache, for that add this Annotation over 
+delete(..) method in service layer
+
+2>@Cacheable :-- On calling select… SQL (load one row as object) same object will be 
+placed in cache before give to Service (App).
+3> CachePut:-- This annotation is used to update object in cache before updating in 
+Database.
+NOTE:--
+ Define one MapConfig memory for one module cache.
+ new MapConfig().setName(“prod-cache”);
+ Provide MAX size of cache (maximum no. of objects to be hold by cache)
+ setMaxSizeConfig(new MaxSizeConfig(100, MaxSizePolicy.FREE_HEAP_SIZE))
+ Provide EvictionPolicy.
+ **If cache is full and another object is in waiting state to get into cache then
+ EvictionPolicy will not allow another obj. (Default is : NONE).
+ **EvictionPolicy .LRU : Will remove last accesses Object (Least Recently Used) 
+ from cache.
+ Provide Life Time of object to be in cache (in second)
+ setTimeToLiveSeconds (3000);
+
+Log4j.properties:
+=> This file is used to provide all the configuration details of Log4J. Especially like appender and layout details with Pattern and also root Logger details. 
+=>We should not create Appender in every class only logger object must be created in a class.
+=>Data will be shown in below order like
+ 1. rootLogger
+ 2. appenders
+ 3. layouts
+ Appender name must be defined before use at rootLogger level.
+ We can specify multiple appenders in log4j.properties file like 2 File Appenders, one JdbAppender, one smtpAppender etc…
+ Appender name can be any think ex:-- abc, hello, sysout, file, db, email etc…
+ log4j.properties file must be created under src/main/resource folder (Maven).
+ Make rootLogger =OFF to disable log4j completely without deleting code in any class or properties file.
+ log4j.properties file will be auto detected by log4j tool. No special coding is required.
+Format : Log4j.properties
+log4j.rootLogger=PRIORITY, APPENDER NAMES, ….
+log4j.appender.<name>.layout=…..
+
+VM Arguments:-- A variable created with value at JVM level which can be stored to one or services (Projects/Threads/Apps… etc) Format for creating System / VM Argument -Dkey = value =>To read data in Application code is : 
+String s = System.getProperty(“key”);
+2. Working with logging using spring boot:--
+Step#1:- Creating logger object using multiple APIs.
+a>SLF4J API:--
+ private static Logger log = LoggerFactory.getLogger(----.class);
+b>Apache Log4J:--
+ private static Logger log = LogManager.getLogger(----.class);
+c>Java util Logging 
+ private static logger log = LogManager.getLogger(---.class, getName());
+Step#2:- Provide Appender and Layout details using Properties files/yml file in Boot.
+NOTE:- Application No need to create another log4j.properties file.
+=>Default logging level in INFO.
+Example:-- key = value pairs are given below.
+application.properties:--
+logging.level.root=INFO
+logging.file=d://logs/my.log
+logging.level.org.springframework=error
+logging.pattern.file=%p %d{dd-mm-yy}%L %c[%m]-%d %n
+logging.pattern.console=%d{yyyy-mm-dd HH:mm:ss}-%m %n
 
 
+5. Lombok API:--
+=>This is open source JAVA API used to avoid writing (or generating) common code for 
+Bean/Model/Entity classes.
+That is like: 
+1.>Setters and Getters
+2.>toString() method
+3.>Default and Parameterized Constructor
+4.>hashCode() and equals() methods.
+=>Programmer can write these methods manually or generate using IDE. But if any 
+modification (s) are done in those classes then again generate set/get methods also 
+delete and write code for new : toString, hashCode, Equals and Param const (it is like 
+represented task).
+=>By using Lombok API which reduces writing code or generating task for Beans.
+Just apply annotations, it is done.
+=>To use Lombok, while creating Spring Boot Project choose Dependency : Lombok (or) 
+Add below dependency in pom.xml.
+(for Spring Boot Project: Do not provide version provided by spring boot Parent only.)
+<dependency>
+<groupId>org.projectlombok</groupId>
+<artifactId>lombok</artifactId>
+<optional>true</optional>
+</dependency>
+<dependency>
+ <groupId>org.projectlombok</groupId>
+ <artifactId>lombok</artifactId>
+ <scope>provided</scope>
+</dependency>
+NOTE:-- (For Non Spring Boot Projects)
+<dependency>
+ <groupId>org.projectlombok</groupId>
+ <artifactId>lombok</artifactId>
+ <version>1.18.6</version>
+</dependency>
 
+6. Logging:-- This process is used to track all types of messages when any request is 
+processed by server.
+=>Here tracking means, finding messages like SUCCESS, WARNING, EXCEPTIONS, (N/W, 
+DB…), INFORMATIONS… etc.
+Types of server:--
+a. DEV / QA Server
+b. UAT Server (User Acceptance Test):- Client does testing before purchase the 
+project/product.
+c. Production Server :-- Application placed in real-time server and this can be 
+accesses by end users.
+d. MS service (Management Support).
+=>To implement Loggin concept, we need to provide 3 components. Those are:
+a>Logger (C) 
+b>Appender (I)
+c>Layout (AC)
+a>Logger:-- This object need to be created in class which needs Logging concept.
+=>If Logger object is created then Logging is enabled for that class, else not.
+=>All classes may not need Logger object, Example Model class.
+=>Logger object can be created using Different Vendors few are: Apache Log4J, SELF4J, 
+Java UTIL Logging, JBoss Logging, Apache JCL (Commons Logging)…etc.
 
-
-
-
-
-
-
-
-
+b>Appender :-- It indicates where to store Log messages Possible Appender are.
+ 1>ConsoleAppender (C)
+2>FileAppender *** (C)
+3>SmtpAppender (C)
+4>TelnetAppender (C)
+5>JdbcAppender (C)
+=>FileAppender is mostly used one for projects which stores all log messages in 
+---.log file.
+c>Layout:-- This one used to specify “Message Format” to be printed on Appender.
+=>PossibleLayouts are / implemented classes are.
+ 1>SimpleLayout:- Prints only message as it is provided in log methods.
+ 2>XMLLayout:- Converts message into XML Format.
+ 3>HTMLLayout:- Prints in HTML format.
+ 4>PatternLayout:- Programmer can define Message Format (like Date-Time-class-
+ method-line-message ... etc).
+=>For more details about pattern visit bellow link :
+https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
+NOTE:-- In one Application we can use more than one Appender also.
+=>In development mostly used Appender is FileAppender and Layout is Pattern Layout.
+=>If No appender is provided to Logger object then Log4J throws WARNING as log4j : 
+WARN No appenders could be found for logger (com.app.Product).
+=>At last Appender object must be added to Logger Object then only it is considered 
+by using log.addAppender() method.
+Priority Methods with Order:--
+=>This are used to print log messages with type indications.
+=>List of Methods with order is given below.
+Order Method Meaning
+1 TRACE =>State of execution.
+2 DEBUG =>Message with final Result.
+3 INFO =>Message of current step
+4 WARN =>Warning message.
+5 ERROR =>Exception messages.
+6 FATAL =>High Level Exceptions/ Errors
+0 OFF =>Do TURN OFF Logging
 
