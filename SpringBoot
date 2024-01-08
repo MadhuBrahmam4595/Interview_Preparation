@@ -710,3 +710,155 @@ Order Method Meaning
 6 FATAL =>High Level Exceptions/ Errors
 0 OFF =>Do TURN OFF Logging
 
+
+***************************************** SB REST (Provider & Consumer) ***********************************************************************
+1. Introduction:--
+=> To implement ReSTFul webservices API using simple annotations and Templates Spring boot ReST F/w has been introduced.
+=> Even to implement Microservices design Spring boot ReST API is used.
+NOTE:
+a.> Consumer and Provider interchanges the data Primitive (String format only), Class Type (Object) and Collections.
+b.> Data will be converted to either JSON or XML format also known as Global Formats
+c.> String data will be converted to any other type directly.
+d.> ReST Controller supports 5 types of Request Methods Handling. Those are HTTP Method : GET, POST, PUT, DELETE and PATCH.
+e.> Controller class level use annotations @RestController (Stereotype), @RequestMapping (for URL).
+f.> Controller methods level use annotations.
+TYPE             Annotations
+GET              @GetMapping
+POST             @PostMapping
+PUT              @PutMapping
+DELETE           @DeleteMapping
+PATCH            @PatchMapping
+g.>To provide Inputs to Request Methods in RestController, use annotations.
+TYPE               Annotation
+url?key=val        @RequestParam
+/url/val/          @PathVariable
+/url/key=val       @MatrixVariable
+Http Header        @RequestHeader
+Http Body          @RequestBody
+***All above annotations works on HttpRequest only, supports reading input data.
+h.> By default Matrix Parameter is disabled (may not work properly). To enable this write below code in MVC config file.
+i.> DispatcherServlet is autoConfigured in Spring Boot with URL Pattern mapped to /.
+j.> AutoConfiguration Provided even for @EnableWebMvc, @ComponentScan(Startsclass), @PropertySource(“ClassPath:application.propery”)
+k.> Embedded server.
+NOTE:--
+a. URL is case-sensitive, same URL can be used at multiple (GET, POST, PUT…) must be different.
+b. Difference between PUT and Patch :
+PUT :-- It indicates modify complete (full) data, based on Identity (ID-PK).
+PATCH :-- It indicates modify partial (few data, based on Identity (ID-PK).
+
+Example#2 Read Data from Http Request (Head and Body).
+=> Http Request sends data using Header and body Section (both).
+=> To Read any Header Parameter use code
+ @RequestHeader DataType localVariable
+ @RequestHeader (required=false) DataType localVariable
+ @RequestHeader (“key”) DataType localVariable
+=> To read data from Body (RAW Data) use code @RequestBody
+NOTE:--
+ Request Header is required (true) by default to make it optional, add code required=false.
+ If key name localVariable Name same then providing key name is optional.
+ Request Body Raw data (Characters or any…).
+ Can be Stored in String with any variableName.
+2. Passing Input to RestController:--
+=> RestController will read input data either in primitive or in Type (Object/Collection).
+=> To pass data/input to rest controller Spring has provided different concepts.
+Those are :--
+1> Request Header
+2> Request Body ***
+3> Request Parameter
+4> Path Variable ***
+5> Matrix Variable (disable mode by default)
+
+1> Request Header:-- It provides data in key=value format (both are String type).
+=> Request header also called as Header Parameters.
+=> These are used to provide instructions to server (application/Controller).
+Ex:-- Content-Type, Accept, host, Date, Cookies…
+
+2>Request Body:-- To send large/bulk data like objects and collections data in the form of JSON/XML.
+=> Even supported large text (Raw data).
+=> Spring boot enables JSON conversion by default, but not XML (no JAXB API).
+
+3>Request Parameter:-- To pass primitive data (like id, name, codes … etc) as input, request parameters are used.
+=> format looks like url?key=val&key=val…
+=> Both key and value are String type by default.
+Request Parameter: Format:--
+@RequestParam(value="key", required=true/false, defaultValue="-value-")
+DataType localVariable
+
+Syntax #1:-
+@RequestParam("key") DataType localVariable
+Ex#1: @RequestParam("sname") String sn
+
+Syntax #2:-
+@RequestParam DataType localVar
+Ex#2: @RequestParam String sname
+=>If key name and local variable name are same then key is not 
+
+Syntax #3:-
+@RequestParam(required=false) DT localVariable
+=>To make key-value is optional @RequestParam (required=false) String sname
+
+Syntax #4:-
+@RequestParam (required=false, defaultValue="-DATA-")DT localVariable
+=>To change default value from null to any other value.
+@RequestParam(required=false, defaultValue="No DATA") String sname
+
+Paths are two types:--
+a.>Static Path [format:/url]
+b.>Dynamic Path [format:/{key}]
+=> Static Path indicates URL, where as Dynamic Path indicates Data at runtime.
+=> While sending data using Dynamic Path key should not be used. Only data
+=> Order must be followed in case of sending multiple Parameters.
+=> To read data at controller method, use annotation : @PathVariable.
+Syntax:--
+@PathVariable datatype keyName
+
+3. RestController : Method ReturnType:--
+=> We can use String (for primitive Data), A classType or Any CollectionType(List, Set, Map…) as Method ReturnType.
+=>If return types String then same data will be send to Controller.
+=>If return type is non-String (Class or Collection Type) then Data converted to Global Format (ex: JSON/XML).
+=>Default conversion Type supported by Boot is JSON (Java Script Object Notation).
+=>Even “ResponseEntity<T>” can be used as Return Type which holds Body (T) and status (HttpStatus enum).
+Possible Http Status are (5):
+Code        Types
+1xx         Informational
+2xx         Success
+3xx         Redirect
+4xx         Client Side Error
+5xx         Server Side Error
+=> To Convert Object to JSON (and JSON to Object) SpringBoot uses JACKSON API.Spring Boot ReST + Data JPA +MySQL CRUD Operations (Rest API with Swagger):--
+=> Here, define ReST Collector which works for JSON and XML Data input/output.
+=> For Primitive inputs use PathVariable.
+=> ReST Controller must return output type as ResponseEntity<T> which holds Body(T) and HttpStatus Ex:-- 500, 404, 200, 400 etc..
+
+Operation Type Http Method Annotation
+Save         @PostMapping
+Update       @PutMapping
+Delete       @DeleteMapping
+getOne       @GetMapping
+get all      @GetMapping
+
+MediaType Conversion annotations are:--
+=> @RequestBody and @ResponseBody are the MediaType annotations.
+=> Here, @ResponseBody is applied when we write @RestController annotation over class (**Not handled by programmer). 
+  It converts Class/Collection type to JSON/XML.
+=> @RequestBody should be handled by programmer. It converts JSON/XML Data to Object format.
+NOTE:-- If request Id is not present then Return Http Status – 400 BAD-REQUEST
+4. Enable Swagger UI in Spring Boot ReST Application:--
+=> Compared to all other tools Swagger is a RichSet API provides dynamic UI based on code written for Rest Controller with common Paths.
+Step#1:- Add below dependencies in pom.xml
+<dependency>
+ <groupId>io.springfox</groupId>
+ <artifactId>springfox-swagger2</artifactId>
+ <version>2.7.0</version>
+</dependency>
+<dependency>
+ <groupId>io.springfox</groupId>
+ <artifactId>springfox-swagger-ui</artifactId>
+ <version>2.7.0</version>
+</dependency>
+Flow Meaning
+->Docket ()             =>Create Docket
+->select ()             =>Choose Rest classes
+->apis(basepackage())   =>Classes are in package
+->paths (regex())       =>Having common path
+->build()               =>Create final output
