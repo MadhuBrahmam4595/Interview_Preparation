@@ -375,7 +375,8 @@ Special Types in Query methods:
   => ViewResovler needs not to be configured. But Programmer has to provide (Prefix and Suffix) using properties/yml file.
   => FC (DispatcherServlet) is configured by spring boot and mapped to URL = “/”.
   =>FC, ViewResolver, HandlerMapper taken care by Boot, Controller and UI files should be defined by Programmer.
-    Data Rendering:-- Reading data from Model (I) or ModelMap(C) at runtime and send to UI is known as Data Rendering, It is implemented using EL Programming.
+    Data Rendering:-- Reading data from Model (I) or ModelMap(C) at runtime and send to UI is known as Data Rendering, It is implemented using 
+                      EL Programming.
       =>Programmer should provide inputs like port number view resolver details using Properties or yml file. Example files like
       application.properties:--
         server.port=9898
@@ -384,8 +385,8 @@ Special Types in Query methods:
       =>Default port no mapped to ‘8080’ by using key ‘server.port’. We can change even.
       =>Spring boot has provided 3 embedded servers. [No download and No install]
       Those are : Tomcat (default server), Jetty and Undertow.
-      =>In General Tomcat container 2 engines Servlet Engine (Catalina) and JSP Engine (JASPER). In Spring boot, tomcat comes with only Servlet engine. That’s why it is also called as 
-        light weight engine that works for “DispatcherServlet”, nothing else.
+      =>In General Tomcat container 2 engines Servlet Engine (Catalina) and JSP Engine (JASPER). In Spring boot, tomcat comes with only Servlet 
+        engine. That’s why it is also called as light weight engine that works for “DispatcherServlet”, nothing else.
       => Default Static Resource Handler is added to folder static and template which are provided under src/main/resources folder.
       =>To work with JSP files in Spring Boot WEB apps, we need to add dependencies in pom.xml.
         <dependency>
@@ -393,7 +394,8 @@ Special Types in Query methods:
          <artifactId>tomcat-embed-jasper</artifactId>
          <scope>provided</scope> //Version taken care by Spring boot (and Tomcat)
         </dependency>
-      =>To avoid/remove tomcat server (default server) from Boot application, we need to add <Exclusion> for Tomcat under web dependency. Given as,
+      => To avoid/remove tomcat server (default server) from Boot application, we need to add <Exclusion> for Tomcat under web dependency. 
+          Given as,
         <dependency>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-starter-web</artifactId>
@@ -405,44 +407,46 @@ Special Types in Query methods:
            </exclusions>
           </dependency>
 
-        =>To use jetty in spring boot, first we need to exclude ‘tomcat’, then add below dependency in pom.xml.
+        => To use jetty in spring boot, first we need to exclude ‘tomcat’, then add below dependency in pom.xml.
           <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jetty</artifactId>
           </dependency>
-        =>In case of ‘JBoss Undertow Server’ add below dependency.
+        => In case of ‘JBoss Undertow Server’ add below dependency.
           <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-undertow</artifactId>
           </dependency>
-        =>Tomcat provided by Apache.
-        =>Jetty Provided by Eclipse.
-        =>Undertow provided by JBoss.
-        =>Final packing of Spring Boot Application: after coding and unit testing, our project will be converted to JAR/WAR based on <packing> type selected while creating project.
+        => Tomcat provided by Apache.
+        => Jetty Provided by Eclipse.
+        => Undertow provided by JBoss.
+        => Final packing of Spring Boot Application: after coding and unit testing, our project will be converted to JAR/WAR based on <packing> 
+          type selected while creating project.
         Execute commands:-
         Step#1:- Do JDK setup.
         Step#2:- Clear target folder.
         Step#3:- Generate jar/war file.
-        =>Refresh target folder after message “build success”. 
-        =>If pom.xml contains <packing>war</packing> then it will be converted to [ProjectName]-[version].war 
-        =>Else it is considered as jar[ProjectName]-[version].jar
-        =>To indicate Spring container, spring f/w has provided two container interfaces. 
+        => Refresh target folder after message “build success”. 
+        => If pom.xml contains <packing>war</packing> then it will be converted to [ProjectName]-[version].war 
+        => Else it is considered as jar[ProjectName]-[version].jar
+        => To indicate Spring container, spring f/w has provided two container interfaces. 
         Those are.
          a. BeanFactory (I) [Legacy]
          b. ApplicationContext (I) [new]
 
-        =>In Spring boot programming, for stand-alone type application impl class used “AnnotationConfigApplicationContext”.
-        =>For Spring Boot web and related application impl class used: “AnnotationConfigServletWebServerApplicationContext”.
-        =>In case of Spring Application for web Programming Programmer has to define 
+        => In Spring boot programming, for stand-alone type application impl class used “AnnotationConfigApplicationContext”.
+        => For Spring Boot web and related application impl class used: “AnnotationConfigServletWebServerApplicationContext”.
+        => In case of Spring Application for web Programming Programmer has to define 
         Configuration code as.
         Ex:--
           @Configuration
           @ComponentScan (basePackage=”---“)
           public class AppConfig {----}
-          =>Here, basePackage must be provided by programmer. If we are using Spring boot then ‘basePackage’ is set to Spring Boot Starter class package.
-          =>All our classes which are annotated with StereoType annotation must be under starter class package or its sub package.
-          =>All our classes which are annotated with stereotype annotations must be under starter class manually. It is not a good approach.
-          =>We can run Starter class only one time if type is web application with one port number.
+          => Here, basePackage must be provided by programmer. If we are using Spring boot then ‘basePackage’ is set to Spring Boot Starter class 
+              package.
+          => All our classes which are annotated with StereoType annotation must be under starter class package or its sub package.
+          => All our classes which are annotated with stereotype annotations must be under starter class manually. It is not a good approach.
+          => We can run Starter class only one time if type is web application with one port number.
           =>If we want to run again, then must stop last process which is already running.
            -> Goto Console option.
            -> Look at Console Symbol.
