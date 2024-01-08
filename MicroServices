@@ -1,0 +1,14 @@
+1. Monolithic Application:
+**************************
+=> A Project which holds all modules together and converted as one Service (one .war file).
+=> All most every project in realtime is implemented using this format only.
+=> In this case, if no. of users are getting increased, then to handle multiple request (load) use LBS (Load Balancing Server).
+=>But few modules needs Extra load, not all. In this case other modules get memory which is waste (no use). Hence reduces performance of server 
+(application).
+**Consider Project P1 is having 2 modules M1(Register), M2(Login) and their runtime memories are M1=50 MB, M2=50 MB.
+=> Here, End user Register only onetime (first time) and login is mostly used module.
+-> Consider Application needs 100MB size in server as register 50MB and Login 50MB.
+-> To handle multiple client request multiple instances of sample App must be provided using Load balancing server with Load Register.
+=>In above example, M2 Module is getting fewer (100) requests from Client. So, max 2 instances are may be enough. Other 2 instances (memories) are 
+no use. It means near 100MB memory is not used, which impacts server performance.
+
