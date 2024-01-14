@@ -1,0 +1,12 @@
+Task 1:
+Input: java 100
+Output: java (15 spaces) 100
+Code:
+Scanner sc=new Scanner(System.in);
+for(int i=0;i<3;i++) {
+                String s1=sc.next();
+                int x=sc.nextInt();
+                //Complete this line
+                System.out.printf("%-15s%03d%n", s1, x);
+            }
+===============================================================================================================
