@@ -1,0 +1,193 @@
+1. What is an API?
+2. What is REST?
+3. What is REST API?
+4. Is API considered a software?
+5. Which protocol do REST APIs use?
+6. Which HTTP request methods are supported by REST ?
+7. What are Advantages and disadvantages of REST API ?
+8. What are the principles of REST ?
+9. What is messaging in the context of REST ?
+10. List differences between API and Web Services ?
+11. What is a resource ?
+12. What is a URI ?
+13. Name the five important principles of an api design ?
+14. What does it mean for API to be stateless ?
+15. Which markup languages are primarily used to represent resources in REST APIs ?
+16. What are Idempotent methods ?
+17. What are the main parts of an HTTP request ?
+
+
+1. What is an API?
+==================
+=> API Stands for Application Programming Interface, They are basically a collection of functions and procedures which allows us to communicate two application or libray.
+=> An API is a software intermediary that allows two applications to talk to each other. APIs are an accessible way to extract and share data within and across organizations.
+=> APIs are all around us. Every time you use a rideshare app, send a mobile payment, or change the thermostat temperature from your phone, you’re using an API.
+
+2. What is REST?
+================
+=> REST stands for Representational State Transfer, and is an architectural style based on the Hypertext Transfer Protocol(HTTP) for developing web-based applications.
+=> REST outlines several guidelines that web services must follow be considered RESTful. These guidelines ensure that requests and resources are sent easily and efficiently between client
+and server using standardized HTTP methods.
+=> REST is one of the most widely used approaches for building web-based APIs (Application Programming Interfaces). It provides standards between computer systems on the web, 
+making it easier for systems to communicate with each other. 
+=> REST is more flexible than SOAP and allows applications to exchange data in multiple formats.
+
+3. What is REST API?
+=====================
+=> RESTful API is an interface that two computer systems use to exchange information securely over the internet. 
+=> Most business applications have to communicate with other internal and third-party applications to perform various tasks. 
+=> RESTful APIs support this information exchange because they follow secure, reliable, and efficient software communication standards.
+=> For example, to generate monthly payslips, your internal accounts system has to share data with your customer's banking system to automate invoicing and communicate 
+with an internal timesheet application. 
+
+4. Is API considered a software?
+================================
+=> API is not a software but rather an interface to provide data exchange and functionality among different software applications or processes.
+=> While an API provides access to data as well as functionality, it can be thought of as software that fulfills our needs, too.
+
+5. Which protocol do REST APIs use?
+===================================
+=> REST APIs use the HTTP protocol to communicate with clients.
+=> A RESTful API uses existing HTTP methodologies defined by the RFC 2616 protocol, such as:
+GET to retrieve a resource;
+PUT to change the state of or update a resource, which can be an object, file or block;
+POST to create that resource; and
+DELETE to remove it.
+=> This allows REST APIs to be easily deployed over the internet, since HTTP is the same protocol that is used to deliver web pages to client browsers.
+
+6. Which HTTP request methods are supported by REST ?
+=====================================================
+=> An HTTP request method indicates which action the client wants the API to perform on a resource.
+=> Essential HTTP Methods in RESTful API Development.
+1. GET: The GET method is used to ‘retrieve’ a record or a collection of records from the server.
+2. POST: The POST method sends data to create a ‘new record‘ on the server. 
+3. PUT: The PUT method sends data to update an ‘existing record‘ on the server.
+4. PATCH: Like the PUT method, PATCH is also used to send data to update an ‘existing record’ on the server. 
+    But the important difference between PUT and PATCH is that PATCH only applies partial modifications to the record instead of replacing the whole record.
+5. DELETE: The DELETE method is used to delete record(s) from the server. 
+
+7. What are Advantages and disadvantages of REST API ?
+======================================================
+Advantages of REST API:
+=> REST API is easy to understand and learn, due to its simplicity, known API.
+=> With REST API, being able to organize complicated applications & makes it easy to use resources.
+=> The high load can be managed with help out of HTTP proxy server & cache.
+=> REST API is easy to explore and discover.
+=> It makes it simple for new clients to work on other applications, whether it is designed specifically for purpose or not.
+=> Use standard HTTP procedure call- outs to retrieve data and requests.
+=> REST API depends on codes, can use it to synchronize data with a website without any complications.
+=> Users can avail access to the same standard objects and data model when compared to SOAP-based web services.
+=> Brings flexibility formats by serializing data in XML or JSON format.
+=> Allows Standard-based protection with the use of OAuth protocols to verify your REST requests.
+
+Disadvantages or Challenges in REST:
+=> Lack of state: most web applications require stateful mechanisms. 
+    Suppose you purchase a website which has a mechanism to have a shopping cart. It is required to know the number of items in the shopping cart before the actual purchase is made. 
+    This burden of maintaining the state lies on the client, which makes the client application heavy and difficult to maintain.
+=> Last of security: REST doest impose security such as SOAP. That is the reason REST is appropriate for public URLs, but it is not good for confidential data passage between 
+    client and server. 
+
+8. What are the principles of REST ?
+====================================
+1. Client-Server decoupling:
+In a REST API design, client and server programs must be independent. 
+The client software should only know the URI of the requested resource; it should have no additional interaction with the server application. 
+
+2. Uniform Interface:
+All API queries for the same resource should look the same regardless of where they come from. 
+The REST API should ensure that similar data, such as a user's name or email address, is assigned to just one uniform resource identifier (URI). 
+
+3. Statelessness:
+REST APIs are stateless, meaning each request must contain all the information needed to process it. 
+
+4. Layered System architecture:
+REST API requests and responses are routed through many tiers. 
+REST APIs must be designed so neither the client nor the server can tell whether they communicate with the final application or an intermediary.  
+
+5. Cacheable:
+Wherever feasible, resources should be cacheable on the client or server side. 
+Server responses must additionally indicate if caching is authorized for the offered assistance. 
+The objective is to boost client-side speed while enhancing server-side scalability.  
+
+6. Code on Demand
+REST APIs typically provide static resources, but in rare cases, responses may include executable code (such as Java applets). 
+In these cases, perform the code when necessary.
+
+9. What is messaging in the context of REST ?
+=============================================
+=> In REST, messaging refers to the back-and-forth communication between the client and API.
+=> An interaction always starts with the client messaging the API with an HTTP request.
+=> The API processes this request, then sends back an HTTP response that gives the status of the request and any resources the client asked for.
+
+10. List differences between API and Web Services ?
+===================================================
+=> All Web services are APIs but not all APIs are Web services.
+=> Web services might not contain all the specifications and can't perform all the tasks that APIs would perform.
+=> A Web services uses only three styles of use: SOAP, REST and XML-RPC for communication where as API may be exposed to in multiple ways.
+=> A Web service always needs a network to operate while APIs don't need a network for operation.
+
+11. What is a resource ?
+========================
+=> In REST, every accessible piece of content on the server is labeled as a resource.
+=> A resource is an object with a type, associated data, a relationship with other resources on the server, and a list of methods that can be used with it.
+For example, a resource could be an HTML or text file, a data file, an image or video, or an executable code file.
+=> A resource is identified with a uniform resource identifier, or URI. Clients access resources by including their URIs in HTTP requests.
+
+12. What is a URI ?
+===================
+=> URI stands for uniform resource identifier.
+=> In REST, a URI is a String that identifies a resource on a web server.
+=> Each resource has its own unique URI which, when included in an HTTP request, allows clients to target that resource and perform actions on it.
+=> The process of targeting a resource with its URI is called "addressing".
+=> The format of a URI is as follows:
+    <protocol>://<service-name>/<ResourceType>/<ResourceID>
+
+13. Name the five important principles of an api design ?
+=========================================================
+1. Consistency:
+=> Maintain consistency in naming conventions, URI structures, and response formats throughout the API. 
+=> This makes it easier for developers to understand and use the API, as they can apply learned patterns consistently across different endpoints.
+2. Clarity and Simplicity:
+=> Strive for simplicity and clarity in the design of your API. Use clear and intuitive names for resources, actions, and parameters. 
+=> Avoid unnecessary complexity and keep the API design easy to understand for both developers and clients.
+3. Versioning:
+=> Implement a versioning strategy to handle changes to the API over time. This ensures that existing clients can continue to function without disruption while new features or 
+improvements are introduced. Common versioning approaches include including the version number in the URI or using custom headers.
+4. Statelessness:
+=> Follow the statelessness principle of REST. Each API request from a client to the server should contain all the information needed to understand and process the request. 
+Avoid relying on server-side sessions to store client state between requests. This enhances scalability and simplifies client-server interactions.
+5. Error Handling:
+=> Define clear and consistent error-handling mechanisms. Provide informative error messages with appropriate HTTP status codes. This helps developers understand what went wrong 
+and how to correct it. Additionally, include error details in the response payload to aid in troubleshooting.
+
+14. What does it mean for API to be stateless ?
+===============================================
+=> Statelessness is one of the key principles of REST architecture.
+=> In stateless communication, the server does not store any information about previous communications.
+=> In other words, the client and server do not know each other's state. Every requests and response is a new interaction, and each request includes everything the server
+needs to give a successful response.
+=> Statelessness simplifies client-server interactions because the server does not rely on past requests to process future requests.and thus does not need to consume space 
+and resources storing data from these requests.
+
+15. Which markup languages are primarily used to represent resources in REST APIs ?
+===================================================================================
+=> There are 2 common languages for representing resources in REST APIs
+    1. XML (extensible markup language)          2. JSON (JavaScript Object Notation)
+
+16. What are Idempotent methods ?
+=================================
+=> Idemponent methods are methods that return the same outcome irrespective of how many times the same request has been made.
+=> These methods are important as there are common instances where the client-side might send out duplicate requests.
+=> Hence it's important to use Idemponent methods to avoid such errors.
+
+17. What are the main parts of an HTTP request ?
+================================================
+There are five main components of an HTTP request in REST.
+=> Status line: Indicates the intended action of the request and includes.
+=> A request method that indicates the HTTP request method to be performed on the resource.(i.e GET, PUT,POST and DELETE)
+=> a URI that identifies the requested resource on the server.
+=> The HTTP version being used, which signals which version the API should respond with.
+=> HTTP Request Header: Lists metadata about the request, such as the user agent, file formats the client will accept, format of the request body, language, caching preference, etc.
+=> HTTP Request Body: Contains any data associated with the request. This is only necessary if the request is to modify data on the server with the POST or PUT methods.
+
+
