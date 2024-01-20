@@ -34,6 +34,7 @@
 34. What are 'Options' in REST APIs ?
 35. What are common API errors that often founded ?
 36. What are API documentation templates that are commonly used ?
+37. What is integration and types?
 
 
 1. What is an API?
@@ -389,6 +390,26 @@ The types of bugs that APIs will find are:
 =================================================================
 There are several available API documentation templates help to make the entire process simple and straightforward, such as: Swagger, Miredot and Slate etc.
 
+37. What is integration and types?
+==================================
+Integration: 
+    => It means connecting one application which is running in server#1 and with another application which is running in Server#2.
+Based on languages used to develop application, integration is divided into two types.
+1. Homogeneous Integration.    2. Heterogeneous Integration. 
+
+1. Homogeneous Integration:
+----------------------------
+If both applications are developed in same language and integrated together is called 
+Homogeneous Integration.
+In case of Java, CORBA, RMI, EJB are used for Integration.
+CORBA – Common Object Request Broker Architecture
+RMI – Remote Method Invocation.
+EJB – Enterprise java Bean.
+
+2. Heterogeneous Integration:
+If two applications are integrated together which are developed in different languages is 
+called Heterogeneous Integration.
+Here WebServices supports both Homogeneous and Heterogeneous Integration.
 
 
 
