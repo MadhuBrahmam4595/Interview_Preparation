@@ -302,6 +302,84 @@ However, good REST APIs still implement safety measures for secure and reliable 
     => Security Headers
     => Educate Developers
 
+27. What are some main characterstics of REST ?
+===============================================
+=> REST uses the HTTP protocol for communication.
+=> REST makes server resources available via URIs. Each resource has a unique URI.
+=> REST is stateless, meaning the server does not store information about past communications with clients.
+=> REST uses GET to retrieve resources from a server, whereas other web service methods use POST.
+
+28. What is the difference between API testing and Unit Testing ?
+=================================================================
+=> Unit testing is white-box testing while API testing is black-box testing.
+=> Unit testing is used to verify that each unit in isolation works as expected while API testing is used to assure full functionality of the system.
+
+29. How should we test the API security ?
+=========================================
+To test the security of the API during API testing, we need to validate two components.
+=> Authentication : Whether the identity of the end-user is correct.
+=> Authorization : Whether the user is allowed to access the access.
+
+30. Which options help to identify the type of API requests ?
+=============================================================
+=> The HTTP Methods help identify the type of API requests.
+
+31. What are the challenges faced in API testing ?
+==================================================
+The challenges faced in API testing are:
+=> API chaining or sequencing the API class.
+=> Testing parameter combinations.
+=> Frequent Schema changes.
+=> Access to the database.
+
+32. What must be checked when performing API testing ?
+======================================================
+In order to perform an API test you must check the following.
+=> Accuracy of data
+=> Schema validation
+=> HTTP status codes
+=> Data type, validations, order and completeness
+=> Authorization checks
+=> Implementation of response timeout
+=> Error codes in case API returns
+=> Non-functional testing like performance and security testing
+
+33. What kinds of bugs does API testing find most commonly ?
+=============================================================
+The types of bugs that APIs will find are:
+=> Missing or duplicate functionality
+=> Fails to handle error conditions gracefully
+=> Stress
+=> Reliability
+=> Security
+=> Unused flags
+=> Not implemented errors 
+=> Inconsistent error handling 
+=> Performance
+=> Multi-threading issues
+=> Improper errors
+
+34. What are 'Options' in REST APIs ?
+=====================================
+=> It's an HTTP method used to fetch the supported HTTP options or operations that help clients to choose the options in REST APIs.
+=> Cross-Origin Resources Sharing (CORS) uses the REST option method.
+
+35. What are common API errors that often founded ?
+===================================================
+=> HTTP Status codes (Client Erros, Server Erros)
+=> Validation Errors
+=> Authentication and Authorization Errors 
+=> Rate Limit Exceeded
+=> Conflict Errors
+=> Unexpected Erros
+=> Custom Error Messages
+=> Redirect and URL Changes
+
+36. What are API documentation templates that are commonly used ?
+=================================================================
+There are several available API documentation templates help to make the entire process simple and straightforward, such as: Swagger, Miredot and Slate etc.
+
+
 
 
 
