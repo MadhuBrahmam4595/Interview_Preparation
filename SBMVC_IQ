@@ -1,0 +1,333 @@
+1. What is MVC ?
+2. What do you mean Spring MVC Framework ?
+3. What are key features available in Spring version wise ?
+4. What are the advantages of going for spring MVC ?
+5. Is Spring 5 compatible with older versions of Java ? 
+6. What are the Design Patterns Used by Spring ?
+7. Explain Spring MVC architecture ?
+8. Describe Dispatcher Servlet ? 
+9. What is the role of Handler Mapper ?
+10. What is the role of Controller ?
+11. How to create Controller in Spring MVC ?
+12. How many objects will be created for Spring Controller ?
+13. Tell me some predefined Controller classes available in Spring MVC ?
+14. How to map request to Controller Method in Spring MVC ?
+15. What is View Resolver in Spring MVC ?
+16. How many view resolvers you know in Spring MVC ?
+17. What is ContextLoaderListener in Spring MVC ?
+18. What is @ModelAttribute ? 
+19. What is Spring Form Tag Library ?
+20. Explain few tags available in Spring Form Tag Library ?
+21. What is the purpose of RedirectAttributes in Spring boot ?
+22. What is FlashAttribute ?
+23. What is the difference between Map, ModelMap and ModelAndView ?
+24. Are Model objects specific to a request ?
+25. Can I have multiple parameters with the same name in a request ?
+26. Can you explain the concept of Interceptors in Spring MVC ?
+27. Can we Scheduled a task in spring web application ?
+28. What is CharacterEncodingFilter in Spring MVC ?
+29. How to enable Spring Security for a web application ?
+30. What is the difference between @Controller and @RestController ?
+31. Can we return Response from Controller method directly ?
+32. What is the difference between @RequestBody and @ResponseBody ?
+33. What is the difference between @ResponseBody and ResponseEntity ?
+34. How to read Query Parameter in Spring Controller ?
+35. How to read Path parameter in Spring Controller ?
+36. How to handle Exceptions in Spring MVC ?
+37. How to prevent double posting problem in Spring MVC ?
+38. What is RestTemplate in Spring MVC ?
+39. What is the use of WebClient and WebTestClient ?
+40. Can we develop Spring MVC application without xml ?
+41. How to get ServletContext and ServletConfig objects in a Spring Bean ?
+42. How to use Tomcat JNDI Datasource in Spring Web Application ?
+
+
+1. What is MVC ?
+================
+=> MVC stands for Model-View-Controller, which is a software architectural pattern commonly used for designing and organizing the code in 
+  applications, especially in web development. 
+=> The MVC pattern separates an application into three interconnected components, each handling specific responsibilities:
+  1.a. Model:
+  => The Model represents the application's data and business logic. 
+  => It is responsible for managing the data, processing business rules, and responding to queries from the View or instructions from the Controller.
+  =>Encapsulates the data and state of the application.Performs operations such as data validation, retrieval, and manipulation.
+  => Notifies observers (typically Views) about changes in the data.
+
+  1.b. View:
+  => The View is responsible for presenting the data to the user and handling the user interface. 
+  => It displays information from the Model to the user and forwards user input (such as clicks and keystrokes) to the Controller for processing.
+  => Presents the data to the user in a visually understandable format.
+  => Observes changes in the Model and updates the UI accordingly.Sends user input to the Controller for processing.
+
+  1.c. Controller:
+  => The Controller acts as an intermediary between the Model and the View. 
+  => It receives user input from the View, processes it, and updates the Model accordingly. 
+  => The Controller is responsible for managing the flow of data between the Model and the View.
+  => Interprets user input and translates it into actions for the Model or View.
+  => Updates the Model based on user input or other events.
+  => Sends updates to the View when the Model changes.
+
+2. What do you mean Spring MVC Framework ?
+==========================================
+=> Spring MVC is one module in Spring Framework which is built on the Servlet API.
+=> It provides Model-View-Controller architecture that can be used to develop flexible web applications using Spring Framework.
+=> Key features and components of the Spring MVC framework include:
+  DispatcherServlet:
+  ------------------
+  => The central component in the Spring MVC framework is the DispatcherServlet, which acts as the front controller. 
+  => It receives incoming requests, dispatches them to the appropriate handlers, and manages the overall request lifecycle.
+  Controller:
+  -----------
+  => Controllers are responsible for handling user requests, processing the input, and providing an appropriate response. 
+  => In Spring MVC, controllers are typically annotated with @Controller. 
+  => They can handle various types of requests (e.g., HTTP GET or POST) and are responsible for invoking business logic.
+  Model:
+  ------
+  => The Model in Spring MVC represents the data and business logic of the application. 
+  => It is usually a POJO (Plain Old Java Object) that holds attributes and state. 
+  => The data from the Model is passed to the View for rendering.
+  ViewResolver:
+  -------------
+  => Spring MVC supports various view technologies, such as JSP, Thymeleaf, FreeMarker, and more. 
+  => The ViewResolver is responsible for resolving logical view names to actual view implementations. 
+  => It enables the framework to render the output for the client.
+  View:
+  -----
+  => The View is responsible for presenting the data to the user. 
+  => In Spring MVC, the View can be a JSP page, Thymeleaf template, or any other view technology. 
+  => The view receives data from the model and renders it to generate the final output that is sent to the client.
+  HandlerMapping:
+  ---------------
+  => Handler mappings are used to map incoming requests to specific controller methods. 
+  => Spring MVC provides various types of handler mappings, including annotation-based mappings and XML-based mappings.
+  Data Binding and Validation:
+  ----------------------------
+  => Spring MVC supports data binding, allowing automatic conversion of request parameters to Java objects. 
+  => It also provides built-in validation support through annotations such as @Valid.
+  Interceptors:
+  -------------
+  => Interceptors allow developers to perform pre-processing or post-processing of requests before they reach the controller or after 
+      the controller has generated a response. This is useful for tasks like logging, authentication, or modifying the model.
+
+
+3. What are key features available in Spring version wise ?
+===========================================================
+Spring Framework 1.0 (Released in 2004):
+----------------------------------------
+Core Container:  Introduced core features like Inversion of Control (IoC) and the BeanFactory, enabling developers to manage and 
+configure Java objects (beans).
+Aspect-Oriented Programming (AOP): Provided support for aspect-oriented programming, allowing developers to modularize cross-cutting 
+concerns.
+Data Access: Introduced the JDBC abstraction to simplify database access, offering a consistent and easier-to-use API.
+Transaction Management: Added support for declarative transaction management using AOP proxies.
+Model-View-Controller (MVC): Introduced the first version of the Spring MVC framework for building web applications.
+
+Spring Framework 2.0 (Released in 2006):
+----------------------------------------
+Annotation-Based Configuration: Introduced support for annotation-based configuration, reducing the need for XML configuration.
+Java 5 Features: Leveraged Java 5 features like generics and metadata annotations.
+Spring AOP Enhancements: Enhanced AOP features, including the introduction of the @AspectJ annotation for more powerful aspect-oriented 
+programming.
+Integration with Java EE 5: Improved integration with Java EE 5 features, making it easier to use Spring in enterprise environments.
+Enhanced Spring MVC: Added support for RESTful web services and improved the Spring MVC framework.
+
+Spring Framework 3.0 (Released in 2009):
+----------------------------------------
+Java 5 Minimum Requirement: Raised the minimum Java version requirement to Java 5.
+Spring Expression Language (SpEL): Introduced the Spring Expression Language for querying and manipulating object graphs.
+Spring 3.0 REST Support: Expanded REST support with the introduction of @PathVariable and @RequestBody annotations in Spring MVC.
+Java Configuration: Introduced the @Configuration annotation for Java-based configuration, providing an alternative to XML.
+Profile Support: Added support for profiles, allowing developers to define sets of configuration that can be activated conditionally.
+
+Spring Framework 4.0 (Released in 2013):
+----------------------------------------
+Java 6 Minimum Requirement: Raised the minimum Java version requirement to Java 6.
+Introduction of Spring Boot: Introduced Spring Boot, a convention-over-configuration, opinionated framework for simplifying the process 
+of building and deploying Spring-based applications.
+Java-based Conditional Configuration: Enhanced the Java-based configuration with conditional configuration based on certain conditions.
+WebSocket Support: Added support for WebSocket communication in Spring MVC.
+Groovy Support: Provided better integration with the Groovy language for writing configuration and scripts.
+
+Spring Framework 5.0 (Released in 2017):
+----------------------------------------
+Java 8 Minimum Requirement: Raised the minimum Java version requirement to Java 8.
+Reactive Programming Support: Introduced a new reactive programming paradigm with the introduction of the Spring WebFlux framework.
+Functional Bean Registration: Introduced a more functional and programmatic approach to bean registration with the @Bean annotation.
+Kotlin Support: Enhanced support for the Kotlin programming language.
+Revised Testing Support: Improved testing support, including the introduction of the JUnit 5 (Jupiter) extension model.
+
+4. What are the advantages of going for spring MVC ?
+====================================================
+-> Spring MVC implements a clear seperation of concerns that allows us to develop and unit test our applications easily.
+
+=> Dispatcher Servlet
+=> Controllers
+=> View Resolvers
+=> Views, Models
+=> ModelAndView
+=> Model and Session Attributes
+
+-> All above components are completely independent of each other, and they are responsible for one thing only.
+-> Therefore, MVC gives us quite big flexibility. It's based on interfaces (with provided implementation classes), and we can configure
+    every part of the framework by using custom interfaces.
+-> Another important thing is that we aren't tied to a specific view technology (for example, JSP), but we have the option to choose from
+    the ones we like the most.
+-> Another advantage is Form Binding (Form Data Can be Binded Model Objects).
+-> Also, we don't use Spring MVC only in web applications development but in the creation of RESTful webservices as well.
+
+5. Is Spring 5 compatible with older versions of Java ? 
+=======================================================
+-> To build and run Spring 5 application, you will need minimum JDK8 and JavaEE 7.
+   Previous JDK and JavaEE version are not supported anymore.
+
+6. What are the Design Patterns Used by Spring ?
+================================================
+Singleton Pattern        : Singleton-scoped beans
+Factory Pattern          : Bean Factory classes
+Prototype Pattern        : Prototype-scoped beans
+Adapter Pattern          : Spring Web and Spring MVC
+Proxy Pattern            : Spring Aspect Oriented Programming Support
+Template Method Pattern  : Jdbc Template, Hibernate Template, etc.
+Front Controller         : Spring MVC DispatcherServlet
+Data Access Object       : Spring DAO Support
+Model View Controller    : Spring MVC
+
+7. Explain Spring MVC architecture ?
+====================================
+MVC design pattern, where the application is divided into three main components: Model, View, and Controller. 
+
+Model:
+------
+-> The Model represents the application's data and business logic. 
+-> It encapsulates the state and behavior of the application. 
+-> In Spring MVC, the Model is often implemented using Plain Old Java Objects (POJOs) or JavaBeans. 
+-> These objects hold the data and are responsible for processing business logic.
+-> The Model objects are managed by the Spring framework and are typically populated with data in the Controller. 
+-> The data is then passed to the View for rendering.
+
+View:
+-----
+-> The View is responsible for presenting the data to the user. 
+-> It takes the data from the Model and generates the appropriate output for the client. 
+-> In Spring MVC, views can be implemented using various technologies such as JSP (JavaServer Pages), Thymeleaf, FreeMarker, or even 
+    simple JSON or XML views.
+-> Views are loosely coupled with the Model and Controller, allowing for flexibility in choosing the presentation technology. 
+-> The View receives data from the Model and renders it for the user.
+
+Controller:
+-----------
+-> The Controller handles user input and manages the flow of data between the Model and the View. 
+-> It is responsible for processing incoming requests, invoking the appropriate business logic in the Model, and preparing the data for 
+  rendering in the View.
+-> In Spring MVC, the Controller is typically implemented as a Java class annotated with @Controller. 
+-> Methods within the Controller class are annotated with @RequestMapping to map specific URLs or request patterns to corresponding 
+  methods.
+-> The Controller receives input from the user (HTTP requests) and decides which business logic in the Model to invoke. 
+-> After processing the request, it passes the data to the View and selects the appropriate view for rendering the response.
+
+DispatcherServlet:
+------------------
+-> The DispatcherServlet acts as the front controller in the Spring MVC architecture. 
+-> It receives all incoming requests and dispatches them to the appropriate controllers based on URL mappings. 
+-> The DispatcherServlet is configured in the web.xml file or through Java-based configuration.
+-> The DispatcherServlet works closely with HandlerMappings, HandlerAdapters, and ViewResolvers to determine which Controller to invoke, 
+  how to handle the request, and which View to use for rendering.
+
+HandlerMapping:
+---------------
+-> HandlerMappings are responsible for mapping the incoming request to the appropriate Controller. 
+-> They inspect the request and determine which Controller should handle it. 
+-> Spring MVC provides various types of HandlerMappings, including RequestMappingHandlerMapping for annotation-based mappings and others.
+
+HandlerAdapter:
+---------------
+-> HandlerAdapters are responsible for invoking the appropriate method in the Controller based on the incoming request. 
+-> They adapt the request to the Controller's method signature and handle the execution of the method.
+
+ViewResolver:
+-------------
+-> The ViewResolver is responsible for resolving the logical view names returned by the Controller to actual view implementations. 
+-> It determines which view technology to use and how to render the data for the client.
+
+8. Describe Dispatcher Servlet ? 
+================================
+-> In the Spring Framework, the DispatcherServlet is a crucial component of the Spring MVC (Model-View-Controller) web framework. 
+-> It serves as the front controller, handling the incoming HTTP requests, dispatching them to the appropriate controllers, and managing
+  the overall request lifecycle.
+
+Front Controller:
+-----------------
+-> The DispatcherServlet acts as a front controller, meaning that it is the entry point for all incoming requests to a Spring MVC web 
+  application. 
+-> When a client makes an HTTP request, the request first goes through the DispatcherServlet.
+
+Configuration:
+--------------
+-> The DispatcherServlet is typically configured in the web.xml file (for XML-based configuration) or through Java-based configuration 
+  (using WebApplicationInitializer and other mechanisms). 
+-> Configuration includes specifying the servlet name, URL mappings, and references to other important components like the application 
+  context.
+
+-> Example of web.xml configuration:
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+Request Handling:
+----------------
+-> The DispatcherServlet is responsible for handling different types of requests, such as HTTP GET, POST, PUT, DELETE, etc. 
+-> It determines which controller should handle the request based on the URL mapping and other configuration.
+
+Handler Mapping:
+----------------
+-> The DispatcherServlet consults the configured HandlerMapping beans to determine which controller should handle the incoming request. 
+-> HandlerMapping is responsible for mapping a request to a specific handler (controller).
+
+Handler Adapter:
+----------------
+-> Once the appropriate controller is identified, the DispatcherServlet delegates the request to the corresponding HandlerAdapter. 
+-> The HandlerAdapter is responsible for executing the controller's method that corresponds to the requested URL.
+
+Controller Execution:
+---------------------
+-> The Controller's method is executed, and it performs the necessary business logic, interacts with the Model, and prepares the data to 
+  be sent to the View.
+
+View Resolution:
+----------------
+-> After the Controller has processed the request, the DispatcherServlet uses a configured ViewResolver to determine which view should 
+  be used to render the response. 
+-> The ViewResolver resolves the logical view name returned by the controller to an actual view implementation.
+
+Rendering the Response:
+-----------------------
+-> The selected view is then responsible for rendering the response, incorporating the data provided by the Controller. 
+-> The rendered output is sent back to the client as the HTTP response.
+
+Request Lifecycle Management:
+-----------------------------
+-> Throughout this process, the DispatcherServlet manages the request lifecycle, coordinating the various components involved in request 
+  handling, and ensuring the smooth flow of control.
+
+-> The DispatcherServlet simplifies the development of web applications by providing a centralized entry point and handling the 
+  complexities of request dispatching, allowing developers to focus on writing controllers and views. 
+-> Its extensibility and configurability make it a key component in building flexible and scalable Spring MVC applications.
+
+9. What is the role of Handler Mapper ?
+=======================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
