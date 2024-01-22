@@ -316,6 +316,47 @@ Request Lifecycle Management:
 
 9. What is the role of Handler Mapper ?
 =======================================
+=> Handler Mapper is a interface that defines a mapping between requests and handler objects.
+=> While Spring MVC framework provides some ready-made implementations, the interface can be implemented by developers to provide customized
+    mapping strategy.
+
+10. What is the Role of Controller ?
+====================================
+=> MVC Controllers are responsible for controlling the flow of the application execution.
+=> When you make a request (means request a page) to MVC application, a controller is responsible for returning the response to that request.
+=> The controller can perform one or more actions.
+=> The controller action can return different types of action results to a particular request.
+=> The controller is responsible for controlling the application login and acts as the coordinator between the View and the Model.
+=> The controller receives an input from the users via the View, then processes the user's data with the help of Model and passes the results
+    back to the view.
+
+11. How to create Controller in Spring MVC ?
+============================================
+=> We can create Controller using @Controller annotation or we can use Predefined Controller classes provided by Spring MVC to create 
+    Controllers like SimpleFormController, AbstractController, AbstractCommandController and MultiActionController etc.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
