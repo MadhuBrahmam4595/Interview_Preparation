@@ -1,3 +1,77 @@
+VIEWS
+=====
+=> Views are known as logical tables.
+=> They represents the data of one of more tables.
+=> A view derives it's data from the tables on which it is based.
+=> These tables are called base tables.
+=> Views can be based on actual tables or another view also.
+
+view
+----
+=> It's a database object contains logical copy of selected table data.
+=> It can be created based on frequently using data.
+=> It reduces no of hits to the database.
+=> It improves the performance of queries and database.
+
+Types of Views
+---------------
+1. Simple view / updateable view :
+=> It is created based on single table data. It allows DML operations.
+=> Syntax: create view <view_name> as select col,col2,... from table_name where <condition>;
+=> Ex: create view vw_mgr_info as select * from emp where job = 'MANAGER';
+
+2. Composite view or read only view :
+=> It is created based on more than one table data. It's not allow DML operations. 
+=> Advantage: It will reduce writing number of join queries again and again.
+=> Syntax: create view <view_name> as select ..... from tab1, tab2,..... where <join_cond>;
+=> Ex: create view vw_emp_dept_info as select ename,sal,job from emp,dept where job='MANAGER' and emp.deptno=dept.deptno
+
+3. Inline view
+=> An inline view is a SELECT statement in the FROM-clause of another SELECT statement.
+=> In-line views are commonly used to simplify complex queries by removing join operations and condensing several separate queries into a single query.
+
+4. Force view
+=> A view can be created even if the defining query of the view cannot be executed, as long as the CREATE VIEW command has no syntax errors.
+=> Ex: create force view vw_act_dtls_sb as select * from cust_act_dtls where act_type='SB' order by act_bal;
+
+5. Materialized views
+=> A materialized view, or snapshot as they were previously known, is a table segment whose contents are periodically refreshed based on a query, either against a local or remote table.
+=> Ex: create materialized view emp_mv build immediate refresh force on demand as select * from emp@db1.world;
+
+
+CLUSTERS
+========
+=> In Oracle, a cluster is a database object that is used to group together tables that share common columns and are often queried together. 
+=> A cluster enables the data from multiple tables to be stored together in the same database blocks, based on the values in one or more columns. 
+=> This physical organization can improve the performance of certain types of queries, as it reduces the number of I/O operations needed to retrieve related data.
+=> Not Always Recommended: With advancements in Oracle database technology and improvements in query optimization, the use of clusters has become less common. 
+    In many cases, alternative techniques such as indexing and partitioning are preferred for optimizing query performance.
+
+SEQUENCES
+=========
+=> It is a data base object which is used to generate sequential integers with the specified interval value.
+=> Generally the sequences are used to generate primary key values.
+=> Syntax: create sequence <seq_name> increment by <val> start with <val> max value <val>;
+=> Note: By default the sequences starts with 1 and increment value is also 1.
+=> Note: Sequence is an independent object.It's not depending on any table.
+=> Ex: create sequence srno1;
+=> <seq_name>.CURRVAL (Display current value of the sequence). Ex: srno1.currval;
+=> <seq_name>.NEXTVAL (Display next value of the sequence). Ex: srno1.nextval();
+
+SYNONYMS
+********
+=> Synonyms are used to create permanent alias names for the table.
+=> Types 
+1. Private synonym  : It is a default synonym and it's used by the owner only.
+2. Public synonym   : It is created by DBA. And it can be accessed by permitted authenticated user.
+
+=> syntax: create [public] synonym <synonym_name> for <table_name>
+=> create synonym emp for employee;
+
+Note: Once a synonym is created then we can use synonym name instead of table name for any operations on the table.
+
+
+
                                                         ORACLE's SQL FUNCTIONS
                                                         ***********************
 
