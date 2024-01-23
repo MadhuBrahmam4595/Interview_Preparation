@@ -1,4 +1,27 @@
-1. DATE FUNCTIONS
+STRING FUNCTIONS
+================
+1. ASCII('ch)
+  => Display ASCII value of the character.
+  => select ascii('a') from dual; //output : 97
+2. LENGTH('str'/col)
+  => Display number of chars from the given string or column values
+  => select lenth('oracle') from dual; //output : 6
+3. LOWER('str'/col)
+  => Display the given string chars or column values in lower case.
+  => select lower('OWL') from dual; // output : owl
+4. UPPER('str'/col)
+  => Display given string chars or column values in upper case.
+  => select lower('owl') from dual; //output : OWL
+5. INITCAP('str'/col) [initial capital]
+  => Display the given string or column values with beginning char as capital.
+  => select initcap('welcome') from dual; // output : Welcome
+6. SUBSTRING('str'/col,m,n) (substring)
+  => Display a substring from the given string. Here the substring started with 'm' th char and through 'n' number of chars.
+  => select substr('secure',3,4) from dual;// output : cure
+7. INSTR('str'/col,'ch',m,n) [instring]
+  => Display the position 
+
+DATE FUNCTIONS
 =================
 1. TO_DATE('char fmt of date', date) : 
   => It will display any non-Oracle date format value in Oracle's format.
@@ -22,7 +45,7 @@
   => select next_day(sysdate, 'saturday') from dual
 
 
-2. CONVERSION FUNCTIONS
+CONVERSION FUNCTIONS
 =======================
 1. TO_NUMBER(chardata, [numberdata]) : It accepts the chardata which contains a sequence of digits and convert it into number type data.for example to_number(substr(sal,2)).
 2. TO_CHAR(num, [char]) : It accepts number type data and convert it into character type data. For example to_char(price_list,'000.00').
