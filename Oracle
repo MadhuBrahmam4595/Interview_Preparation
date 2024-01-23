@@ -1,3 +1,95 @@
+                                                        ORACLE's SQL FUNCTIONS
+                                                        ***********************
+
+Categories:
+===========
+1. Group or Aggregate Functions 
+  => These functions can acts on group of values display single output value.
+  => These functions act on column level/field level
+  => sum(), avg(),....
+2. Scalar/Single Row Functions
+  => These functions acts on group of values and display a set of output values.
+  => These functions act on Record level / row level
+  => lower(), length(), trim()
+The above 2 categories of functions are further devided into following 4 types:
+
+Types of Functions: 4
+----------------------
+i. Numeric Functions - Acts on numeric data.
+ii. String Functions - Acts on char data.
+iii. Date Functions  - Acts on date data.
+iv. Conversion Functions - It acts on one data type and display result in other data types.
+
+NUMERIC FUNCTIONS [GROUP FUNCTIONS]
+===================================
+These functions act on column data only.
+
+i) SUM(colname)
+  => It will display addition of values from the column.
+  => select sum(sal) from emp;
+ii) AVG(colname)
+  => It will display average value from the column.
+  => select avg(cost) avgcost from prod_dtls;
+iii) MAX(colname)
+  => Display higher value from the column.
+  => select max(sal) from emp;
+iv) MIN(colname)
+  => Display lower value from the column.
+  => select * from products where cost in(select min(cost) from products where pname='MOBILE');
+v) COUNT(colname)
+  => Display number of values from the column except null values.
+  => select count(comm) from emp;
+vi) COUNT(*)
+  => Display number of records from a table.
+  => select count(*) from emp;
+
+GROUP BY CLAUSE
+---------------
+=> It is used to group related data by considering distinct values from the column.
+=> On each group the oracle engine executes the aggregate function and display result individually.
+=> select deptno, count(*) from emp GROUP BY deptno order by deptno;
+
+HAVING CLAUSE
+-------------
+=> It is used specify conditions on group by output.
+=> select deptno, count(*) from emp group by deptno HAVING count(*)>=0 order by deptno;
+
+NUMERIC FUNCTIONS (SCALAR FUNCTIONS)
+====================================
+1. ABS(n) [ABSOLUTE]
+  => Display absolute value of n.
+  => select abs(-9) from dual; //output : 9
+2. MOD(m,n)
+  => Display remainder value after m devides n.
+  => select mod(17,5) from dual; //output : 2
+3. POWER(m,n)
+  => Display m power of n'th value.
+  => select power(5,3) from dual; //output : 125
+4. SQRT(n) [ square root]
+  => Display square root value of n.
+  => select sqrt(64) from dual; //output : 4
+5. ROUND(m,n)
+  => Display value 'm' which is rounded to the 'n' number of decimal places. Before displaying 'nth' decimal digit it will check 'n+1 th' decimal digit.
+  => If it is > or = 5 then 'nth' digit incremented by 1.
+  => select round(63.354, 2) from dual; // output : 63.35
+  => select round(63.354) from dual; // output : 63
+6. TRUNC(m,n)
+  => Display value m which is truncated to the n number of decimal places.
+  => select round(63.354, 2) from dual; // output : 63.3
+  => select round(63.554) from dual; // output : 63
+7. FLOOR(n)
+  => Display highest integer value which is lessthan or equal to given value.
+  => select floor(64.2) from dual; // output : (0,1,2,....,63,64) = 64
+8. CEIL(n)
+  => Display lowest integer value which is greater or equal to given value.
+  => select floor(64.2) from dual; // output : (0,1,2,....,63,64) = 65
+9. LEAST(val/expr, val/expr,....)
+  => Display minimum value from the given values or expression results.
+  => select least(32, (6*5), (20-10), (36/2)) from dual; // output : 10
+10. GREATEST(val/expr, val/expr)
+  => Display maximum value from the given values or expressions.
+  => select greatest(32, (6*5), (20-10), (36/2)) from dual; // output : 32
+
 STRING FUNCTIONS
 ================
 1. ASCII('ch)
@@ -19,7 +111,47 @@ STRING FUNCTIONS
   => Display a substring from the given string. Here the substring started with 'm' th char and through 'n' number of chars.
   => select substr('secure',3,4) from dual;// output : cure
 7. INSTR('str'/col,'ch',m,n) [instring]
-  => Display the position 
+  => Display the position of char in the given string or not.
+  => Here 'm' value is either +1(default) or -1
+    +1 means search the character position from the beginning of string.
+    -1 means search the character position from the end of string.
+  => Here n is the occurance of given character.
+  => select instr('welcome','e',1,1) from dual; // output : 2
+8. TRANSLATE('str'/col, 'sourcechars','targetchars')
+  => It will display given string chars by translating source chars with corresponding target chars.
+  => select translate('welcome','em','xy') from dual; //output : wxlcoyx
+9. REPLACE('str'/col,'source string','target string')
+  => Display given string by replacing source string with target string.
+  => select replace('welcome','come','sys') from dual; //welsys
+10. TRIM('str'/col)
+  => Display given string by eleminating blank spaces before and after the string.
+  => select trim('  welcome to   ') from dual; // output : welcome to
+11. LTRIM('str'/col) [left trim]
+  => Display given string by removing blank spaces from the left of string only.
+  => select ltrim('         welcome to') from dual; // output : welcome to
+12. RTRIM('str'/col) [right trim]
+  => Display given string by removing blank spaces from right of string only.
+  => select rtrim('welocme to   ') from dual; // output : welcome to
+
+TRIM WITH KEYWORD
+13. LEADING 'ch' FROM 'str'/col
+  => Display given string by removing similar occurances of specific char from left of string.
+  => select trim(leading 'x' from 'xxxcxxdxxxx') from dual; //output : cxxdxxxx
+14. TRAILING 'ch' FROM 'str'/col
+  => Display given string by removing similar occurances of specific char from right of string.
+  => select trim(leading 'x' from 'xxxcxxdxxxx') from dual; //output : xxxcxxd
+15. BOTH 'ch' FROM 'str'/col
+  => Display given string by eleminating similar occurances of specific char from both sides of string.
+  => select trim(leading 'x' from 'xxxcxxdxxxx') from dual; //output : cxxd
+16. LPAD('str'/col, n, 'ch') [left padding]
+  => Display given string along with the specific char in the left of the string.
+  => select lpad('page 1', 12, '*') from dual; // output : ******page 1
+17. RPAD('str'/col, n, 'ch') [right padding]
+  => Display given string along with specific char in the right of string.
+  => select lpad('page 1', 12, '*') from dual; // output : page 1******
+
+
+
 
 DATE FUNCTIONS
 =================
