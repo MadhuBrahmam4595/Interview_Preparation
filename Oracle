@@ -1,3 +1,51 @@
+JOINS
+=====
+1. CROSS JOIN
+2. EQUI JOIN / INNER JOIN
+3. SELF JOIN
+4. OUTER JOINS
+
+1. CROSS JOIN
+-------------
+=> It will display combination of data from multiple tables.
+=> In this join, each value in the first table is mapped with all values in the second table.
+=> It will display all possible combinations of data from multiple tables.
+=> Ex: consider s1 = {a,b,c,d} s2 = {d1,d2} => s1 * s2 = {(a,d1), (a,d2), (b,d1), (b,d2), (c,d1), (c,d2), (d,d1), (d,d2)}
+=> Syntax: select col1, col2, ...coln from table1, table2,... where <cond> order by col1, col2,....[desc];
+
+2. INNER JOIN / EQUI JOIN
+-------------------------
+=> A cross join is known as equi join if we specify join condition using '=' operator. It will display only matched data from all tables.
+=> A condition is known as join condition if it's specified between primary key of one table and foreign key of other table.
+=> Syntax: select col1, col2,..coln/* from table1, table2,... where table1.pk=table2.fk and table2.pk=table3.fk.....
+=> Ex: 
+Equi Join: select cd.cname,cd.city,cad.act_type,cad.act_bal,at.act_name from cust_dtls cd, cust_act_dtls cad, act_types at where cd.cno=cad.cust_code and cad.act_type=at.act_type
+Inner Join: select cd.cname,cd.city,cad.actno,cad.act_type,cad.act_bal,at.act_name from cust_dtls cd inner join cust_act_dtls cad ON cd.cno=cad.cust_code INNER JOIN act_types_info at 
+            ON cad.act_type=at.act_type
+
+3. SELF JOIN
+------------
+=> A table which is joined itself is known as self join. In this case we can use alias names for single table.
+=> Here the alias names are temporary.
+=> select e2.ename,e2.city from employee e1, employee e2 where e1.ename = 'john' and e1.city=e2.city;
+
+4. OUTER JOINS
+--------------
+=> These are used to display all data from one table and only matched data from other table.
+Types:
+
+1. Left outer join / left join
+    => Display all the data from left table and only matched data from right table.
+2. Right outer join / Right join
+    => Display complete data from right table and only matched data from left table.
+3. Full outer join / Full join
+    => Display
+        -> matched data from both the tables
+        -> unmatched data from left table
+        -> unmatched data from right table
+=> Syntax: select col1,col2,col... from table1 [left join/right join/full join] table2 ON table1.pk=table2.fk;
+
+
 SUB QUERIES
 ===========
 => A query with in other query is known as sub query.
