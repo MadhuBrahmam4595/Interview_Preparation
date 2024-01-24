@@ -1,3 +1,37 @@
+
+
+
+MERGE statement
+===============
+=> Oracle's MERGE statement is used for situations when you want to do an 'upset' i.e update existing rows in a table or insert new rows depending on a match condition.
+=> This is typically the case when you have to synchronize a table periodically with data from another source (table/view/query).
+=> Syntax: MERGE into <target table> USING <source table/view/result of subquery> ON <match condition> WHEN MATCHED THEN <update clause> <delete clause> 
+            WHEN NOT MATCHED THEN <insert clause>
+
+=> merge into student a using(select id,name,score,from student_n)b on (a.id=b.id) when matched then update set a.name = b.name,a.score=b.score when not matched then 
+            insert(a.id,a.name,a.score)values(b.id,b.name,b.score);
+
+
+SET OPERATORS
+=============
+=> The operators are used to select same data type of data and equal no of column's data from multiple tables. (OR) These operators will display combined data from multiple tables.
+
+1. UNION : It will display combined data from multiple tables without duplicates.
+2. UNION ALL : It will display combined data from multiple tables with duplicates.
+3. INTERSECT : It will display common data from multiple tables (from multiple select stms)
+4. MINUS : It will display values from first selection by eliminating values which are repeating in second selection.
+
+For example : s1 = {a,b,c,d}             s2 = {x,y,z,c,b}
+
+1. select * from s1 union select * from s2; //output : {a,b,c,d,x,y,z}
+2. select * from s1 union all select * from s2; //output : {a,b,c,d,x,y,z,c,b}
+3. select * from s1 intersect select * from s2; //output : {c,b}
+4. select * from s1 minus select * from s2; //output : {a,d}
+
+Q. What are the limitations of set operators ?
+Ans: We need to select equal number of columns from each table. We need to select same data type of data in the same sequence under each select query.
+
+
 JOINS
 =====
 1. CROSS JOIN
