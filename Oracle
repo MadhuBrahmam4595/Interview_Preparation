@@ -1,5 +1,103 @@
+OPERATORS
+*********
+DUAL table : It's a system defined table which contains only one column to perform calculations on users own data.
+
+1. Arithmetic Operators : + - * / 
+=> These are used to perform Arithmatic calculations on user's own data and table data.
+=> Ex: select 200+300 from dual;
+
+2. Relational Operators : < > = <= >=
+=> These are used to compare values by specifying conditions on the columns.
+
+3. Special Operators : 
+BETWEEN : It supports specific range of values. 
+Syntax: select col1,col2,...coln/* from table_name where <columnname> BETWEEN <start_value> AND <end_value> order by col1, col2,..[asc/desc]
+Ex: select sal from emp where sal between 2000 and 3000 order by sal
+=> In the above syntax it includes both start value and end value. BETWEEN Operator supports both Numeric range and Date range.
+
+
+IN : It supports specific list of values.
+Syntax: select col1, col2,...coln/* from table_name where <ColumnName> IN (val1, val2,...) order by col1, col2...coln [asc/desc]
+Ex: select * from emp where job IN('clerk','manager')
+=> IN operator works on Numeric, String and Date type data.
+
+IS NULL : It's used to check the column value is null or not, if it's null display output.
+Syntax: select col1,col2..,coln/* from table table_name where <ColumnName> IS NULL order by col1, col2...coln [asc/desc]
+Ex: select empno,ename,esal from emp where comm IS NULL.
+=> It works on only null values and it's independent of data type of column.
+
+LIKE : It's used to represents sequence of chars / specific strings.
+Syntax: select col1,col2,...coln/* from table_name where <ColumnName> LIKE 'string' order by col1, col2, ...coln [asc/desc]
+Ex: select ename from emp where ename like 'S%';
+=> It uses two symbols _(underscore) represents anyone char, % represents any number of chars
+
+
+
 Data Integrity Constraints
 ==========================
+=> Constraints are set of rules / business rules which will be defined at DDL level.
+=> Constraints enforce the data base to allow only valid values in to the tables.
+=> Constraints ensure the user to fetch only valid / complete and accurate data from the database.
+
+Types:
+------
+1. Key Constraints
+2. Domain Constraints
+3. Referential Integrity
+
+1. KEY CONSTRAINTS: 
+=> These constraints check the individual values in to a column according to Business.
+
+a). UNIQUE : It doesn't allow duplicates but allows null values. Ex: This constraint is suitable for maintaining phone, number etc.
+b). NOT NULL : It doesn't allow null values but allows duplicates. Ex: EmpNames, CustNames...
+c). PRIMARY KEY : It doesn't allow duplicates and null values.Generally a Primary key is used to identify any record in a table
+                        uniquely. 'Only one primary key is allowed per a table'.
+
+            i. Simple Primay Key : If a Primary Key defined on a single column then it's known as simple primary key.
+            ii. Composite Primary Key : If a Primary Key constraint defined on more than one column then it's known as Composite PK
+=> Max no of columns in to a composite PK are 32 columns.
+=> Note : Even after the key constraints on the table, still we have invalid values. We can eliminate them by using DOMAIN constraints.
+
+Displaying constraints information on a table:
+----------------------------------------------
+=> In oracle databases, all constraints stored in a system defined table called USER_CONSTRAINTS 
+=> Each constraint named and numbered uniquely like, SYS_Cn (System defined Constraint)
+=> Ex: select constraint_name, constraint-type from user_constraint where table_name = 'employee';
+
+NORMALIZATION AND DENORMALIZATION
+*********************************
+Types: 
+1. NORMALIZATION : Maintaining data in different tables and implement Physical relationships between the tables.
+=> The process of deviding a big table into sub tables until the data duplicacy is maximum reduced is called normalization process.
+
+i) Ist NF(normal form) : Deviding the table into sub tables based on repeated groups of data.
+ii) II NF(normal form) : Eleminating duplicates and defining primay keys.
+iii) III NF(normal form) : Implementing relationships between the tables by using Primary key of dept table define the foreign key column
+            under emp table.
+=> It occupies less disk space and max, data duplicacy is reduced.
+
+Advantages
+----------
+=> Searching for required data is as much as fast.
+=> Data retrieval is fast.
+=> Max data duplicacy is eleminated.
+=> Occupy less Disk space.
+
+2. DENORMALIZATION : Maintaining all the information in one big table.
+=> Maintaining all information in one big table is known as De-normalized method.
+=> It contains duplicate data.
+=> It occupies more disk space.
+=> data retrieval time is very high.
+=> If table have 10 rows and 5cols then diskspace will be consume 10*5=50kb.
+
+3. REFERENTAL INTEGRITY CONSTRAINTS
+-----------------------------------
+=> Used to implement PHYSICAL relationship between the tables by using primary key of one table and we can define 
+   foreign key in other table.
+=> Foreign key column contains only values from primary key.
+=> Foreign key contains duplicates and null values also.
+=> A table which contains primary key is considered as Parent / Master / Base table.
+=> A table which contains foreign key is known as child table / Detailed table / Derived table.
 
 
 
