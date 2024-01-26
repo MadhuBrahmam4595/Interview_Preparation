@@ -1,0 +1,37 @@
+1. What are Microservices ?
+=> Microservices is an architecture where the application is exposed as loosely coupled service that can be independently developed, deployed and maintained.
+=> Each service exposed is referred to as Microservice. Each service performs a unique function.
+=> Speciality of this architecture is that polyglot architecture is supported. 
+=> For example, if a team is working on one of the microservice using Java, SpringBoot and MySQL another team can work on another microservice using Python, Node JS and NoSQL.
+=> Different microservices can use a different version of the same programming language.
+=> Different microservices can use different programming languages.
+=> Different microservices can use different architectures as well.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2. Why Microservices ?
+=> In case of monolithic applications, there several problems like
+    => same code base for presentation, business layer and data access layer. Application is deployed as a single unit.
+    => Complex to maintain and scalability is an issue.
+=> Microservice solves the above problem.
+=> Microservice are ideal when a monolithic or a legacy application needs to be modernized.
+=> For new software development, if the key business drivers are to reduce time to market, scalable better software, lower costs, faster development or clound native development.
+=> Each service is independent and gives the flexibility to choose the programming language, database, and architecture.
+=> Distinct services can be developed, deployed and maintained independently.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3. When to use Microservice ?
+=> Reduce time to market.
+=> Scalable better software.
+=> Lower casts.
+=> Faster development.
+=> Clound-native development.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+4. What are the main features of Microservices ?
+=> Microservices architecture breaks an application into smaller services, and it is possible to develop, deploy each service independently.
+   This makes the introduction of new features in an application very easier.
+=> Decentralization : Microservices architecture leads to distributed systems. The data management is decentralized. There will be a monolithic database containing all data beloging to 
+   the application. Each service has the ownership of the data related to the business functionality of that service.
+=> Black Box : Every microservice is defined as a black box. The details of the complexity are hidden from other service / components.
+=> Security : The Microservice platform itself should private capabilities for certificate management. different type of credentials, authentication and authentication based on RBAC
+(Role Based Access Model). Security is decoupled from the microservice development team as platform standartatization help with it.
+
+
+
