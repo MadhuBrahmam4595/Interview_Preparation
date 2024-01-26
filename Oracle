@@ -1,15 +1,95 @@
+ORACLE
+***************************************
+DATABASE CONCEPTS
+=================
+DATA : Collection of information of any one Business entity is known as data.[one line of information]
+DATABASE : It's a software which stores and manages the collection of information of all objects in the business.
+DATABASE MANAGEMENT SYSTEM : DB which is comprised with management system services is known as DBMS.
+
+PARTS OF ORACLE
+===============
+1. SQL
+2. PL/SQL
+
+  1. SQL
+================================================================================================================================
+Features:
+=> At a time only one query is allowed to execute.
+=> Sql queries are not case sensitive.
+=> Each query is terminated with ; (semi colon)
+=> SQL commands are ANSI standard (American National Standard Institute)
+
+SQL COMMANDS
+============
+Types :
+1. DDL (Data Definition Language)    - CREATE, ALTER, DROP, TRUNCATE, RENAME => Used to create or change or delete any data base objects.
+2. DML (Data Modification Language)  - INSERT, UPDATE, DELETE, TRUNCATE  => Used to fetch/enter/changing existedd data/deleting data
+3. DRL (Data Retrieval Language)     - SELECT => Used to retrieval data from tables.
+4. DCL (Data Control Language)       - GRANT,REVOKE =>Used to control the access of data base objects.These are used by DBA.
+5. TCL (Transactional Control Language)-COMMIT, ROLLBACK,SAVEPOINT => Used to save or cancel the actions/transactions made on table.
+
+
+DATA TYPES:
+===========
+1. STRING DATA TYPES : These data types support alphabets, digits, and any symbol from keyword.
+----------------------
+i. CHAR (size) : 
+=> It's used to store fixed length character strings. 
+=> By default the size is 1 character and max size is 2000 chars or bytes.
+
+ii. VARCHAR2 (size) : 
+=> It's used to store variable length character strings. 
+=> No default size.
+=> We should specify size and max size is 4000 chars/bytes.
+
+iii. LONG :
+=> It is used to store variable length char data(similar to varchar2 data type) but max size is 2GB.
+=> Note: Only one long type column is allowed per a table.
+
+2. NUMERIC DATA TYPES : 
+-----------------------
+i. NUMBER (Precision, [scale]) : It's used to store numbers along with decimal point.
+ii. NUMBER (Precision) : It's used to store numbers without decimal point.
+
+Precision : represents total number of digits in the value.
+Scale : represents the max number of digits after decimal point.
+
+=> Total no of digits in the value should be less than or equal to Precision value.
+=> Total no of digits in the value decimal part should be less than or equal to scale value.
+
+3. DATA DATA TYPES :
+--------------------
+i. DATE (12-may-13) : It is used to store date type data. Oracle is having a predefined date format as follows.
+
+4. BINARY DATA TYPE :
+---------------------
+i. RAW (size) : It's used to store binary data like images, thumb impressions, logos and so on. Max size is 2000 bytes < 2 KB
+ii. LONG RAW : It is similar to RAW data type but max size is 2GB.
+NOTE: Only one longraw type column is allowed per a table.
+
+5. LOG - Large Objects
+----------------------
+=> It is used to store higher volumes of data and max size is 4GB.
+Types:
+CLOB - CHAR LOB- used to store character data
+BLOB - BINARY LOB - Used to store binary data
+NCLOB - Fixed length multi char large objects --> Used to store both binary and char data.
+
 OPERATORS
 *********
 DUAL table : It's a system defined table which contains only one column to perform calculations on users own data.
 
-1. Arithmetic Operators : + - * / 
+1. Arithmetic Operators : + - * /
+----------------------------------
 => These are used to perform Arithmatic calculations on user's own data and table data.
 => Ex: select 200+300 from dual;
 
 2. Relational Operators : < > = <= >=
+---------------------------------------
 => These are used to compare values by specifying conditions on the columns.
 
 3. Special Operators : 
+----------------------
 BETWEEN : It supports specific range of values. 
 Syntax: select col1,col2,...coln/* from table_name where <columnname> BETWEEN <start_value> AND <end_value> order by col1, col2,..[asc/desc]
 Ex: select sal from emp where sal between 2000 and 3000 order by sal
@@ -31,6 +111,25 @@ Syntax: select col1,col2,...coln/* from table_name where <ColumnName> LIKE 'stri
 Ex: select ename from emp where ename like 'S%';
 => It uses two symbols _(underscore) represents anyone char, % represents any number of chars
 
+4. RELATION NEGATION OPERATORS:
+----------------------------
+!= (or) <> (or) ^= (not equal to), NOT BETWEEN, NOT LIKE, NOT IN, IS NOT NULL
+=> Ex: select * from emp where job <> 'SALESMAN';
+=> Ex: select * from emp where hiredate NOT BETWEEN '01-jan-14' and '31-dec-14';
+
+5. LOGICAL OPERATORS
+-----------------
+These are used to specify Multiple conditions in the where clause
+
+AND :
+-----
+=> Display output if all conditions are true. If any one condition was failed then it will not display output.
+=> Ex: select * from emp where job = 'MANAGER' and sal > 2500;
+
+OR :
+----
+=> Display output if anyone condition is true. If all conditions are false then it will not display output.
+=> Ex: select * from emp where hiredate like '%87' or deptno=10;
 
 
 Data Integrity Constraints
