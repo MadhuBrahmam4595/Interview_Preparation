@@ -1,3 +1,76 @@
+Questions
+=========
+1. Check given String is Palindrom or not?
+
+
+
+
+
+
+
+Solutions
+=========
+1. Check given String is Palindrom or not?
+------------------------------------------
+METHOD 1: 
+---------
+   Scanner sc = new Scanner(System.in);
+   String str = sc.next();
+   String rev = "";
+   for(int i=str.length()-1;i>=0;i--){ rev = rev + str.charAt(i); }
+   if(str.equals(rev) System.out.println("Yes");
+   else System.out.println("No");
+
+METHOD 2:
+--------
+public class Solution {
+    public static boolean isPalindrom(String A){
+        int left = 0;
+        int right = A.length()-1;
+        while(left < right){
+            if(A.charAt(left) != A.charAt(right)){ return false; }
+            left++;
+            right--;
+        }
+        return true;  
+    }
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String A=sc.next();
+        if(isPalindrom(A)) System.out.println("Yes");
+        else System.out.println("No");
+        
+    }
+}
+====================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Input: java 100
 Output: java (15 spaces) 100
 Code:
