@@ -1,12 +1,7 @@
 Questions
 =========
 1. Check given String is Palindrom or not?
-
-
-
-
-
-
+2. Check two strings are Anagrams or not?
 
 Solutions
 =========
@@ -43,7 +38,15 @@ public class Solution {
     }
 }
 ====================================================================================================
+2. Check two strings are Anagrams or not?
 
+String str1 = "anagram", str2 = "margana";
+String[] str1Array = str1.split(""); String[] str2Array = str2.split("");
+Arrays.sort(str1Array); Arrays.sort(str2Array);
+boolean equalsarrays = Arrays.equals(str1Array, str2Array);
+if(equalsarrays){ System.out.println("Two strings are anagrams"); }
+else{ System.out.println("Two strings are not anagrams"); }
+=========================================================================================================
 
 
 
