@@ -1,0 +1,24 @@
+1. Reverse a String?
+--------------------
+		String msg = "madhu";
+		
+		//using streams
+		String revmsg = IntStream.range(0, msg.length())
+		.mapToObj(a-> msg.charAt(msg.length()-1-a))
+		.collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+		.toString();
+		System.out.println(revmsg); //uhdam
+		
+		//using string builder
+		StringBuilder sb = new StringBuilder(msg);
+		System.out.println(sb.reverse()); //uhdam
+		
+		//using for loop and builder
+		StringBuilder sb2 = new StringBuilder();
+		char[] msgArray = msg.toCharArray();
+		for(int i = msgArray.length -1; i >= 0; i--) {
+			sb2.append(msgArray[i]);
+		}
+		System.out.println(sb2); //uhdam
+
+=================================================================================================================
