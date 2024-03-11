@@ -1,7 +1,8 @@
 Questions
 =========
-1. Check given String is Palindrom or not?
-2. Check two strings are Anagrams or not?
+1. Check given String is Palindrom or not? (Example: madam)
+2. Check two strings are Anagrams or not? (Example: (anagram, margana))
+3. Java Program to get a character from a String ?
 
 Solutions
 =========
@@ -47,6 +48,25 @@ boolean equalsarrays = Arrays.equals(str1Array, str2Array);
 if(equalsarrays){ System.out.println("Two strings are anagrams"); }
 else{ System.out.println("Two strings are not anagrams"); }
 =========================================================================================================
+3. Java Program to get a character from a String ?
+
+METHOD 1: Using String.charAt() method
+--------------------------------------
+public static char getCharFromStr(String str, int index){ return str.charAt(index); }
+
+METHOD 2: Using String.toCharArray() method
+-------------------------------------------
+public static char getCharFromStr(String str, int index){ return str.toCharArray()[index]; }
+
+METHOD 3: Using Java 8 Streams
+------------------------------
+public static char getCharFromStr(String str, int index){ return str.chars().mapToObj(char->(char)ch).toArray(Character[] :: new)[index]; }
+
+METHOD 4: Using String.codePointAt()
+------------------------------------
+public static char getCharFromStr(String str, int index){ return (char)str.codePointAt(index); }
+
+
 
 
 
