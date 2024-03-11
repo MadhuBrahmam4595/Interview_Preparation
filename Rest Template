@@ -1,0 +1,143 @@
+=> RestTemplate is a class in the Spring Framework that simplifies communication with RESTful web services. 
+   It provides a higher-level, more convenient API for interacting with HTTP-based services compared to using raw HTTP connections or lower-level libraries.
+=> RestTemplate allows you to send HTTP requests to a RESTful web service and receive responses. 
+   It supports various HTTP methods such as GET, POST, PUT, DELETE, etc., and provides methods for making requests with parameters, headers, and payloads.
+=> Some common operations you can perform with RestTemplate include:
+    => Sending GET requests to retrieve data from a RESTful endpoint.
+    => Sending POST requests to create resources on the server.
+    => Sending PUT requests to update existing resources.
+    => Sending DELETE requests to remove resources.
+=> RestTemplate handles tasks such as managing connections, serialization and deserialization of request and response bodies (often JSON or XML), and handling error responses. 
+   It can also integrate with authentication mechanisms and SSL/TLS configurations.
+=> RestTemplate has been a widely used component in Spring-based applications for interacting with RESTful services, but in newer versions of Spring, it is gradually being replaced 
+   by the more modern WebClient, which offers a non-blocking, reactive API. However, RestTemplate is still supported and widely used in existing applications.
+=> 'RestTemplate’ is a synchronous REST client provided by the core Spring Framework.
+
+Path:  org.springframework.web.client.RestTemplate
+
+Constructors:
+- RestTemplate()
+- RestTemplate(ClientHttpRequestFactory requestFactory)
+- RestTemplate(List<HttpMessageConverter<?>> messageConverters)
+
+It provides a total of 41 methods for interacting with REST resources. But there are only a dozen of unique methods each overloaded to form a complete set of 41 methods.
+ 
+DELETE 
+      delete()	=> Performs an HTTP DELETE request on a resource at a specified URL.
+GET
+      getForEntity() => Sends an HTTP GET request, returning a ResponseEntity containing an object mapped from the response body.
+      getForObject() => Sends an HTTP GET request, returning an object mapped from a response body.
+POST
+      postForEntity() => POSTs data to a URL, returning a ResponseEntity containing an object mapped from the response body.
+      postForLocation() => POSTs data to a URL, returning the URL of the newly created resource.
+      postForObject() => POSTs data to a URL, returning an object mapped from the response body.
+PUT
+      put() =>	PUTs resource data to the specified URL.
+PATCH
+      patchForObject()	=> Sends an HTTP PATCH request, returning the resulting object mapped from the response body.
+HEAD
+      headForHeaders() =>	Sends an HTTP HEAD request, returning the HTTP headers for the specified resource URL.
+ANY
+      exchange() => Executes a specified HTTP method against a URL, returning a ResponseEntity containing an object.
+      execute() => Executes a specified HTTP method against a URL, returning an object mapped from the response body.
+OPTIONS
+      optionsForAllow()	=> Sends an HTTP OPTIONS request, returning the Allow header for the specified URL.
+
+RestTemplate Interview Questions and Answers
+=============================================
+1. What is RestTemplate in Spring?
+RestTemplate is a class in Spring that provides a simple way to make RESTful web service calls. 
+It handles all of the low-level details of making an HTTP request and parsing the response.
+
+2. Can you explain the difference between GET, POST, PUT, and DELETE HTTP methods when used with a RESTful API?
+The four main HTTP methods used with RESTful APIs are GET, POST, PUT, and DELETE. Each of these methods corresponds to a different action that can be performed on a resource.
+GET: Used to retrieve a resource from the server.
+POST: Used to create a new resource on the server.
+PUT: Used to update an existing resource on the server.
+DELETE: Used to delete a resource from the server.
+
+3. Why do you think it’s better to use RestTemplate than plain HttpClient or other similar Java libraries?
+RestTemplate is a higher level library than HttpClient, which makes it easier to use. 
+It also has built in support for a number of features, such as error handling and automatic retries, which can make it more reliable.
+
+4. What are some common problems faced by developers using RestTemplate? How can they be solved?
+Some common problems faced by developers using RestTemplate include the following:
+– Not being able to set the request or response charset, which can lead to encoding/decoding errors
+– Not being able to customize the HTTP message converters used by the template
+– Not being able to use a different HttpMessageParser for different types of requests
+These problems can be solved by using the RestTemplateBuilder to create a new RestTemplate instance, and then configuring it with the desired settings.
+
+5. How does RestTemplate handle error handling? Does it provide any built-in support for this purpose?
+RestTemplate does not provide any built-in support for error handling. However, it is possible to configure it to use a custom error handler. 
+This can be done by setting the ‘restTemplateErrorHandler’ property on the RestTemplate bean.
+
+6. How many ways are there to add parameters to a request URL? Which one would you recommend?
+There are two ways to add parameters to a request URL: query parameters and path parameters. 
+Query parameters are added to the end of the URL, after a question mark, and are used to provide information to the server that is needed to process the request. 
+Path parameters are added to the URL itself, and are used to identify specific resources that the server should provide.
+I would recommend using path parameters over query parameters, as they are more specific and easier to understand.
+
+7. Is it possible to send binary data over an HTTP request? If yes, how?
+Yes, it is possible to send binary data over an HTTP request. 
+This can be done by using the Base64 encoding scheme to encode the binary data into a string, which can then be included in the HTTP request.
+
+8. What kind of requests can be sent through RestTemplate?
+RestTemplate can be used to send various types of HTTP requests, including GET, POST, PUT, DELETE, and HEAD requests. 
+You can also use RestTemplate to execute other HTTP methods, such as OPTIONS and TRACE.
+
+9. When should you not use RestTemplate?
+RestTemplate is a great tool for making simple HTTP requests to retrieve data from a web service. 
+However, it is not intended for use in more complex situations, such as when you need to handle authentication or make requests that require a higher level of customization. 
+In these cases, you should use a more full-featured HTTP client library, such as the Apache HttpClient.
+
+10. Why should you avoid synchronous calls while working with RestTemplate?
+Synchronous calls can cause performance issues because they can block the thread that is making the call. 
+This can cause problems if you are making multiple calls at the same time or if you are making calls to a slow or unresponsive server. 
+Asynchronous calls, on the other hand, do not block the thread, so they can improve performance in these situations.
+
+11. Can you give me some examples of real-world projects where RestTemplate has been successfully implemented?
+RestTemplate has been used in a number of high-profile projects, including Netflix’s Eureka, Spring Cloud Config, and Spring Cloud Gateway.
+
+12. Can you explain what HATEOAS means in context with REST web services?
+HATEOAS stands for Hypermedia As The Engine Of Application State. 
+It is a constraint of the REST architectural style that specifies that a client should be able to navigate the application state by following links from resource to resource, 
+without having any prior knowledge of the application structure. This allows for a much more flexible and decoupled application design.
+
+13. What is your understanding of the term “REST”?
+REST is an acronym for Representational State Transfer. It is a style of software architecture for distributed systems.
+
+14. What is the difference between consuming external APIs and creating new ones using REST?
+Consuming external APIs means that your application will be making requests to an API that already exists, and you will be using the existing endpoints to get the data that you need. 
+Creating new ones using REST means that you will be creating a new API from scratch, and you will need to design the endpoints and functionality yourself.
+
+15. What is the difference between SOAP and REST?
+SOAP (Simple Object Access Protocol) is a standards-based web services access protocol that has been around for a long time. 
+REST (Representational State Transfer) is a newer style of web services that is not as strictly defined, but is generally easier to use and more flexible.
+
+16. What are some best practices you should follow when developing RESTful APIs?
+There are a few best practices you should follow when developing RESTful APIs:
+1. Keep your API simple and easy to use.
+2. Make sure your API is well documented.
+3. Use a consistent naming convention for your API endpoints.
+4. Use the proper HTTP status codes to indicate success or failure.
+5. Handle errors gracefully and provide informative error messages.
+
+17. How can we test RESTful APIs without writing code?
+There are a few ways to test RESTful APIs without writing code. 
+One way is to use a tool like SoapUI, which allows you to create and run test cases for APIs without having to write any code. 
+Another way is to use a tool like Postman, which allows you to make HTTP requests to an API and see the responses.
+
+18. What do you understand about Test Driven Development (TDD) and its relation to REST?
+Test Driven Development is a software development methodology that relies on tests being written before code is written. 
+This allows for the development of more reliable and bug-free code. 
+When it comes to REST, TDD can be used to test the various API calls that are made to ensure that they are returning the correct data.
+
+19. What do you understand about exception handling in the context of REST?
+When an exception is thrown in a REST service, the client will receive an HTTP status code that indicates an error has occurred. 
+The client can then use this status code to determine what action to take next. 
+For example, if a client receives a 404 status code, it knows that the resource it is trying to access does not exist.
+
+20. What is the role of HTTP status codes in REST?
+HTTP status codes play an important role in REST, as they are used to indicate the success or failure of an API call. 
+For example, a status code of 200 indicates that the call was successful, while a status code of 404 indicates that the requested resource could not be found.
+
