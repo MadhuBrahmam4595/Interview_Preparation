@@ -3,6 +3,7 @@ Questions
 1. Check given String is Palindrom or not? (Example: madam)
 2. Check two strings are Anagrams or not? (Example: (anagram, margana))
 3. Java Program to get a character from a String ?
+4. Replace a character at a specific index in a String in Java ?
 
 Solutions
 =========
@@ -65,54 +66,20 @@ public static char getCharFromStr(String str, int index){ return str.chars().map
 METHOD 4: Using String.codePointAt()
 ------------------------------------
 public static char getCharFromStr(String str, int index){ return (char)str.codePointAt(index); }
+=====================================================================================================================
 
+4. Replace a character at a specific index in a String in Java ?
 
+METHOD 1: Using String class
+----------------------------
+public static String replaceChar(String str, int index,char ch){ return str= str.substring(0, index) + ch + str.substring(index+1); }
 
+METHOD 2: Using StringBuilder
+------------------------------
+public static String replaceChar(String str,int index,char ch){ StringBuilder sb = new StringBuilder(str); sb.setCharAt(index, ch); }
 
+METHOD 3: Using StringBuffer
+----------------------------
+public static String replaceChar(String str,int index,char ch){ StringBuffer sb=new StringBuffer(str); sb.setCharAt(index,ch); }
+=====================================================================================================================================================
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Input: java 100
-Output: java (15 spaces) 100
-Code:
-Scanner sc=new Scanner(System.in);
-for(int i=0;i<3;i++) {
-                String s1=sc.next();
-                int x=sc.nextInt();
-                //Complete this line
-                System.out.printf("%-15s%03d%n", s1, x);
-            }
-Explantion: %n = new line, 
-========================================================================================================
-Input: 2
-Output: 2 table
-BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(bufferedReader.readLine().trim());
-        for(int i=1; i<=10; i++){
-            int sum = N * i;
-            System.out.printf("%d x %d = %d%n", N, i, sum);
-        }
-        bufferedReader.close();
-========================================================================================================
