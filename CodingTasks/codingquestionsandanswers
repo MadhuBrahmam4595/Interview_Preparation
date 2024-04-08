@@ -1,9 +1,189 @@
 1. Find the factorial of a number using iterative(for loop) approach.
 Ans: 
 
-Scanner sc = new Scanner(System.in);
-int factorial = 1;
-for(int i=1;i<=factorial;i++){
-  factorial = factorial * i;
+import java.util.*;
+
+class HelloWorld {
+    public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter number for factorial");
+        int number = sc.nextInt();
+        int factorialvalue =1;
+        
+        for(int i=1; i<=number; i++){
+            factorialvalue = factorialvalue * i;
+        }
+        System.out.println("factorialvalue=>"+factorialvalue);
+    }
 }
-sysout(factorial); //1
+
+2. Find the factorial of a number using Recursion.
+import java.util.*;
+
+class HelloWorld {
+    public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter number for factorial");
+        int number = sc.nextInt();
+        
+       int factorialvalue = findFactorial(number);
+        System.out.println("factorialvalue=>"+factorialvalue);
+    }
+    
+    public static int findFactorial(int n){
+        if(n == 0){
+            return 1;
+        }else{
+           return n * findFactorial(n-1); 
+        }
+    }
+
+3. Program to display Fibonacci series.
+import java.util.*;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter number for fibonacci");
+        int number = sc.nextInt();
+        int firstValue = 0;
+        int secondValue = 1;
+        for(int i=1; i<=number;i++){
+             System.out.println(firstValue + " ");
+             int nextValue = firstValue + secondValue;
+             firstValue = secondValue;
+             secondValue = nextValue; 
+        }
+    }
+}
+
+4. Program to check whether the number is positive or negative.
+import java.util.*;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter number for fibonacci");
+        double number = sc.nextDouble();
+        if(number > 0){
+            System.out.println("Positive Number");
+        }else if(number < 0){
+            System.out.println("Negative Number");
+        }else{
+            System.out.println("Number is Zero");
+        }
+    }
+}
+
+5. Program to check whether the number is even or odd.
+import java.util.*;
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter number for fibonacci");
+        int number = sc.nextInt();
+        if(number %2 == 0){
+            System.out.println("Even Number");
+        }else{
+            System.out.println("Odd Number");
+        } 
+    }
+}
+
+6. Program to find larget element in the array.
+class HelloWorld {
+    public static void main(String[] args) {
+        int[] numbers = {4,3,5,8,9};
+        int largestNumber = numbers[0];
+        for(int i=1; i<numbers.length;i++){
+            if(largestNumber < numbers[i]){
+                largestNumber = numbers[i];
+            }
+        }
+        System.out.println(largestNumber);
+    }
+}
+
+7. Programs to find the largest among three numbers using if else condition.
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter number one :");
+        double num1 = scanner.nextDouble();
+        
+        System.out.print("Enter number two :");
+        double num2 = scanner.nextDouble();
+        
+        System.out.print("Enter number three :");
+        double num3 = scanner.nextDouble();
+        
+        if(num1 >= num2 && num1 >= num3){
+            System.out.print("number one is greater value");
+        }else if(num2 >= num1 && num2 >= num3){
+            System.out.print("number two is greater value");
+        }else{
+            System.out.print("number three is greater value");
+        }
+    }
+}
+
+8. Programs to find the largest among three numbers using inbuilt function.
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Enter number one :");
+        double num1 = scanner.nextDouble();
+        
+        System.out.print("Enter number two :");
+        double num2 = scanner.nextDouble();
+        
+        System.out.print("Enter number three :");
+        double num3 = scanner.nextDouble();
+        
+       double maxvalue = Math.max(num1, Math.max(num2, num3));
+       System.out.print("Max value :"+maxvalue);
+    }
+}
+
+9. Program to check whether an alphabet is Vowel or Consonent.
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        char str = scanner.next().charAt(0);
+        boolean result = false;
+        if(str == 'a' || str == 'A'
+        || str == 'b' || str == 'B'
+        || str == 'c' || str == 'C'
+        || str == 'd' || str == 'D'
+        || str == 'e' || str == 'E'){
+             result = true;
+        }
+        if(result){
+            System.out.print("Given character is vowel");
+        }else{
+            System.out.print("Given character is consonent");
+        }
+    }
+}
+
+10. Program to reverse a string without using inbuilt reverse method.
+import java.util.*;
+class HelloWorld {
+    public static void main(String[] args) {
+        String str = "madhu";
+        String revStr = "";
+        
+        for(int i=str.length()-1; i >=0; i--){
+            revStr = revStr + str.charAt(i);
+        }
+        System.out.print(revStr);
+    }
+}
+
+
