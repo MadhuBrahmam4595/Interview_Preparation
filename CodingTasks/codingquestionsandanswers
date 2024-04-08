@@ -1,0 +1,9 @@
+1. Find the factorial of a number using iterative(for loop) approach.
+Ans: 
+
+Scanner sc = new Scanner(System.in);
+int factorial = 1;
+for(int i=1;i<=factorial;i++){
+  factorial = factorial * i;
+}
+sysout(factorial); //1
