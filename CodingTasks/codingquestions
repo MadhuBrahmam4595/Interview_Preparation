@@ -1,10 +1,37 @@
+Programs on Numerical Values
+----------------------------
 1. Find the factorial of a number using iterative(for loop) approach.
 2. Find the factorial of a number using Recursion.
 3. Program to display Fibonacci series.
 4. Program to check whether the number is positive or negative.
 5. Program to check whether the number is even or odd.
-6. Program to find larget element in the array.
-7. Program to find the largest among three numbers using if else condition.
-8. Program to find the largest among three numbers using inbuilt function.
-9. Program to check whether an alphabet is Vowel or Consonent. 
-10. Program to reverse a string without using inbuilt reverse method.
+6. Program to find the largest among three numbers using if else condition.
+7. Program to find the largest among three numbers using inbuilt function.
+8. Program swap two numbers without using two variables.
+9. Program to find sum of the all digits from given number using Java8.
+
+Programs on String values
+-------------------------
+1. Program to check whether an alphabet is Vowel or Consonent. 
+2. Program to reverse a string without using inbuilt reverse method.
+3. Program to remove white spaces from a string.
+4. Program to find reverse a string using Java8.
+
+
+Programs on arrays
+------------------
+1. Program to find larget element in the array.
+2. Program to array without using additional array.
+
+Programs on collections
+-----------------------
+1. Program to remove duplicate elements from arraylist.
+2. Program to find last element in the list using Java8.
+3. Program to print even numbers from list using Java8.
+4. Program to remove duplicate elements from list using Java8 Streams.
+
+Other Programs
+--------------
+1. Program to find the age of person based on date of birth.
+
+
