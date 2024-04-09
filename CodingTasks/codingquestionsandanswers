@@ -1,10 +1,7 @@
 1. Find the factorial of a number using iterative(for loop) approach.
 Ans: 
 
-import java.util.*;
-
-class HelloWorld {
-    public static void main(String[] args) { 
+import java.util.*; 
         Scanner sc = new Scanner(System.in);
         System.out.println("enter number for factorial");
         int number = sc.nextInt();
@@ -14,8 +11,6 @@ class HelloWorld {
             factorialvalue = factorialvalue * i;
         }
         System.out.println("factorialvalue=>"+factorialvalue);
-    }
-}
 
 2. Find the factorial of a number using Recursion.
 import java.util.*;
@@ -40,9 +35,6 @@ class HelloWorld {
 
 3. Program to display Fibonacci series.
 import java.util.*;
-
-class HelloWorld {
-    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter number for fibonacci");
         int number = sc.nextInt();
@@ -54,14 +46,9 @@ class HelloWorld {
              firstValue = secondValue;
              secondValue = nextValue; 
         }
-    }
-}
 
 4. Program to check whether the number is positive or negative.
 import java.util.*;
-
-class HelloWorld {
-    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter number for fibonacci");
         double number = sc.nextDouble();
@@ -72,14 +59,9 @@ class HelloWorld {
         }else{
             System.out.println("Number is Zero");
         }
-    }
-}
 
 5. Program to check whether the number is even or odd.
 import java.util.*;
-
-class HelloWorld {
-    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("enter number for fibonacci");
         int number = sc.nextInt();
@@ -88,12 +70,8 @@ class HelloWorld {
         }else{
             System.out.println("Odd Number");
         } 
-    }
-}
 
 6. Program to find larget element in the array.
-class HelloWorld {
-    public static void main(String[] args) {
         int[] numbers = {4,3,5,8,9};
         int largestNumber = numbers[0];
         for(int i=1; i<numbers.length;i++){
@@ -102,13 +80,9 @@ class HelloWorld {
             }
         }
         System.out.println(largestNumber);
-    }
-}
 
 7. Programs to find the largest among three numbers using if else condition.
 import java.util.*;
-class HelloWorld {
-    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
         System.out.print("Enter number one :");
@@ -127,13 +101,9 @@ class HelloWorld {
         }else{
             System.out.print("number three is greater value");
         }
-    }
-}
 
 8. Programs to find the largest among three numbers using inbuilt function.
 import java.util.*;
-class HelloWorld {
-    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
         System.out.print("Enter number one :");
@@ -147,13 +117,9 @@ class HelloWorld {
         
        double maxvalue = Math.max(num1, Math.max(num2, num3));
        System.out.print("Max value :"+maxvalue);
-    }
-}
 
 9. Program to check whether an alphabet is Vowel or Consonent.
 import java.util.*;
-class HelloWorld {
-    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         char str = scanner.next().charAt(0);
         boolean result = false;
@@ -169,13 +135,9 @@ class HelloWorld {
         }else{
             System.out.print("Given character is consonent");
         }
-    }
-}
 
 10. Program to reverse a string without using inbuilt reverse method.
 import java.util.*;
-class HelloWorld {
-    public static void main(String[] args) {
         String str = "madhu";
         String revStr = "";
         
@@ -183,7 +145,105 @@ class HelloWorld {
             revStr = revStr + str.charAt(i);
         }
         System.out.print(revStr);
+ 
+
+Program to array without using additional array.
+------------------------------------------------
+import java.util.*;
+        int[] array = {1,2,3,4,5,6};
+        int temp;
+        for(int i = 0; i < array.length / 2; i++){
+            temp = array[i];
+            array[i] = array[array.length - 1 - i];
+            array[array.length - 1 - i] = temp;
+        }
+        for(int i = 0; i < array.length; i++){
+            System.out.print(array[i]+" ");
+        }
+
+Program swap two numbers without using two variables.
+------------------------------------------------------
+        int a = 10, b = 20;
+        a = a + b;
+        b = a - b;
+        a = a - b;
+        System.out.print(a+","+b);
+
+Program to remove duplicate elements from arraylist.
+----------------------------------------------------
+import java.util.*;
+        List<Integer> list = new ArrayList<Integer>();
+        for(int i =1; i < 10; i++){
+            list.add(i);
+        }
+        list.add(3);
+        list.add(6);
+        System.out.println(list);
+       Set<Integer> setlist =  new LinkedHashSet(list);
+       List<Integer> resultList = new ArrayList<Integer>(setlist);
+       System.out.println(resultList);
+
+Program to remove white spaces from a string.
+---------------------------------------------
+ String name = "madhu praneeth srinivas";
+        String result = name.replaceAll("\\s+", "");
+        System.out.print(result);
+
+Program to find sum of the all digits from given number using Java8.
+--------------------------------------------------------------------
+int number = 12345;
+        IntStream stream = String.valueOf(number).chars();
+        int result = stream.map(Character::getNumericValue).sum();
+        System.out.print(result);
+
+Program to print even numbers from list using Java8.
+----------------------------------------------------
+ List<Integer> numbers = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+         numbers.stream()
+            .filter((n)-> n % 2 ==0)
+            .forEach((n)->{
+                System.out.print(n+" ");
+            });
+
+Program to find last element in the list using Java8.
+-----------------------------------------------------
+List<String> list = Arrays.asList(
+            "one","two","three","four","five");
+        String element = list.stream().skip(list.size()-1).findFirst().get();
+        System.out.print(element);
+
+Program to remove duplicate elements from list using Java8 Streams.
+-------------------------------------------------------------------
+ List<String> list = Arrays.asList(
+            "one","two","three","four","five","one","four");
+        List<String> duplicatelists = list.stream().distinct().collect(Collectors.toList());
+        System.out.print(duplicatelists);
+
+Program to find the age of person based on date of birth.
+---------------------------------------------------------
+import java.time.Period;
+import java.time.LocalDate;
+class HelloWorld {
+    public static void main(String[] args) {
+       LocalDate birthDate = LocalDate.parse("1995-05-04");
+       LocalDate currentDate = LocalDate.now();
+       Period period = Period.between(birthDate, currentDate);
+       System.out.print(period.getYears());
     }
 }
 
-
+Program to find reverse a string using Java8.
+---------------------------------------------
+import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.List;
+class HelloWorld {
+    public static void main(String[] args) {
+       String words = "Hello from controller";
+       String[] wordArray = words.split(" ");
+       List<String> list = Arrays.stream(wordArray)
+       .map((word)-> new StringBuilder(word).reverse().toString()).collect(Collectors.toList());
+       System.out.print(list);
+       
+    }
+}
