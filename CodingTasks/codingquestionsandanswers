@@ -247,3 +247,55 @@ class HelloWorld {
        
     }
 }
+
+Program to find second larget number in the list of integer using Java8 Streams.
+--------------------------------------------------------------------------------
+List<Integer> list = Arrays.asList(10,50,20,60,30);
+        Integer result = list
+        .stream()
+        .sorted(Comparator.reverseOrder())
+        .skip(1)
+        .findFirst()
+        .get();
+         System.out.println(result);
+
+Program to find max and min number in the list of integer using Java8 Streams.
+-------------------------------------------------------------------------------
+import java.util.Comparator;
+import java.util.Arrays;
+import java.util.List;
+    
+        List<Integer> list = Arrays.asList(10,50,20,60,30);
+        Integer max = 
+        list.stream().max(Comparator.naturalOrder()).get();
+        System.out.println("max=>"+max);
+        
+        Integer min = 
+        list.stream().min(Comparator.naturalOrder()).get();
+        System.out.println("min=>"+min);
+ 
+Program to find fequencies of each character given string using Java8.
+----------------------------------------------------------------------
+import java.util.Comparator;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Stream;
+       
+        String name = "nallabothulamadhubrahmam";
+        IntStream stream = name.chars();
+        Stream<Character> streamChars = stream.mapToObj(c-> (char)c);
+        Map<Character, Long> map = streamChars.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        System.out.println(map);
+
+Program to sort a list of string alphabatically using Java8.
+------------------------------------------------------------
+import java.util.stream.Collectors;
+import java.util.List;
+import java.util.Arrays;
+ 
+        List<String> list = Arrays.asList("Madhu","Praneeth","Srinivas","Balu","Venkatesh");
+        List<String> result = list.stream().sorted().collect(Collectors.toList());
+        System.out.println(result);
+ 
