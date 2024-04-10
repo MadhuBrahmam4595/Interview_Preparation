@@ -16,6 +16,7 @@ Programs on String values
 2. Program to reverse a string without using inbuilt reverse method.
 3. Program to remove white spaces from a string.
 4. Program to find reverse a string using Java8.
+5. Program to find fequencies of each character given string using Java8.
 
 
 Programs on arrays
@@ -29,6 +30,9 @@ Programs on collections
 2. Program to find last element in the list using Java8.
 3. Program to print even numbers from list using Java8.
 4. Program to remove duplicate elements from list using Java8 Streams.
+5. Program to find second larget number in the list of integer using Java8 Streams.
+6. Program to find max and min number in the list of integer using Java8 Streams.
+7. Program to sort a list of string alphabatically using Java8.
 
 Other Programs
 --------------
