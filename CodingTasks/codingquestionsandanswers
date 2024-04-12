@@ -298,4 +298,14 @@ import java.util.Arrays;
         List<String> list = Arrays.asList("Madhu","Praneeth","Srinivas","Balu","Venkatesh");
         List<String> result = list.stream().sorted().collect(Collectors.toList());
         System.out.println(result);
- 
+
+Program to find first non repeat character from given string.
+-------------------------------------------------------------
+String value = "madhuam";
+		for(Character ch:value.toCharArray()) {
+			if(value.indexOf(ch) == value.lastIndexOf(ch)) {
+				System.out.println("First Non repeated character is: "+ch);
+				break;
+			}
+		}
+
