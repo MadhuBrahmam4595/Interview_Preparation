@@ -1,15 +1,19 @@
 => RestTemplate is a class in the Spring Framework that simplifies communication with RESTful web services. 
-   It provides a higher-level, more convenient API for interacting with HTTP-based services compared to using raw HTTP connections or lower-level libraries.
+   It provides a higher-level, more convenient API for interacting with HTTP-based services compared to using raw HTTP connections or 
+   lower-level libraries.
 => RestTemplate allows you to send HTTP requests to a RESTful web service and receive responses. 
-   It supports various HTTP methods such as GET, POST, PUT, DELETE, etc., and provides methods for making requests with parameters, headers, and payloads.
+   It supports various HTTP methods such as GET, POST, PUT, DELETE, etc., and provides methods for making requests with parameters, headers, 
+   and payloads.
 => Some common operations you can perform with RestTemplate include:
     => Sending GET requests to retrieve data from a RESTful endpoint.
     => Sending POST requests to create resources on the server.
     => Sending PUT requests to update existing resources.
     => Sending DELETE requests to remove resources.
-=> RestTemplate handles tasks such as managing connections, serialization and deserialization of request and response bodies (often JSON or XML), and handling error responses. 
+=> RestTemplate handles tasks such as managing connections, serialization and deserialization of request and response bodies (often JSON or XML),
+   and handling error responses. 
    It can also integrate with authentication mechanisms and SSL/TLS configurations.
-=> RestTemplate has been a widely used component in Spring-based applications for interacting with RESTful services, but in newer versions of Spring, it is gradually being replaced 
+=> RestTemplate has been a widely used component in Spring-based applications for interacting with RESTful services, 
+   but in newer versions of Spring, it is gradually being replaced 
    by the more modern WebClient, which offers a non-blocking, reactive API. However, RestTemplate is still supported and widely used in existing applications.
 => 'RestTemplate’ is a synchronous REST client provided by the core Spring Framework.
 
