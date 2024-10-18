@@ -1,0 +1,27 @@
+1. What are the Features of Spring Boot?
+########################################
+There are many useful features of Spring Boot. Some of them are mentioned below:
+Auto-configuration – 
+  Spring Boot automatically configures dependencies by using @EnableAutoconfiguration annotation and reduces boilerplate code.
+Spring Boot Starter POM – 
+  These Starter POMs are pre-configured dependencies for functions like database, security, maven configuration etc.
+Spring Boot CLI (Command Line Interface) – 
+  This command line tool is generally for managing dependencies, creating projects and running the applications.
+Actuator – 
+  Spring Boot Actuator provides health check, metrics and monitors the endpoints of the application. 
+  It also simplifies the troubleshooting management.
+Embedded Servers – 
+  Spring Boot contains embedded servers like Tomcat and Jetty for quick application run. No need of external servers.
+
+2. Why Spring Boot over Spring?
+#################################
+Spring Boot simplifies the spring features for the user.
+Below are some key points which spring boot offers but spring doesn’t:
+
+Starter POM.
+Version Management.
+Auto Configuration.
+Component Scanning.
+Embedded server.
+InMemory DB.
+Actuators
