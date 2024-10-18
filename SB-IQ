@@ -3,7 +3,7 @@
 There are many useful features of Spring Boot. Some of them are mentioned below:
 Auto-configuration – 
   Spring Boot automatically configures dependencies by using @EnableAutoconfiguration annotation and reduces boilerplate code.
-Spring Boot Starter POM – 
+Spring Boot Starter POM(Project Object Model) – 
   These Starter POMs are pre-configured dependencies for functions like database, security, maven configuration etc.
 Spring Boot CLI (Command Line Interface) – 
   This command line tool is generally for managing dependencies, creating projects and running the applications.
@@ -25,3 +25,48 @@ Component Scanning.
 Embedded server.
 InMemory DB.
 Actuators
+ 
+4. SB Annotations
+#################
+@SpringBootApplication
+-----------@SpringBootApplication annotation combines @Configuration, @EnableAutoConfiguration and @ComponentScan annotations.
+@AutoConfiguration
+-----------This annotation automatically configuring beans in the class path 
+            and automatically scans the dependencies according to the application need.
+@Autowired
+----------Spring provides annotation-based auto-wiring by providing @Autowired annotation. 
+          It is used to autowire spring bean on setter methods, instance variable, and constructor. 
+          When we use @Autowired annotation, the spring container auto-wires the bean by matching data-type.
+@Bean
+----------It is a method-level annotation. 
+          It is an alternative of XML <bean> tag. 
+          It tells the method to produce a bean to be managed by Spring Container.
+@Component
+----------It is a class-level annotation. It is used to mark a Java class as a bean. 
+          A Java class annotated with @Component is found during the classpath. 
+          The Spring Framework pick it up and configure it in the application context as a Spring Bean.
+@ComponentScan
+-----------This annotation scans the components (@Component, @Service, etc.) in the package of annotated class and its sub-packages.
+@Controller
+------------The @Controller is a class-level annotation. It is a specialization of @Component. 
+            It marks a class as a web request handler. It is often used to serve web pages. 
+            By default, it returns a string that indicates which route to redirect. It is mostly used with @RequestMapping annotation.
+@Configuration
+-----------This annotation configures the beans and packages in the class path. It is a class-level annotation. 
+            The class annotated with @Configuration used by Spring Containers as a source of bean definitions.
+@Required
+-----------It applies to the bean setter method. It indicates that the annotated bean must be populated at configuration time 
+           with the required property, else it throws an exception BeanInitilizationException.
+@Repository
+-----------It is a class-level annotation. The repository is a DAOs (Data Access Object) that access the database directly. 
+            The repository does all the operations related to the database.
+@Service
+-----------It is also used at class level. It tells the Spring that class contains the business logic.
+@EnableAutoConfiguration
+-----------It auto-configures the bean that is present in the classpath and configures it to run the methods. 
+            The use of this annotation is reduced in Spring Boot 1.2.0 release because developers provided an alternative of the annotation, 
+            i.e. @SpringBootApplication.
+            @SpringBootApplication: It is a combination of three annotations @EnableAutoConfiguration, @ComponentScan, and @Configuration.
+https://www.javatpoint.com/spring-boot-annotations
+
+
