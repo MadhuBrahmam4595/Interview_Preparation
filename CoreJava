@@ -1,149 +1,867 @@
-1. What is the difference between == operator and .equals() method?
-Ans: .equals() for content comparison, where == operator is reference comparison.
-    String s1= new String("ashok");
-    String s2= new String("ashok");
-    System.out.println(s1==s2); //false
-    System.out.println(s1.equals(s2)); //true
-==========================================================================================
+1. What is the difference between == operator and .equals() method in Java?
+
+Definition:
+   * == (Reference Comparison): Compares whether two reference variables point to the same object in memory.
+   * .equals() (Content Comparison): Compares whether two objects have the same content, as defined by the class's equals() method (usually overridden in most classes like String).
+
+💡 Example with Explanation:
+public class ComparisonExample {
+    public static void main(String[] args) {
+        String s1 = new String("ashok");
+        String s2 = new String("ashok");
+
+        System.out.println("Using == : " + (s1 == s2));         // false - different memory locations
+        System.out.println("Using .equals() : " + s1.equals(s2)); // true - same content
+    }
+}
+    * s1 == s2 returns false because both s1 and s2 are created using new, so they point to different memory locations.
+    * s1.equals(s2) returns true because the content of the strings is the same.
+
+📌 Bonus Example (String Constant Pool):
+public class SCPExample {
+    public static void main(String[] args) {
+        String a = "java";
+        String b = "java";
+
+        System.out.println(a == b);        // true - both point to same SCP object
+        System.out.println(a.equals(b));   // true - same content
+    }
+}
+In this case:
+    * "java" is placed in the String Constant Pool (SCP).
+    * Both a and b refer to the same object, so == returns true.
+
+==========================================================================================================================================================================================================================================================
+
 2. Difference between new and newInstance() ?
 Ans: 
+
 new:
 ----
-1. new is a operator, which can be used to create an object.
-2. We can use new operator if we know the class name ath he beginning. Test t = new Test();
-3. If the corresponding .class file  not available at Runtime then we will get RuntimeException saying NoClassDefFoundError, It is unchecked.
-4. To used new operator the corresponding class not required to contain no argument constructor.
+new is a keyword (operator) in Java used to create an object.
+It is used when the class name is known at compile time.
+Syntax example: Test t = new Test();
+If the corresponding .class file is not available at runtime, it throws an unchecked exception: NoClassDefFoundError.
+It does not require a no-argument constructor. It can call any accessible constructor.
 
-newInstance()
+💡 Code Example
+✅ Using new Operator
+public class Test {
+    public Test() {
+        System.out.println("Test constructor called");
+    }
+
+    public static void main(String[] args) {
+        Test obj = new Test();  // using new
+    }
+}
+
+newInstance():
 -------------
-1. newInstance() is a method, present in class Class, which can be used to create an object.
-2. We can use the newInstance() method, If we don't class name at the beginning and available dynamically Runtime.
-Object o = Class.forName(arg[0]).newInstance();
-3. If the corresponding .class file  not available at Runtime then we will get RuntimeException saying NoClassDefFoundError, It is checked.
-4. To used newInstance() method the corresponding class should compulsory contain no argument constructor, Otherwise we will get RuntimeException saying InstantiationException.
-=================================================================================================================================================================================
-3. Difference between ClassNotFoundException and NoClassDefFoundError ?
-Ans:
-NoClassDefFoundError: For hard coded class names at Runtime in the corresponding .class files not available we will get NoClassDefFoundError, which is unchecked
-Ex: Test t = new Test(); 
-In Runtime Test.class file is not available then we will get NoClassDefFoundError
+newInstance() is a method present in the Class class in Java, used to create an object dynamically at runtime.
+It is used when the class name is not known at compile time and is decided dynamically (e.g., passed from user input or config file).
+Syntax example: Object obj = Class.forName("Test").newInstance(); (Deprecated way)
+If the .class file is not available at runtime, it throws a checked exception: ClassNotFoundException.
+It requires a public no-argument constructor. If not present, it throws InstantiationException.
 
-ClassNotFoundException: For dynamically provided class names at Runtime. If the corresponding .class files is not available then we will get the RuntimeException saying 
-ClassNotFoundException.
-Ex: Object o = Class.forname("Test").newInstance();
-At Runtime if Test.class file not available then we will get the ClassNotFoundException, which is checked exception.
-=================================================================================================================================================================================
-4. Difference between instanceof and isInstance() ?
-Ans: 
-instanceof: instanceof an operator whcih can be used to check whether the given object is particular type or not, we know the type at beginning it is available.
-Example: String s = new String("Ashok");
-System.out.println(s.instanceof Object); //true
-If we know the type at the beginning only.
+✅ Using newInstance() Method 
+public class Test {
+    public Test() {
+        System.out.println("Test constructor called via reflection");
+    }
 
-isInstance(): isInstance() is method, present in class Class, we can use isInstance() method to checked whether the given object is particular type or not
-we don't know the type at beginning it is available dynamically at Runtime.
-Ex:
-class Test{
-  public static void main(String[] args){
-    Test t = new Test();
-      System.out.println(args[0]).isInstance());
+    public static void main(String[] args) {
+        try {
+            // Load class dynamically
+            Class<?> clazz = Class.forName("Test");
+            
+            // Create object using newInstance (legacy way)
+            Object obj = clazz.getDeclaredConstructor().newInstance();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+🚫 Notes on newInstance():
+    * Class.newInstance() is deprecated in Java 9 and later because:
+    * It forces a requirement for a public no-arg constructor.
+    * Better alternative: Class.getDeclaredConstructor().newInstance()
+
+======================================================================================================================================================================================================================================================
+
+3. Difference between ClassNotFoundException and NoClassDefFoundError in Java
+
+NoClassDefFoundError:
+---------------------
+This is a runtime error (unchecked).
+Occurs when a class was available during compile time but is missing during runtime.
+Commonly happens for classes that are directly referenced in code using the new keyword.
+This is part of the Error hierarchy.
+
+Example:
+public class Main {
+    public static void main(String[] args) {
+        Test t = new Test(); // Test class is used directly
+    }
 }
-java Test Test //true
-java Test String //false
-java Test Ojbect //true
-==================================================================================================================================================================================
-5. What is your favorite package? Why java.lang is your favorite package?
-Ans: It is not required to import lang package explicitly but the remaining packages we have to import.
+If Test.class is not found at runtime, you'll get: Exception in thread "main" java.lang.NoClassDefFoundError: Test 
+
+ClassNotFoundException:
+-----------------------
+This is a checked exception.
+Occurs when the application tries to load a class dynamically using methods like Class.forName() and the class is not found.
+You must handle it with a try-catch block or declare it using throws.
+
+Example:
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Class<?> clazz = Class.forName("Test"); // Class name is passed as a string
+            Object obj = clazz.getDeclaredConstructor().newInstance();
+        } catch (ClassNotFoundException e) {
+            System.out.println("Class not found at runtime.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+If Test.class is missing, output:
+Class not found at runtime.
+
+Summary:
+Use NoClassDefFoundError when class is used directly and missing at runtime.
+Use ClassNotFoundException when loading class dynamically and it's not found.
+
+=======================================================================================================================================================================================================================================================
+
+4. Difference between instanceof and isInstance() in Java
+
+instanceof operator:
+--------------------
+It is a Java keyword/operator.
+Used when the type is known at compile time.
+Checks if the object is an instance of a specific class or interface.
+Returns true if the object is of that type (or subclass).
+
+Example:
+public class Main {
+    public static void main(String[] args) {
+        String s = new String("Ashok");
+        System.out.println(s instanceof String);  // true
+        System.out.println(s instanceof Object);  // true
+    }
+}
+
+isInstance() method:
+--------------------
+It is a method in the Class class (java.lang.Class).
+Used when the type is not known at compile time, and is available dynamically at runtime.
+Syntax: ClassName.class.isInstance(object)
+Returns true if the object is an instance of the specified class or interface.
+
+Example:
+public class Test {
+    public static void main(String[] args) throws Exception {
+        Object obj = new Test(); // object creation
+
+        // Simulating class name received dynamically from command line
+        String className = args[0]; // e.g., Test, String, java.lang.Object
+
+        Class<?> clazz = Class.forName(className);
+        System.out.println(clazz.isInstance(obj));
+    }
+}
+Run the above program:
+java Test Test           // true
+java Test java.lang.String  // false
+java Test java.lang.Object  // true
+
+Summary:
+Use instanceof when type is known at compile time.
+Use isInstance() when type is dynamic and known at runtime.
+
+============================================================================================================================================================================================================================================================
+
+5. What is your favorite package? Why is java.lang your favorite package?
+
+Answer:
+My favorite package is java.lang.
+
+Reasons:
+Automatically imported:
+    - Unlike other packages (e.g., java.util, java.io), the java.lang package is implicitly imported in every Java program. So, we can use its classes directly without needing an import statement.
+Contains core classes:
+    - It provides many essential classes and features that are fundamental to Java programming:
+        String, StringBuilder, StringBuffer
+        Wrapper classes: Integer, Double, Boolean, etc.
+        Math class
+        System, Runtime, Object, Throwable, Exception, etc.
+
+Supports OOP principles:
+    - Many classes in java.lang (like Object, Class, and Throwable) are crucial for object-oriented programming, exception handling, and reflection.
+
+Code Example Without Importing java.lang:
+public class LangDemo {
+    public static void main(String[] args) {
+        String name = "Java";             // Using java.lang.String
+        int length = name.length();       // Using java.lang methods
+        double square = Math.pow(4, 2);   // Using java.lang.Math
+        System.out.println("Length: " + length);
+        System.out.println("Square: " + square);
+    }
+}
+Output:
+Length: 4
+Square: 16.0
+
+As shown, we didn't explicitly import java.lang, yet we could use String, Math, and System directly.
+
 ===================================================================================================================================================================================
+
 6. Which cloning is best?
-Ans:
-If the object contain only primitive varible then swallow cloning is the best choice.
-If the object contain reference variables then Deep cloning is the best choice.
+
+Answer:
+There are two types of cloning in Java:
+
+Shallow Cloning
+Deep Cloning
+
+If the object contains only primitive variables or immutable fields (like int, String), then Shallow Cloning is sufficient and more efficient.
+If the object contains reference variables (i.e., an object has fields that are other objects), then Deep Cloning is the better choice to avoid shared references.
+
+Shallow Cloning Example:
+class Student implements Cloneable {
+    int id;
+    String name;
+
+    Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone(); // shallow copy
+    }
+
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Student s1 = new Student(1, "John");
+        Student s2 = (Student) s1.clone();
+
+        System.out.println(s1.name); // John
+        System.out.println(s2.name); // John
+    }
+}
+
+Deep Cloning Example:
+class Address {
+    String city;
+
+    Address(String city) {
+        this.city = city;
+    }
+}
+
+class Employee implements Cloneable {
+    int id;
+    Address address;
+
+    Employee(int id, Address address) {
+        this.id = id;
+        this.address = address;
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        // Deep copy: manually cloning nested object
+        Address clonedAddress = new Address(this.address.city);
+        return new Employee(this.id, clonedAddress);
+    }
+
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Address addr1 = new Address("Delhi");
+        Employee e1 = new Employee(101, addr1);
+        Employee e2 = (Employee) e1.clone();
+
+        e2.address.city = "Mumbai";
+
+        System.out.println(e1.address.city); // Delhi
+        System.out.println(e2.address.city); // Mumbai
+    }
+}
+
+=========================================================================================================================================================================================================================================================
+
+7. Other than immutability and mutability, is there any other difference between String and StringBuffer?
+
+Answer:
+Yes, apart from immutability vs mutability, there are other differences between String and StringBuffer:
+
+=> .equals() behavior:
+    In String, the .equals() method is overridden to compare content.
+    In StringBuffer, .equals() is not overridden, so it uses reference comparison (inherited from Object class).
+
+=> Thread Safety:
+    String is immutable and inherently thread-safe.
+    StringBuffer is mutable but thread-safe due to synchronized methods.
+
+Code Example:
+public class Main {
+    public static void main(String[] args) {
+        String str1 = new String("java");
+        String str2 = new String("java");
+
+        System.out.println("String equals(): " + str1.equals(str2)); // true
+
+        StringBuffer sb1 = new StringBuffer("java");
+        StringBuffer sb2 = new StringBuffer("java");
+
+        System.out.println("StringBuffer equals(): " + sb1.equals(sb2)); // false
+    }
+}
+
+Explanation:
+    => str1.equals(str2) returns true because String compares contents.
+    => sb1.equals(sb2) returns false because StringBuffer uses reference comparison.
+
 ==================================================================================================================================================================================
-7. Other than immutability and mutability is there any other difference between String and StringBuffer ?
-Ans: In String .equals() method meant for content comparison where as in StringBuffer meant for reference comparision.
-==================================================================================================================================================================================
+
 8. What is the SCP(String Constant Pool) advantage and disadvantage ?
 Ans: 
-Advantage: Instead of creating a separte object for every requirement we can create only one object and we can reuse same object for every requirement. This approach improves performances
-and memory utilization.
-Disadvantage: In SCP as several references pointing to the same object by using one reference if we are performing any changes the remaining references will be inflected. To
-prevent this compulsory String objects should be immutable. That is immutability is the disadvantage of SCP.
-=================================================================================================================================================================================
-9. Why String objects are immutable where as StringBuffer objects are mutable?
-Ans: In the case of String as several references pointing to the same object, by using one reference if we are allowed perform the change the remaining references will be impacted.
-To prevent this once we created a String object we can't perform any change in the existing object that is immutability is only due to SCP.
-But in the case of StringBuffer for every requirement we are creating a separate object will be created by using one reference if we are performing any change in the object the 
-remaining references won't be impacted hence immutability concept is not require for the StringBuffer.
-==================================================================================================================================================================================
-10. What is Autoboxing and Autounboxing ?
-Ans: 
-Automatic conversion of primitive to wrapper object by compiler is called Autoboxing.
-Example: Integer i = 10;  [compiler converts 'int' to 'Integer' automatically by Autoboxing]
-After compilation the above line will become.
-Integer i = Integer.valueOf(10);
-That is internally Autoboxing concept is implemented by using valueOf() method.
+Advantage of SCP: Reusability and Memory Efficiency 
+    -Instead of creating a separte object for every requirement we can create only one object and we can reuse same object for every requirement. This approach improves performances and memory utilization.
 
-Automatic conversion of wrapper object to primitive by compiler is called Autounboxing.
-Example:
-Integer I = new Integer(10);
-Int i = r;
-[compiler converts "Integer" to "int" automatically by Autounboxing]
-After compilation the above line will become.
-Int i = I.intValue();
-That is Autounboxing concept is internally implemented by using xxxValue() method.
-===================================================================================================================================================================================
-11. What is the difference between general import and static import?
-Ans: 
-general import: we can use normal imports to import classes and interfaces of a package. whenever we are using normal import we can access class and interfaces directly
-by their short name it is not require to use fully qualified names.
-static import: we can use static import to import static members of a particular class. whenever we are using static import it is not require to use class name we can access 
-static members directly.
-====================================================================================================================================================================================
-12. What is the difference between access specifier and access modifier ?
-Ans: 
+Code Example: SCP Reusability
+public class SCPDemo {
+    public static void main(String[] args) {
+        String s1 = "hello";  // stored in SCP
+        String s2 = "hello";  // reused from SCP
+
+        System.out.println(s1 == s2);  // true -> same reference
+    }
+}
+🧠 Explanation: Both s1 and s2 refer to the same object in SCP, saving memory.
+
+Disadvantage: Immutability is Mandatory
+    - In SCP as several references pointing to the same object by using one reference if we are performing any changes the remaining references will be inflected. To
+prevent this compulsory String objects should be immutable. That is immutability is the disadvantage of SCP.
+
+Code Example: Immutability Protection 
+public class ImmutableStringDemo {
+    public static void main(String[] args) {
+        String s1 = "java";
+        String s2 = "java";
+
+        // creates a new object, doesn't change s1 or s2
+        s1.concat(" developer");
+
+        System.out.println(s1);  // java
+        System.out.println(s2);  // java
+    }
+}
+🧠 Explanation: Even though s1.concat() is called, it doesn't change the original s1 or s2. Strings are immutable, so a new object is created.
+
+Comparing With new String()
+    - If you use new String(), Java creates a new object in heap even if the content is the same.
+
+public class NewStringVsSCP {
+    public static void main(String[] args) {
+        String s1 = "world";               // SCP
+        String s2 = new String("world");   // Heap
+
+        System.out.println(s1 == s2);  // false -> different references
+        System.out.println(s1.equals(s2));  // true -> content is same
+    }
+}
+
+
+===============================================================================================================================================================================================================================================================
+
+9. Why are String objects immutable, whereas StringBuffer objects are mutable?
+
+String (Immutable):
+    => In Java, String objects are immutable, meaning once created, their value cannot be changed. This design ensures:
+            Security – commonly used in sensitive areas like networking, database connections, etc.
+            Thread safety – multiple threads can use the same String without synchronization.
+            Memory efficiency – thanks to String Constant Pool (SCP) where identical strings are reused.
+
+⚠️ If String were mutable, then changing it via one reference would affect all references pointing to the same string in the SCP.
+
+StringBuffer (Mutable):
+    => StringBuffer is designed for mutable strings, especially for scenarios like concatenation in loops. For each StringBuffer, a new object is created, and internal modifications do not affect other objects, so immutability isn't required here.
+
+Code Example (Demonstrating Immutability vs Mutability): 
+public class Main {
+    public static void main(String[] args) {
+        // Immutable String
+        String s1 = "hello";
+        String s2 = s1;
+        s1 = s1.concat(" world"); // creates a new String
+        System.out.println("s1: " + s1); // hello world
+        System.out.println("s2: " + s2); // hello
+
+        // Mutable StringBuffer
+        StringBuffer sb1 = new StringBuffer("hello");
+        StringBuffer sb2 = sb1;
+        sb1.append(" world"); // modifies the same object
+        System.out.println("sb1: " + sb1); // hello world
+        System.out.println("sb2: " + sb2); // hello world
+    }
+}
+
+Explanation:
+    => s1 and s2 initially point to the same String. When s1 is modified, a new object is created, so s2 is unaffected.
+    => sb1 and sb2 point to the same StringBuffer. When sb1 is modified, sb2 also reflects the change.
+
+
+==============================================================================================================================================================================================================================================================
+
+10. What is Autoboxing and Autounboxing in Java?
+
+    Autoboxing is the automatic conversion that the Java compiler makes between primitive types (like int, char) and their corresponding wrapper classes (Integer, Character, etc.).
+    Autounboxing is the reverse process, where the compiler automatically converts wrapper class objects back to primitives.
+
+These features were introduced in Java 5 to make writing code easier and cleaner, especially when working with collections, generics, and method arguments.
+
+🔄 Autoboxing Example: 
+public class AutoBoxingExample {
+    public static void main(String[] args) {
+        int primitive = 10;
+
+        // Autoboxing: int -> Integer
+        Integer wrapper = primitive;
+
+        // Internally done by compiler:
+        // Integer wrapper = Integer.valueOf(primitive);
+
+        System.out.println("Wrapper value: " + wrapper);
+    }
+}
+🔁 Autounboxing Example: 
+public class AutoUnboxingExample {
+    public static void main(String[] args) {
+        Integer wrapper = new Integer(20);
+
+        // Autounboxing: Integer -> int
+        int primitive = wrapper;
+
+        // Internally done by compiler:
+        // int primitive = wrapper.intValue();
+
+        System.out.println("Primitive value: " + primitive);
+    }
+}
+✅ Why Is It Useful?
+Before Java 5, you had to manually convert between primitives and wrappers:
+
+Integer i = Integer.valueOf(10);  // No autoboxing
+int x = i.intValue();             // No autounboxing
+
+Now with autoboxing/unboxing:
+Integer i = 10;  // Autoboxing
+int x = i;       // Autounboxing
+
+=============================================================================================================================================================================================================================================================
+
+11. What is the difference between general import and static import in Java?
+
+✅ General Import:
+we can use normal imports to import classes and interfaces of a package. whenever we are using normal import we can access class and interfaces directly by their short name it is not require to use fully qualified names.
+Used to import classes and interfaces from other packages.
+Once imported, we can use the class name directly (short name) instead of the fully qualified name.
+
+📌 Example (General Import):
+import java.util.ArrayList;
+
+public class GeneralImportExample {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();  // No need to write java.util.ArrayList
+        list.add("Java");
+        System.out.println(list);
+    }
+}
+
+Without import java.util.ArrayList;, you would need to write:
+    java.util.ArrayList<String> list = new java.util.ArrayList<>();
+
+✅ Static Import:
+    we can use static import to import static members of a particular class. whenever we are using static import it is not require to use class name we can access static members directly.
+    Used to import static members (fields or methods) of a class.
+    Allows us to use static members without class name prefix.
+
+📌 Example (Static Import):
+        import static java.lang.Math.*; // Static import of all static methods from Math class
+        public class StaticImportExample {
+            public static void main(String[] args) {
+                System.out.println(sqrt(25));       // No need to write Math.sqrt()
+                System.out.println(pow(2, 3));      // No need to write Math.pow()
+                System.out.println(PI);             // No need to write Math.PI
+            }
+        }
+
+Without static import, you’d write:
+    System.out.println(Math.sqrt(25));
+    System.out.println(Math.pow(2, 3));
+    System.out.println(Math.PI);
+
+🟢 Summary:
+
+Feature	        General Import	                Static Import
+----------------------------------------------------------------------------------
+Used For	    Classes and Interfaces	        Static members (fields and methods)
+Syntax	        import java.util.ArrayList;	    import static java.lang.Math.*;
+Benefit	        Use short class names	        Use static members without class prefix
+
+============================================================================================================================================================================================================================================================
+
+12. What is the difference between Access Specifier and Access Modifier in Java?
+
 In old languages 'C' (or) 'C++' public, private, protected, default are considered as access specifiers and all the remaining are considered as access modifiers.
 But in java there is no such type of division all are considered as access modifiers.
-====================================================================================================================================================================================
-13. What is the difference between abstract class and abstract method ?
-Ans: 
-If a class contain atleast one abstract method then compulsory the corresponding class should be declare with abstract modifier. Because implementation is not complete and 
-hence we can't create object of that class.
+
+✅ Explanation:
+In older programming languages like C or C++, the terms Access Specifiers and Access Modifiers had different meanings.
+But in Java, there’s no official distinction between them — Java uses the term Access Modifiers to refer to all keywords that control visibility or behavior of classes, methods, variables, and constructors.
+
+✅ Access Modifiers in Java:
+They are used to control the scope (visibility) of: Classes, Methods, Variables and Constructors
+
+🔹 Types of Access Modifiers in Java:
+    public – Accessible from everywhere.
+    private – Accessible only within the same class.
+    protected – Accessible within the same package or by subclasses.
+    default (no keyword) – Accessible within the same package only.
+
+📌 Example: 
+public class ModifierExample {
+    public int a = 10;
+    private int b = 20;
+    protected int c = 30;
+    int d = 40; // default
+
+    public void show() {
+        System.out.println("a: " + a); // Accessible
+        System.out.println("b: " + b); // Accessible
+        System.out.println("c: " + c); // Accessible
+        System.out.println("d: " + d); // Accessible
+    }
+}
+
+✅ Other Modifiers in Java (not related to access control):
+    These are also modifiers, but not access modifiers — they modify behavior, not visibility.
+        static – Belongs to the class, not instance.
+        final – Cannot be changed or overridden.
+        abstract – Must be overridden in subclass.
+        synchronized, native, strictfp, etc.
+
+📌 Example: 
+public final class MyFinalClass {
+    public static void main(String[] args) {
+        final int x = 10;
+        System.out.println(x);
+    }
+}
+
+✅ Summary:
+
+Term	            Usage in Java
+--------------------------------------------------
+Access Specifier	✅ Not officially used in Java
+Access Modifier	    ✅ Used for visibility control
+Modifier	        ✅ Includes access & behavior modifiers
+
+============================================================================================================================================================================================================================================================
+
+13. What is the difference between an abstract class and an abstract method in Java?
+
+If a class contain atleast one abstract method then compulsory the corresponding class should be declare with abstract modifier. Because implementation is not complete and hence we can't create object of that class.
 Even through class doesn't contain any abstract methods still we can declare the class as abstract that is an abstract class can contain zero no of abstract methods also.
 Examples: HttpServlet class is abstract but it doesn't contain any abstract method. Every adapter class is abstract but it doesn't contain any abstract method.
+
+✅ Abstract Class:
+    => An abstract class is a class that cannot be instantiated directly.
+    => It can contain both abstract methods (without implementation) and concrete methods (with implementation).
+    => Declared using the abstract keyword.
+    => It’s used when we want to provide partial implementation and force subclasses to complete the rest.
+    => Even if an abstract class has no abstract methods, it can still be declared abstract — to prevent instantiation or provide base functionality.
+
+✅ Abstract Method:
+    => A method that is declared without implementation.
+    => It must be implemented by subclasses.
+    => Declared using the abstract keyword and must end with a semicolon, not a method body.
+    => Can only exist inside an abstract class (or interface).
+
+🔹 Code Example: 
+abstract class Animal {
+    // Abstract method (no body)
+    abstract void sound();
+
+    // Concrete method
+    void sleep() {
+        System.out.println("Sleeping...");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+
+Usage:
+public class Main {
+    public static void main(String[] args) {
+        // Animal a = new Animal(); // ❌ Not allowed (abstract class)
+        Dog d = new Dog();
+        d.sound();  // Dog barks
+        d.sleep();  // Sleeping...
+    }
+}
+
+✅ Key Points:
+    => If a class has at least one abstract method, the class must be abstract.
+    => An abstract class can have zero abstract methods.
+    => You cannot create objects of abstract classes.
+    => Subclasses must override all abstract methods of the parent class, or they must also be declared abstract.
+
+✅ Real-World Examples:
+    => HttpServlet in Java EE is abstract (doesn’t force overriding but provides optional hooks).
+    => Adapter classes like MouseAdapter, KeyAdapter in AWT are abstract but have no abstract methods (used to simplify listener creation).
+
 ====================================================================================================================================================================================
-14. What is the difference between final and abstract ?
-Ans: 
-* For abstract methods compulsory we should override in the child class to provide implementation. Whereas for final methods we can't override hence abstract final combination 
-is illegal for methods.
-* For abstract classes we should compulsory create child class to provide implementation whereas for final class we can't create child class. Hence final abstract combination 
-is illegal for classes.
+
+14. What is the difference between final and abstract in Java?
+
+* For abstract methods compulsory we should override in the child class to provide implementation. Whereas for final methods we can't override hence abstract final combination is illegal for methods.
+* For abstract classes we should compulsory create child class to provide implementation whereas for final class we can't create child class. Hence final abstract combination is illegal for classes.
 * Final class cannot contain abstract methods whereas abstract class can contain final method.
-=================================================================================================================================================================================
+
+Both final and abstract are modifiers in Java, but they serve opposite purposes:
+
+✅ abstract keyword:
+    Used to declare a method or class without a complete implementation.
+    Must be extended (for classes) or overridden (for methods).
+    Cannot be instantiated directly.
+
+    abstract class Vehicle {
+        abstract void start(); // No implementation
+    }
+
+✅ final keyword:
+    Used to declare something as constant or non-changeable.
+    A final class cannot be extended.
+    A final method cannot be overridden.
+    A final variable value cannot be changed once assigned.
+
+    final class Car {
+        void drive() {
+            System.out.println("Driving...");
+        }
+    }
+
+❌ Illegal combinations:
+    abstract final class – ❌ Not allowed (conflict: one says "must override", the other says "cannot override")
+    abstract final method – ❌ Not allowed (same reason)
+
+✅ Legal combination:
+    An abstract class can have final methods (they just can't be overridden).
+
+    abstract class Shape {
+        final void display() {
+            System.out.println("Displaying shape...");
+        }
+        abstract void draw();
+    }
+
+🔹 Comparison Summary:
+
+Feature	                abstract	                        final
+Purpose	                To allow extension/override	        To prevent extension/override
+Class Behavior	        Must be subclassed to use	        Cannot be subclassed
+Method Behavior	        Must be overridden	                Cannot be overridden
+Object Creation	        Cannot instantiate directly	        Can instantiate if it’s not abstract
+Compatibility	        Cannot use with final together	    Cannot use with abstract together
+
+✅ Interview Tip:
+Think of abstract as a contract to be fulfilled, and final as a rule to be respected. They contradict each other when applied together on the same entity.
+
+===========================================================================================================================================================================================================================================================
+
 15. What is the difference between abstract and strictfp ?
 Ans: 
 * Strictfp method talks about implementation where as abstract method never talks about implementation hence abstract, strictfp combination is illegal for methods.
 * But we can declare a class with abstract and strictfp modifier simultaneously. That is abstract strictfp combination is legal for classes but illegal for methods.
-===============================================================================================================================================================================
+
+Both are modifiers, but they serve very different purposes.
+
+✅ abstract keyword:
+    Declares a method or class without full implementation.
+    Must be overridden or extended by subclasses.
+
+    abstract class Calculator {
+        abstract double calculate();  // No implementation here
+    }
+
+✅ strictfp keyword:
+    Used to enforce IEEE 754 floating-point precision (to make floating-point calculations consistent across all platforms).
+    Can be applied to classes, interfaces, or methods (but only to concrete methods, not abstract ones).
+
+    strictfp class ScientificCalc {
+        public double compute(double a, double b) {
+            return a * b + 0.123;
+        }
+    }
+
+❌ Illegal combination:
+    abstract strictfp method is not allowed, because:
+    abstract means no implementation.
+    strictfp applies to implementation of floating-point logic.
+
+    → So combining them doesn't make sense.
+
+// ❌ Not allowed
+    abstract strictfp double compute();  // Compilation error
+
+✅ Legal combination:
+    An abstract class can be marked as strictfp.
+
+    abstract strictfp class PhysicsEngine {
+        abstract double simulate();
+    }
+    This ensures that any concrete implementation inside the class (non-abstract methods) follow consistent floating-point behavior.
+
+🔹 Comparison Recap:
+
+Feature	                    abstract	                            strictfp
+Purpose	                    Defines incomplete implementation	    Enforces consistent floating-point precision
+Applied                     To	Classes, methods	                Classes, interfaces, concrete methods
+Implementation	            Must not have	                        Must have
+Can be combined	With        other modifiers like final	            Not with abstract methods
+
+✅ Interview Tip:
+"Use strictfp when you care about platform-independent floating-point results. Use abstract when you're creating a blueprint for subclasses. But don’t use both on methods—they’re conceptually opposite."
+
+=============================================================================================================================================================================================================================================================
 16. What is Marker Inteface ?
-Ans: If an interface doesn't contain any methods and by implementing that interface if our objects will get some ability such type of interfaces are called Marker Interfaces(Or)
-Tag Interfaces (Or) Ability interface.
-Example: Serializable, Cloneable, RandomAccess, SingleThreadModel,...
-* By implementing serializable-interface we can send that object across the network and we can save state of an object into a file.
-* By implementing SingleThreadModel interface Servlet can process only one client request at a time so that we can get "ThreadSafety".
-* By implementing Cloneable interface our object is in position to provide exactly duplicate cloned object.
-Q. Without having any methods in marker interface how objects will get ability ?
-Ans: Internally JVM is responsible to provide required ability.
-Q. Why JVM is providing the required ability in marker interfaces ?
-Ans: To reduce complexity of the programming.
-Q. Is it possible to create our own marker interface ?
-Ans: Yes, but customization of JVM must be required.
-================================================================================================================================================================================
-17. What is the difference between interface, abstract class and concrete class ? When we should go for interface, abstract class and concrete class ?
-Ans: 
-* If we don't know anything about implementation just we have requirement specification then we should go for interface.
-* If we are talking about implementation but not completely (partial implementation) then we should go for abstract class.
-* If we are talking about implementation completely and ready to provide service then we should go for concrete class.
-==========================================================================================================================================================================
+
+✅ 16. What is a Marker Interface in Java?
+    A Marker Interface is an interface with no methods or fields, but by implementing it, the object gains a specific capability.
+    It's also called a Tag Interface or Ability Interface.
+
+    🔸 Examples of Marker Interfaces in Java:
+        Serializable
+            => Marks an object as serializable → meaning it can be converted into a byte stream and sent over a network or saved to a file.
+            => class Student implements Serializable {
+                    int id;
+                    String name;
+                }
+            => Internally, the JVM uses reflection to check whether the object is an instance of Serializable before performing serialization.
+
+        Cloneable
+            => Marks an object as clonable, allowing it to be duplicated using .clone() method.
+            => class Employee implements Cloneable {
+                    int empId;
+                    String name;
+
+                    public Object clone() throws CloneNotSupportedException {
+                        return super.clone(); // works only if object implements Cloneable
+                    }
+                }
+
+        SingleThreadModel (used in older Servlet APIs)
+            => Indicates that only one thread should access a servlet instance at a time → helps with thread safety.
+
+        RandomAccess (used in collections)
+            => Suggests that a class like ArrayList supports fast random access.
+
+🔹 How do marker interfaces work if they have no methods?
+    JVM or framework code checks for the presence of these interfaces at runtime using reflection.
+
+    if (obj instanceof Serializable) {
+        // JVM knows it can serialize the object
+    }
+🔸 Why does the JVM provide ability through marker interfaces?
+    To keep the language simple and:
+    Avoid complicating the class hierarchy.
+    Allow certain capabilities without modifying method signatures or adding boilerplate code.
+
+🔹 Can we create our own Marker Interface?
+    ✅ Yes, we can.
+
+    interface MyMarker {}
+
+    class MyClass implements MyMarker {
+        // No methods to implement, but we can use this tag elsewhere
+    }
+    But for this to be meaningful, you or your framework must handle the tag manually using:
+
+    if(obj instanceof MyMarker) {
+        // Provide special behavior
+    }
+
+✅ Interview Tip:
+Marker interfaces are a design pattern to associate metadata (like a tag) with a class. In modern Java, many such cases are now replaced with annotations (e.g., @Override, @FunctionalInterface, @Deprecated), but Marker Interfaces are still valid and useful.
+ 
+===========================================================================================================================================================================================================================================================
+
+✅ 17. What is the Difference Between Interface, Abstract Class, and Concrete Class?
+
+🔹 1. Interface
+    An interface defines a contract — a list of methods without any implementation (before Java 8).
+    From Java 8 onward, it can also contain default and static methods with implementations.
+    Used when we don't know anything about the implementation, but we want to define a specification.
+
+    interface Vehicle {
+        void start();
+        void stop();
+    }
+    
+✔️ Use interface when:
+    You want to specify behavior but allow multiple unrelated classes to implement it differently.
+    You want to achieve multiple inheritance.
+
+🔹 2. Abstract Class
+    Can contain both abstract methods (without body) and concrete methods (with body).
+    Cannot be instantiated.
+    Used when we have partial implementation and want to provide a base for subclasses.
+
+    abstract class Car {
+        abstract void start(); // abstract method
+
+        void fuel() { // concrete method
+            System.out.println("Petrol or Diesel");
+        }
+    }
+✔️ Use abstract class when:
+    You want to share some common code between related classes.
+    You need constructors, instance variables, or non-static initialization blocks.
+
+🔹 3. Concrete Class
+    A regular class that has full implementation.
+    Can be instantiated directly.
+    Used when you're ready to provide the actual service.
+
+    class Honda extends Car {
+        void start() {
+            System.out.println("Honda starts with key");
+        }
+    }
+✔️ Use concrete class when:
+    You're done with design and are ready to implement complete logic.
+    You want to create objects and use them in your program.
+
+🧠 Summary (in simple terms):
+
+Concept	            When to Use	                            Contains
+Interface	        You only know the behavior needed	    Only method signatures (and static/default)
+Abstract Class	    You know some implementation	        Abstract + concrete methods
+Concrete Class	    You know everything	                    Full implementation
+
+💡 Real-Life Analogy:
+    Interface = Blueprint (what needs to be built)
+    Abstract Class = Partially constructed building (foundation + walls)
+    Concrete Class = Fully constructed building (ready to use)
+
+===========================================================================================================================================================================================================================================================
 continue page 174
