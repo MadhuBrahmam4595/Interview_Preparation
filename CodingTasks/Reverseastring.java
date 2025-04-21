@@ -89,3 +89,97 @@ public class Reverseastring {
 	}
 
 }
+
+
+========================================================
+Ways to Reverse a String in Java
+=================================
+
+1. Using StringBuilder
+-----------------------
+String input = "hello";
+String reversed = new StringBuilder(input).reverse().toString();
+System.out.println(reversed); // "olleh"
+
+2. Using a character array
+---------------------------
+String input = "hello";
+char[] chars = input.toCharArray();
+for (int i = 0, j = chars.length - 1; i < j; i++, j--) {
+    char temp = chars[i];
+    chars[i] = chars[j];
+    chars[j] = temp;
+}
+String reversed = new String(chars);
+System.out.println(reversed); // "olleh"
+
+3. Using recursion
+-------------------
+public static String reverseRecursive(String str) {
+    if (str.isEmpty()) return str;
+    return reverseRecursive(str.substring(1)) + str.charAt(0);
+}
+System.out.println(reverseRecursive("hello")); // "olleh"
+
+4. Using a loop (concatenation)
+--------------------------------
+String input = "hello";
+String reversed = "";
+for (int i = input.length() - 1; i >= 0; i--) {
+    reversed += input.charAt(i);
+}
+System.out.println(reversed); // "olleh"
+
+5. Using Stack
+---------------
+import java.util.Stack;
+
+String input = "hello";
+Stack<Character> stack = new Stack<>();
+for (char c : input.toCharArray()) {
+    stack.push(c);
+}
+StringBuilder reversed = new StringBuilder();
+while (!stack.isEmpty()) {
+    reversed.append(stack.pop());
+}
+System.out.println(reversed.toString()); // "olleh"
+
+6. Using Java 8 Streams
+------------------------
+import java.util.stream.Collectors;
+
+String input = "hello";
+String reversed = new StringBuilder(
+    input.chars()
+         .mapToObj(c -> (char)c)
+         .collect(Collectors.toList()))
+    .reverse()
+    .toString();
+System.out.println(reversed); // "olleh"
+
+7. Using Collections and ArrayList
+-----------------------------------
+import java.util.*;
+
+String input = "hello";
+List<Character> list = new ArrayList<>();
+for (char c : input.toCharArray()) {
+    list.add(c);
+}
+Collections.reverse(list);
+StringBuilder reversed = new StringBuilder();
+for (char c : list) {
+    reversed.append(c);
+}
+System.out.println(reversed.toString()); // "olleh"
+
+8. Using Apache Commons Lang
+-----------------------------
+import org.apache.commons.lang3.StringUtils;
+
+String input = "hello";
+String reversed = StringUtils.reverse(input);
+System.out.println(reversed); // "olleh"
+
+
