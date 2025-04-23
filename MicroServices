@@ -1,10 +1,9 @@
-1. Monolithic Application:
+🧠 1. Monolithic Application:
 **************************
 => A Project which holds all modules together and converted as one Service (one .war file).
 => All most every project in realtime is implemented using this format only.
 => In this case, if no. of users are getting increased, then to handle multiple request (load) use LBS (Load Balancing Server).
-=>But few modules needs Extra load, not all. In this case other modules get memory which is waste (no use). Hence reduces performance of server 
-(application).
+=>But few modules needs Extra load, not all. In this case other modules get memory which is waste (no use). Hence reduces performance of server (application).
 **Consider Project P1 is having 2 modules M1(Register), M2(Login) and their runtime memories are M1=50 MB, M2=50 MB.
 => Here, End user Register only onetime (first time) and login is mostly used module.
 -> Consider Application needs 100MB size in server as register 50MB and Login 50MB.
@@ -12,7 +11,7 @@
 =>In above example, M2 Module is getting fewer (100) requests from Client. So, max 2 instances are may be enough. Other 2 instances (memories) 
 are no use. It means near 100MB memory is not used, which impacts server performance.
 
-2. Microservices:-- It is a independent deployment component.
+🧠 2. Microservices:-- It is a independent deployment component.
 *************************************************************
 => It is a combination of one (or more) modules of a Projects runs as one Service.
 => To avoid monolithic Limitations like memory and time (performance) problems use this design.
@@ -20,16 +19,13 @@ are no use. It means near 100MB memory is not used, which impacts server perform
 Nature of Microservices:--
 1> Every Service must be implemented using Webservices concept.
 2> One or multiples module as one Project.
-3> Every service must be independent (One service should not effect another one, like for code modifications, version upgrades, 
-   downtime for few servers… etc).
+3> Every service must be independent (One service should not effect another one, like for code modifications, version upgrades, downtime for few servers… etc).
 4> It should able to communicate with any type of client (Mobile, Web based, 3rd party).
 5> Every Services should able to communicate with each other Microservice, It is also called as “Intra Communication”.
 6> Required Services must be supported for Dynamic Load Balancing (i.e. one service runs in multiple instances) based on click request.
-7> Every microservice should support able to read input data from External Configuration Server [Config Server](Dynamic inputs using 
-(_.properties/_.yml), with GIT/Config Server).
+7> Every microservice should support able to read input data from External Configuration Server [Config Server](Dynamic inputs using (_.properties/_.yml), with GIT/Config Server).
 8> Service communication (Chain of execution) problems should be able to solve using Circuite Breaker [Find other possible…].
-9> All Servers must be accessed to Single Entry known as Gateway Service [Proxy Gateway or API Gateway], It supports securing, metering and 
-Routing.
+9> All Servers must be accessed to Single Entry known as Gateway Service [Proxy Gateway or API Gateway], It supports securing, metering and Routing.
 
 => This design provides ability to communicate any kind of client application. Ex:-- Android, Angular, RFID, Web, 3rd party, Swings,… etc.
 => Eureka is a R & D server which supports microservices register, discover with each other for intra communication.
@@ -52,7 +48,7 @@ Component Names:--
 12> Metrics UI = Admin (Server/Client)
 13> Cloud Platform = PCF, Docker With Deploy services
 
-1> Service Registry & Discovery(SOA)
+🧠 1> Service Registry & Discovery(SOA)
 ************************************
 => It is a Design Pattern used to create communication links between multiple services providers and Consumers (users).
 
@@ -76,7 +72,7 @@ Step3: Registry and Discovery -------->get details and link------------->Service
 Step4: Service Consumer -------------->Request-------------------------->Service Provider
 Step5: Service Provider -------------->Response------------------------->Service Consumer
 
-2> Load Balancing Server
+🧠 2> Load Balancing Server
 ************************
 => To handle multiple requests made by any HTTP client (or consumer) in less time, one provider should run as multiple instances and handle 
     request in parallel. Such concept is called as Load Balancing.
@@ -95,17 +91,16 @@ d> Ribbon chooses one Provider URL, based on instance Id with the help of LBS re
 e> Consumer will uses paths to URL and makes Request using “RequestClient”.[ Ex:- LoadBalancerClient (I) or @FeignClient]
 f> ResponseEntity is returned by Provider to Consumer.
 
-3> Circuite Breaker
+🧠 3> Circuite Breaker
 *******************
 => If Producer App (Service) is throwing exceptions continuously then circuit breaker stops executing Producer code and Exception flow directly 
 linked to fallback method.This is called as Opening a Circuit. It means Avoid invalid process or incomplete process execution and return 
 “Dummy Message”. After some time gap (or) no. of request given to fallback, again re-checks once, still same continue to fallBackMethod else 
 execute Microservice (Producer).
-Q> What is the difference between try-catch and Fallback with CircuitBreaker(CB)?
-Ans:-- In try-catch always try code is executed even if exception is reguler, where as 
-    Fallback with CircuitBreaker will stop execution of actual logic if exception is regular.
+🎯 Q> What is the difference between try-catch and Fallback with CircuitBreaker(CB)?
+Ans:-- In try-catch always try code is executed even if exception is reguler, where as Fallback with CircuitBreaker will stop execution of actual logic if exception is regular.
 
-4> API Gateway
+🧠 4> API Gateway
 **************
 In one Application there will be multiple Microservices defined.
 => Every Microservice might be running in different servers (IP:PORT) and ports, even connected with load Balancing (Multiple IP:PORTs).
@@ -123,7 +118,7 @@ In one Application there will be multiple Microservices defined.
 => Spring Cloud Netflix ZUUL behaves as API PROXY for Microservices Application which supports “Integration with any type of client component”
     (Web, mobile, 3rd party, webservices… etc).
 
-11> Production Ready Endpoint = Actuator
+🧠 11> Production Ready Endpoint = Actuator
 ****************************************
 => It provides “Production Read Endpoints” which are used to give extra information of Production Server.
 => In simple readymade service used for production server to “Track and Trace Extra information” from server.
@@ -150,3 +145,4 @@ Actuator Dependencies:--
 => To enable all endpoints use code management.endpoints.web.exposure.include=* [In application.properties.]
 
 
+🌟 🔁 ⚡ 🧩 🧠 ✅ 🎯 🌐 📌 🆚 🔥 🚦 🧪 📦 ⚙️ 🚀 🔍 🔧 🎁 📁 🔐 ➡️ ❌ 🧭 🔹 🎨 🧱 📱 ♿ ⛔ 💡 📡 ♻️ 🔗 👋 📚 
