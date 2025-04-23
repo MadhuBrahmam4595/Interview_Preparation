@@ -1,40 +1,34 @@
+🌟 🔁 ⚡ 🧩 🧠 ✅ 🎯 🌐 📌 🆚 🔥 🚦 🧪 📦 ⚙️ 🚀 🔍 🔧 🎁 📁 🔐 ➡️ ❌ 🧭 🔹 🎨 🧱 📱 ♿ ⛔ 💡 📡 ♻️ 🔗 👋 📚 
+
 Chapters:
-1. SB Core
-2. SB Data JPA
-3. SB MongoDB
-4. SB Web MVC
-5. SB E-Mail
-6. SB Batch Processing
-7. SB REST (Provider & Consumer)
+🧠 1. SB Core
+🧠 2. SB Data JPA
+🧠 3. SB MongoDB
+🧠 4. SB Web MVC
+🧠 5. SB E-Mail
+🧠 6. SB Batch Processing
+🧠 7. SB REST (Provider & Consumer)
 
 Notes:
-
 ************************************************************* CHAPTER 1. SB CORE ******************************************************************************
 
-=> SB is an Abstract Maven Project also called as Parent Maven Project (i.e. A project with partial code).
-=> SB provides AUTO CONFIGURATION which means reduce common lines of code in application which is writtern by programmers and handle jars with version management.
+✅ SB is an Abstract Maven Project also called as Parent Maven Project (i.e. A project with partial code).
+✅ SB provides AUTO CONFIGURATION which means reduce common lines of code in application which is writtern by programmers and handle jars with version management.
   (i.e. Providing configuration code XML / Java and maintaining all jars required for Project Parent Jars + Child Jars).
-=> Here programmer will not write configuration code but need to give input data using 
-  a) Properties File (application.properties)
-  b) YAMAL File (application.yml)
-=> SB supports end to end process that is called
-  Coding -> Unit testing -> Version control -> Build -> Deployment -> Client Integration
-=> SB application is a service provider app which can be integrated with any UI client like Android, Angular UI, Any 3rd party apps, web apps using Rest and JMS.
-=> SB supports two build tools 
-    1) MAVEN 
-    2) GRADEL
-=> SB supports three embeded servers 
-    1) Apache Tomcat (default) 
-    2) JBoss Jetty 
-    3) Undertow
-=> SB supports three embeded databases
-    1) H2
-    2) HSQL DB
-    3) Apache Derby
+✅ Here programmer will not write configuration code but need to give input data using 
+    🚀 a) Properties File (application.properties)   🚀 b) YAMAL File (application.yml)
+✅ SB supports end to end process that is called
+    🚀 Coding -> Unit testing -> Version control -> Build -> Deployment -> Client Integration
+✅ SB application is a service provider app which can be integrated with any UI client like Android, Angular UI, Any 3rd party apps, web apps using Rest and JMS.
+✅ SB supports two build tools 
+    🚀 1) MAVEN      🚀 2) GRADEL
+✅ SB supports three embeded servers 
+    🚀 1) Apache Tomcat (default)       🚀 2) JBoss Jetty       🚀 3) Undertow
+✅ SB supports three embeded databases
+    🚀 1) H2      🚀 2) HSQL DB       🚀 3) Apache Derby
+✅ SB STARTER CLASS: It is a main method class used to start our app. It's entry point in execution. Even for both stand alone and web application.
 
-=> SB STARTER CLASS: It is a main method class used to start our app. It's entry point in execution. Even for both stand alone and web application.
-
-SB RUNNERS:
+🧠 SB RUNNERS:
 ***********
 => A Runner is an auto-executable component which is called by container on application startup only once.
 => In this concept is used to execute any login (code) one time when application is started.
