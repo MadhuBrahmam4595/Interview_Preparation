@@ -29,59 +29,62 @@ Notes:
 ✅ SB STARTER CLASS: It is a main method class used to start our app. It's entry point in execution. Even for both stand alone and web application.
 
 🧠 SB RUNNERS:
-***********
-=> A Runner is an auto-executable component which is called by container on application startup only once.
-=> In this concept is used to execute any login (code) one time when application is started.
+**************
+✅ A Runner is an auto-executable component which is called by container on application startup only once.
+✅ In this concept is used to execute any login (code) one time when application is started.
   Types of Runners
-    1. COMMANDLINE RUNNER: This is legacy runner (old one) which is provided in SB 1.0 version.
-      =>It has only one abstract method “run(String… args) : void”.
-      =>It is a Functional Interface (having only one abstract method).
-      =>Add one stereotype Annotation over Implementation class level (Ex:- @Component). So that container can detect the class and create object to it.
+    🚀 1. COMMANDLINE RUNNER: 
+          ✅ This is legacy runner (old one) which is provided in SB 1.0 version.
+          ✅ It has only one abstract method “run(String… args) : void”.
+          ✅ It is a Functional Interface (having only one abstract method).
+          ✅ Add one stereotype Annotation over Implementation class level (Ex:- @Component). So that container can detect the class and create object to it.
 
-      Q>  How CommandLineRunner works?
-      A>  CommandLine arguments which are passed to application which will be given to Spring Boot starter main(..) method. Those are stored as “string Array” (String[]).
-          SpringApplication.run(…) reads this input and internally calls run(..) methods of RunnerImpl classes and pass same data.
+      🎯 How CommandLineRunner works?
+      🔹 CommandLine arguments which are passed to application which will be given to Spring Boot starter main(..) method. 
+      🔹 Those are stored as “string Array” (String[]).
+      🔹 SpringApplication.run(…) reads this input and internally calls run(..) methods of RunnerImpl classes and pass same data.
 
-    2 ApplicationRunner(I) :-- It is new type runner added in Spring boot 1.3 which makes easy to access arguments.
-        =>This will separate Option Arguments (as Map<String, List<String>>) and Non-Option Arguments (<List<String>)
-        =>This Data Stored in Object
+    🚀 2 ApplicationRunner(I) :-- 
+         ✅ It is new type runner added in Spring boot 1.3 which makes easy to access arguments.
+         ✅ This will separate Option Arguments (as Map<String, List<String>>) and Non-Option Arguments (<List<String>)
+         ✅ This Data Stored in Object
 
-      Q> What is the difference between CommandLineArgument and ApplicationRunner?
-      A> Working process of CommandLineRunner and ApplicationRunner are same, but CommandLineRunner (CLR) holds data in String[] format where as Application (AR) holds data as 
+      🎯 What is the difference between CommandLineArgument and ApplicationRunner?
+      🔹 Working process of CommandLineRunner and ApplicationRunner are same, but CommandLineRunner (CLR) holds data in String[] format where as Application (AR) holds data as 
           ApllicationArguments as Option/Non-Option format.
 
-@ConfigurationProperties:
-*************************
-  =>This Annotation is used to perform bulk data reading (multiple keys at a time) and parsing into one class type (Stores in project).
-  =>Possible conversions are.
-    a> 1key = 1 variable
-    b> Multiple keys with index = List/Set/Array
-    c> Multiple keys with key-value format = Map or Properties
-    d> Multiple keys with common type = Class Object (Has-A)
-
-pom.xml (Maven Process) :
-*************************
-=>Maven is Dependency management and build tool used to handle both stand alone and Archetype (web, restful…) applications.
-
-Dependency Management:
-**********************
-=> Getting Main Jars and its child jars with version support (without conflicts) into project workspace is called as Dependency Management.
-
-Build:
-******
-=>Converting our application into final JAVA executable format i.e .jar/.war/.ear.
-
-Major components of pom.xml:
+🧠 @ConfigurationProperties:
 ****************************
-  1>  Current Project
-  2>  Parent Project
-  3>  Dependencies
-  4>Build plugins
+  ✅ This Annotation is used to perform bulk data reading (multiple keys at a time) and parsing into one class type (Stores in project).
+  ✅ Possible conversions are.
+      📌 a> 1key = 1 variable
+      📌 b> Multiple keys with index = List/Set/Array
+      📌 c> Multiple keys with key-value format = Map or Properties
+      📌 d> Multiple keys with common type = Class Object (Has-A)
 
-Dependency exclusions:
-**********************
-=> When <dependency> tag is added in pom.xml then it will download Parent jars and all its child jars also.
-=> To avoid any one or more child jars from chain, use concept called exclusion.
+🧠 pom.xml (Maven Process) :
+****************************
+✅ Maven is Dependency management and build tool used to handle both stand alone and Archetype (web, restful…) applications.
+
+🧠 Dependency Management:
+*************************
+✅ Getting Main Jars and its child jars with version support (without conflicts) into project workspace is called as Dependency Management.
+
+🧠 Build:
+*********
+✅ Converting our application into final JAVA executable format i.e .jar/.war/.ear.
+
+🧠 Major components of pom.xml:
+*******************************
+  📌 1>  Current Project
+  📌 2>  Parent Project
+  📌 3>  Dependencies
+  📌 4>  Build plugins
+
+🧠 Dependency exclusions:
+*************************
+✅ When <dependency> tag is added in pom.xml then it will download Parent jars and all its child jars also.
+✅ To avoid any one or more child jars from chain, use concept called exclusion.
   Syntax:--
     <dependencies>
      <dependency>
@@ -97,10 +100,10 @@ Dependency exclusions:
      </dependency>
     </dependencies>
 
-Scope (<scope> </scope> in dependency:
-**************************************
-=> For every dependency one scope is given by maven i.e. default scope : compile.
-=> This tag is optional and indicates when a JAR should be used/loaded.
+🧠 Scope (<scope> </scope> in dependency:
+*****************************************
+✅ For every dependency one scope is given by maven i.e. default scope : compile.
+✅ This tag is optional and indicates when a JAR should be used/loaded.
 
     POM format:
       <dependency>
@@ -110,11 +113,11 @@ Scope (<scope> </scope> in dependency:
       </dependency>
 
 Possible Maven dependency scopes are (5) :
-  1> compile: A jar Required from compilation time onwards. It is only default scope.
-  2> runtime: A jar required when we are running an Application, not before that.
-  3> test:    A Jar required only for UnitTesting time.
-  4> provided:A jar provided by servers or Frameworks (Container….).
-  5> system:  A Jar loaded from File System (like D:/abc/myjar/…)
+  📌 1> compile: A jar Required from compilation time onwards. It is only default scope.
+  📌 2> runtime: A jar required when we are running an Application, not before that.
+  📌 3> test:    A Jar required only for UnitTesting time.
+  📌 4> provided:A jar provided by servers or Frameworks (Container….).
+  📌 5> system:  A Jar loaded from File System (like D:/abc/myjar/…)
               =>In this case we should also give <SystemPath> with location of JAR.Ex:-- <systemPath>D:/asf/lib/</systemPath>
       
 NOTE:-- There is a dependency jar which not existing in the maven centre but locally.After mvn clean install, this dependency jar can't be found from the fat jar. is this an 
