@@ -1,0 +1,269 @@
+🌟 🔁 ⚡ 🧩 🧠 ✅ 🎯 🌐 📌 🆚 🔥 🚦 🧪 📦 ⚙️ 🚀 🔍 🔧 🎁 📁 🔐 ➡️ ❌ 🧭 🔹 🎨 🧱 📱 ♿ ⛔ 💡 📡 ♻️ 🔗 👋 📚 
+
+🌐 Java 8 features
+
+🎯 1. Lambda Expression
+🎯 2. Funtional Interface
+🎯 3. Method Reference
+🎯 4. Streams API
+🎯 5. Optional classes
+🎯 6. Comparator and Comparable
+
+🎯 1. Lambda Expression
+✅ A Lambda expression is a simple piece of code that takes in parameters and produces a result.
+✅ It's primarily used with functional interfaces, which are interfaces with just one abstract method and n number of static or default methods.
+✅ Unlike traditional methods, Lambda expressions don't have a method name, return type, or explicit parameter types.
+✅ They're typically defined inline when creating an instance of a functional interface.
+✅ Java automatically infers parameter types based on the context, making Lambda expressions concise and easy to use.
+
+🧠 Syntax: int sum1 = (a, b) -> (a + b)
+
+📌 Example:
+🔹 //Functional Interface
+🔹 Interface Addable { int add(int a, int b);
+🔹 
+🔹 public class LambdaExpression{
+🔹   public static void main(String[] args){
+🔹     Addable add = (a, b) -> (a + b);
+🔹     System.out.println(add.add(20, 20); //output: 40
+🔹    }
+🔹 }
+
+💡 'Function' is a built-in-functional interfaces provided by Java.
+💡 They come with an abstract method called apply(), which simplifies the process for developers by eliminating the need to create custom functional interfaces.
+
+🎯 2. Funtional Interface
+✅ A functional interface is characterized by having only one abstract method, though it can also indlcude any number of default or static methods.
+✅ Function interfaces, also known as Single Abstract Method interfaces, are a addition to Java 8, aimed at enabling functional programming
+✅ Functional interface can also have methods of Object class
+
+📌 Example:
+🔹 //Functional interface
+🔹 interface shape{ void draw(); }
+🔹 
+🔹 class Rectangle implements shape{
+🔹  Rectangle() { }
+🔹  public void draw() { System.out.println("I am Rectangle from Rectangle class"); }
+🔹 }
+🔹  public class FunctionalInterfaceDemo {
+🔹   public static void main(String[] args){
+🔹     Rectangle rectangle = new Rectangle();
+🔹     rectangle.draw(); //print "I am Rectangle from Rectangle class"
+🔹     shape rectangleLambda = () -> { System.out.println("I am in Rectangle"); };
+🔹     rectangle.draw(); //print "I am in Rectangle"
+
+🎯 3. Method Reference
+✅ In Java 8, method references provide a concise way to refer to methods or constructors without actually invoking them.
+✅ They act as shorthand for lambda expressions, allowing you to pass methods as arguments to functional interfaces.
+✅ For example, the following lambda expression takes a string input and converts it to lowercase using a built-in method from the String class.
+    🔹 Function<String, String> function = (str) -> str.toLowerCase();
+    🔹 System.out.println(function.apply("LAMBDA EXPRESSION");
+✅ You can replace the above code with method reference as shown below.
+    🔹 Function<String, String> function = String::toLowerCase();
+    🔹 System.out.println(function.apply("LAMBDA EXPRESSION");
+
+💡 There are basically 4 types of method references
+🚀 1. Static Method: ClassNae::staticMethodName
+🚀 2. Reference to an instance method of a particular object: object::methodName
+🚀 3. Reference to an instance method of a Class Type: ClassName::methodName
+🚀 4. Reference to a constructor: ClassName::new
+
+🎯 4. Streams API
+✅ Streams are used ot process collection of objects and facilitates various operations such as filtering, sorting, mapping and collecting data from a collection.
+✅ These operations can be chained together to create a pipeline for querying and processing the data.
+✅ Java 8 introduced the Stream API as a significant addition to the Collections API in java.util.stream package.
+✅ Stream APIs are extremenly userful when dealing with large collection of data, due to their to leverage optimizations like lazy evaluation and parallel processing.
+✅ By eliminating the need of explicitly defining loop or conditional statements developers can now use built-in-methods like filter,sorted etc.
+✅ This not only reduces the effort required for complex implementations and minimizes the risk of bugs, but also improves the clarity and understandability of the code.
+
+📌 Example:
+🔹 //10. Given an array find the sum of unique elements
+🔹 //Input: int[] arr = {1,6,7,8,1,1,8,8,7}
+🔹 //output: 22
+🔹 System.out.println("Given an array find the sum of unique elements");
+🔹 int[] arr = {1,6,7,8,1,1,8,8,7};
+🔹 int sum = Arrays.stream(arr).distinct().sum();
+🔹 System.out.println(sum);
+
+💡 Common Operations
+🚀 Filtering : filter, distict
+🚀 Mapping: map
+🚀 Sorting: sorted
+🚀 Aggregating: count, min, max, sum, average
+🚀 Iterating: forEach
+🚀 Finding: findFirst, findAny
+
+🎯 5. Optional classes
+✅ Java introduced the Optional class in java.util package to improve the management of null values.
+✅ Traditionally, null signifies the absence of a value, but this practice frequently results in NullPointerExceptions (NPEs) when not handled correctly.
+✅ These exceptions can be difficult to debug and may lead to runtime failures in Java applications.
+
+📌 Example:
+🔹 Optional<String> name = Optional.of("John"); // Non-null value
+🔹 Optional<String> empty = Optional.empty(); // No value
+🔹 Optional<String> maybeName = Optional.ofNullable(null); // Nullable value
+
+🔹 if(maybeName.isPresent()) { System.out.println(maybeName.get()); }
+🔹 name.ifPresent(n -> System.out.println("Hello, " + n);
+
+🎯 6. Comparator and Comparable
+✅ Both Comparator and Comparable are interfaces in Java used for comparing objects, but they serve different purpose.
+
+🧠 Comparable Interface
+✅ The Comparable interface is used to impose a natural ordering on the objects of a class.
+✅ If a class implements Comparable, it means that its objects can be ordered automatically.
+✅ The class implementing Comparable must override the compareTo(Object obj) method that takes a single parameter, which compares this object with another 
+    object of the same type and returns a negative integer, zero, or a positive integer depending on whether this object is less than, equal to, or greater
+    than the other object, respectively.
+✅ Comparable is usually used when you want to define a default sorting order for objects of a class.
+✅ When you call sorting methods like Collections.sort() on a list of objects that implement Comparable, the sort method internally uses the compareTo method
+    to determine the ordering of the objects.
+✅ You don't need to call compareTo yourself; it's invoked automatically by the sorting algorithm implemented in Collections.sort()
+
+📌 For example, the String class and the wrapper classes (Integer, Double, etc.) implement Comparable to enable natural ordering.
+🔹 import java.util.*;
+🔹 
+🔹 // ✅ Step 1: Create a class that implements Comparable
+🔹 class Student implements Comparable<Student> {
+🔹     private String name;
+🔹     private int marks;
+🔹 
+🔹     // Constructor
+🔹     public Student(String name, int marks) {
+🔹         this.name = name;
+🔹         this.marks = marks;
+🔹     }
+🔹 
+🔹     // ✅ Step 2: Override the compareTo() method to define natural ordering
+🔹     @Override
+🔹     public int compareTo(Student other) {
+🔹         // Sort in ascending order based on marks
+🔹         return Integer.compare(this.marks, other.marks);
+🔹         // If descending order is needed: return Integer.compare(other.marks, this.marks);
+🔹     }
+🔹 
+🔹     // For printing student details
+🔹     @Override
+🔹     public String toString() {
+🔹         return name + " - " + marks;
+🔹     }
+🔹 }
+
+🔹 public class ComparableExample {
+🔹     public static void main(String[] args) {
+🔹         // ✅ Step 3: Create a list of students
+🔹         List<Student> students = new ArrayList<>();
+🔹         students.add(new Student("Alice", 85));
+🔹         students.add(new Student("Bob", 92));
+🔹         students.add(new Student("Charlie", 78));
+🔹 
+🔹         // ✅ Step 4: Sort the list using Collections.sort() which internally uses compareTo()
+🔹         Collections.sort(students);
+🔹 
+🔹         // ✅ Step 5: Print the sorted list
+🔹         System.out.println("Students sorted by marks (ascending):");
+🔹         for (Student s : students) {
+🔹             System.out.println(s);
+🔹         }
+🔹     }
+🔹 }
+🔹 // ======== output======
+🔹 Students sorted by marks (ascending):
+🔹 Charlie - 78
+🔹 Alice - 85
+🔹 Bob - 92
+
+🧠 Comparator Interface:
+✅ The Comparator interface is used to define custom comparison logic for objects that do not implement Comparable or when you want to define multiple ways of comparing objects. 
+✅ The Comparator interface defines a single method called compare(Object o1, Object o2), which compares two objects and returns a negative integer, zero, or 
+    a positive integer depending on whether the first object is less than, equal to, or greater than the second object, respectively.
+✅ Using a Comparator allows you to define multiple ways of comparing objects, each with its own criteria. 
+✅ This flexibility is especially useful when you need to sort objects in different ways depending on the context or user preferences. 
+✅ Implementing the Comparable interface requires modifying the class itself to provide a natural ordering. 
+    But if you cannot modify the class (e.g., it’s a third-party library or part of the Java core classes), using a Comparator allows you to define ordering externally.
+✅ Comparator instances can be passed to sorting methods like Collections.sort() or Arrays.sort() to sort objects based on the defined criteria.
+
+📌 Example:
+
+🔹 import java.util.ArrayList;
+🔹 import java.util.Collections;
+🔹 import java.util.Comparator;
+🔹 import java.util.List;
+
+🔹 public class ComparatorDemo {
+
+🔹   public static void main(String[] args) {
+
+🔹         List<Employee> empList = new ArrayList<>();
+🔹         empList.add(new Employee(2, "Manoj", 56000));
+🔹         empList.add(new Employee(4, "Anuj", 30000));
+🔹         empList.add(new Employee(1, "Vijay", 40000));
+🔹         empList.add(new Employee(3, "Venu", 74000));
+🔹 
+🔹         // Sort employees by name
+🔹         Collections.sort(empList, new NameCompare());
+🔹         System.out.println("Sorted by name:");
+🔹         System.out.println(empList);
+🔹 
+🔹         // Sort employees by salary
+🔹         Collections.sort(empList, new Comparator<Employee>() 
+🔹         {
+🔹             public int compare(Employee e1 , Employee e2)
+🔹             {
+🔹                 return (int)(e1.getSalary() - e2.getSalary());
+🔹             }
+🔹         });
+🔹         System.out.println("\nSorted by salary:");
+🔹         System.out.println(empList);
+🔹     }
+🔹 }
+
+🔹 class Employee {
+🔹     private int empId;
+🔹     private String name;
+🔹     private double salary;
+🔹 
+🔹     public Employee(int empId, String name, double salary) {
+🔹         this.empId = empId;
+🔹         this.name = name;
+🔹         this.salary = salary;
+🔹     }
+
+🔹     public int getEmpId() {
+🔹         return empId;
+🔹     }
+
+🔹     public String getName() {
+🔹         return name;
+🔹     }
+
+🔹     public double getSalary() {
+🔹         return salary;
+🔹     }
+🔹 
+🔹     public String toString() {
+🔹         return "\n[ Emp Id = " + empId + " || Name = " + name + " || Salary = " + salary + " ]";
+🔹     }
+🔹 }
+
+🔹 // Comparator to compare employees by name
+🔹 class NameCompare implements Comparator<Employee> {
+🔹     public int compare(Employee e1, Employee e2) {
+🔹         return e1.getName().compareTo(e2.getName());
+🔹     }
+🔹 }
+
+💡 Let’s unserstand the above code.
+
+🚀 NameCompare Comparator: 
+      The NameCompare class implements the Comparator<Employee> interface to compare Employee objects based on their names. 
+      It overrides the compare method to compare the names of two Employee objects using the compareTo method of String.
+
+🚀 Main Method: 
+      In the main method, a list empList of Employee objects is created and populated with employee data.
+      The Collections.sort method is called twice to sort the empList:
+
+🚀 First, it’s sorted using the NameCompare comparator to sort employees by name.
+      Then, it’s sorted using an anonymous Comparator<Employee> implementation to sort employees by salary.
+
+🚀 Inside this anonymous implementation, the compare method compares two Employee objects based on their salaries.
