@@ -1,0 +1,203 @@
+🌟 🔁 ⚡ 🧩 🧠 ✅ 🎯 🌐 📌 🆚 🔥 🚦 🧪 📦 ⚙️ 🚀 🔍 🔧 🎁 📁 🔐 ➡️ ❌ 🧭 🔹 🎨 🧱 📱 ♿ ⛔ 💡 📡 ♻️ 🔗 👋 📚 
+
+🎯 Data Hiding
+---------------
+✅ Our internal data should not go out directly that is outside person can't access our internal data directly.
+✅ By using private modifier we can implement Data Hiding.
+
+🔥 Advantage: Data hiding is security.
+💡 Note: Recommended modifier for data members is private.
+
+🎯 Topic : Abstraction
+-----------------------
+✅ Hide internal implementation and just highlight the set of services is called abstraction.
+✅ By using abstract classes and interfaces, we can achieve abstraction.
+
+🔥 Advantages:
+  ⚡ We can achieve security as we are not highlighting our internal implementation.
+  ⚡ Enhancement will become very easy because without effecting end user we can able to perform any type of changes in our internal system.
+  ⚡ It provides more flexibility to the end user to use system very easily
+  ⚡ It improves maintability of the application
+  ⚡ It improves modularity of the application
+  ⚡ It improves easyness to use our system
+💡 Note: By using interfaces(GUI) we can implement abstraction
+
+🎯 Topic: Encapsulation
+------------------------
+✅ Binding of data and corresponding methods into a single unit is called Encapsulation.
+✅ If any java class follows data hiding and abstraction such type of class is said to be encapsulated class
+✅ Encapsulation = Data Hiding + Abstration
+✅ Every data member should be declared as private and for every member we have to maintain Setters and Getters methods.
+
+🔥 Advantages:
+  ⚡ We can achieve security
+  ⚡ Enhancement will become very easy
+  ⚡ It improves maintainability and modularity of the application
+  ⚡ It improves easyness to use our system
+⛔ Disadvantages: It is increases length of the code and slows down execution
+
+🎯 Topic: Tightly encapsulated class
+-------------------------------------
+✅ A class is said to be tightyly encapsulated if and only if every variable of that class declared as private whether the variables has getter and setter or not,
+    and these methods declared as public or not, these checkings are not require to perfome.
+💡 Note: If the parent class is not tightly encapsulated then no child class is tightly encapsulated.
+
+🎯 Topic: Inheritance (IS-A Relationship)
+------------------------------------------
+✅ By using 'extends' keywords we can implement IS-A relationship
+🔥 Advantage: Main advantage is Reusability
+
+💡 Notes:
+  🔹 Whatever the parent has by default available to the child but whatever the child has by default not available to the parent.
+  🔹 Hence on the child reference we can call both parent and child class methods 
+      But on the parent references we can call only methods available in the parent class and we can't callchild specific methods
+  🔹 Parent class reference can be used to hold child class object but by using that reference we can call only methods available in parent class and child specific methods we can't call.
+  🔹 Child class reference cannot be used to hold parent class object
+  🔹 For all java classes the most commonly required functionalities are defined inside object class hence object class acts as a root for all java classes.
+  🔹 For all java exceptions and errors the most common required functionality defines inside Throwable class hence it's acts as a root for exception hierachy
+
+📌 Example: The common methods which are required for housing loan, vehicle loan, personal loan, and education loan we can define into a seperate class in  parent class loadn.
+    So that automaticallythese methods are available to every child loan class.
+
+🎯 Topic: Multiple Inheritance
+------------------------------
+✅ Having more than one Parent class at the same level is called Multiple Inheritance.
+✅ Any class can extends only one class ata a time and can't extends more than one class simultaneously hence java won't provide support for multiple inheritance.
+✅ But an interface can extends any no of interfaces at a time hence java provides support for multiple inheritance through interfaces.
+✅ If our class doesn't extends any other class then only our class is the direct child class of object class.
+✅ If our class extends any other class then our class is not direct child class of object, It is indirect childclass of object, which forms multilevel inheritance.
+
+🧠 Why Java won't provide support for Multiple Inheritance ?
+🧪 There may be a chance of raising ambiguity problems.
+
+🧠 Wht ambiguity problem won't be there in interface ?
+🧪  Interfaces having dummy declarations and they won't have implementations hence no ambiguity problem.
+
+🎯 Topic: Cycle Inheritance
+---------------------------
+❌ Cycle Inheritance is not allowed in java.
+
+🎯 Topic: HAS-A relationship
+----------------------------
+✅ HAS-A relationship is also known as composition or aggregation
+✅ There is no specific keyword to implement HAS-A relationship but mostly we can use new operator.
+
+🔥 Advantage: Main advantage of HAS-A relationship is reusability.
+⛔ Disadvantages: The main disadvantage of HAS-A relationship increases dependency between the components and creates maintains problem.
+
+🎯 Topic: Composition 🆚 Aggregation
+-------------------------------------
+🧩 Composition
+  ✅ Without existing container object if there is no chance of existing contained objects then the relationship between container object and contained object is called composition.
+  ✅ In Composition objects have strong association.
+  ✅ Example: A Library contains Books. If the Library is destroyed, the Books it contains are also destroyed. Books do not exist independently outside of the Library.
+
+🧩 Aggregation
+  ✅ Without existing container object if there is a chance of existing contained objects such type of relationship is called aggregation.
+  ✅ In aggregation objects have weak association
+  ✅ Example: A Department has Teachers. But a Teacher can exist without being assigned to a Department. So, this is a weak association → Aggregation.
+
+💡 Notes:
+  🔹 In composition container, contained objects are strongly associated and but container object holds conatined objects directly.
+  🔹 In aggregation container and contained objects are weakly associated and container object just now holds the reference of contained objects.
+
+🎯 Topic: Method Signature
+--------------------------
+✅ In java, method signature consists of name of the method followed by argument type
+✅ Example: methodOne(int, float);
+✅ In java return type is not part of the method signature. compiler will use method signature while resolving method calls.
+✅ Within the same class we can't take two methods with same signature otherwise we will get compile time error.
+
+🎯 Topic: Polymorphism
+----------------------
+✅ Same name with different forms is the concept of polymorphism.
+
+📦 Example 1: 1. abs(int);                        2. abs(long);                         3. abs(float);
+📦 Example 2: 1. List list = new ArrayList();     2. List list = new LinkedList();      3. List list = new Vector();
+
+💡 Notes:
+  🔹 Inheritance talks about reusability
+  🔹 Polymorphism talks about flexibility
+  🔹 Encapsulation talks about security
+
+🌐 Beautiful Definition of Polymorphism :
+  A boy starts love with the friendship, but girl ends love with the same word friendship, word is the same but with different attitudes.
+
+🎯 Topic: Overloading
+----------------------
+✅ Two methods are said to be overload if and only if both having the same method name but different argument types.
+✅ In C language we can't take two methods with same name and different types. If there is a change in argument type compulsory we should go for new method name.
+✅ Lack of overloading in 'C' increases complexity of the programming
+✅ But in java we can take multiple methods with the same name and different argument types.
+✅ Having the same name and different argument types is called method overloading.
+✅ Having overloading concept in java reduces complexity of the programming
+
+💡 Notes: In overloading compiler is responsible to perform method resolution(decision) based on the reference type(but not based on runtime object). 
+          Hence overloading is also considered as compile time polymorphsim(or)static polymorphism(or)early biding.
+
+  🧩 Case 1 : Automatic promotion in overloading
+    ✅ In overloading if compiler is unable to find the method with exact match we won't get any compile time error immediately.
+    ✅ First compiler promotes the argument to the next level and checks whether the matched method is available or not if its available then that method will be considered if it is not
+        available then compiler promotes argument once again to the next level. This process will be continued until all possible promotions still if the matched method is not available 
+        then we will get compile time error.
+💡 Notes:
+  🔹 While resolving overload methods exact match will always get high priority.
+  🔹 While resolving overload methods child class will get the more priority than parent class
+  🔹 In general var-arg method will get less priority that is if no other method matched then only var-args method will get chance for execution it is almost same as default case 
+      inside switch.
+  🔹 In overloading method resolution is always based on reference type and runtime object won't play any role in overloading.
+
+🎯 Topic: Overriding
+--------------------
+✅ Whaterver the parent has by default available to the child through inheritance, if the child is not satisfied with parent class method implementation then child child allow to 
+    redefine that parent class method in child class in it's own way this process is calling overriding.
+✅ The parent class method which is overridden is called overridden method.
+✅ The child class method which is overriding is called overriding method.
+✅ In overriding method resolution is always take care by JVM based on runtime object hence overriding also considered as runtime polymorphism or dynamic polymorphism or late binding
+✅ The process of overriding method resolution is also known as dynamic method dispatch
+
+💡 Note: In overriding runtime object will play the role and reference type is dummy.
+
+🔐 Rules
+  🔹 In overriding method names and arguments must be same. That means method signature should be same.
+  🔹 Until 1.4v the return type must be same but from 1.5v onwards co-variant return types are allowed.
+  🔹 According to the child class method return type need not to be same as parent class method return type it's child type also allowed.
+  🔹 Co-varient return type concept is applicable only for object types but not for primitives.
+  🔹 Private methods are not visible in the Child classes hence overriding concept is not applicable for private methods. Based on own requirement we can declare the same parent class
+      private method in child class also. It is valid but not overriding.
+  🔹 Parent class final method we can't override in the child class
+  🔹 Parent class non-final methods we can override as final in Child class and also native methods also we can override.
+  🔹 We should override parent class abstract methods in child classes to provide implementation
+  🔹 We can override a non-abstract method as abstract this approach is helpful to stop availability of parent method implementation to the next level child classes
+
+🎯 Topic: Checked 🆚 Un-checked Exceptions
+-------------------------------------------
+✅ The exceptions which are checked by the compiler for smooth execution of the program at runtime are called checked exceptions.
+✅ The exceptions which are not checked by the compiler are called Un-checked exceptions.
+✅ Runtime exceptions and its child classes, error and its child classes are unchecked except these the remaining are checked exceptions.
+
+🔐 Rule 
+  🔹 While overriding if the child class method throws any checked exception compulsory the parent class method should throw the same checked exception or 
+      its parent otherwise we will get compile time error.
+  🔹 But there are no restrictions for un-checked exceptions
+
+🧩 Overriding with respect to static methods
+✅ We can't override a static method as non-static, Similarly can't override non-static method as static
+✅ We can write Method Hiding means same static method signature in child class also we can write.
+
+🧩 Overriding with respect to Var-arg methods
+✅ A var-arg method should be overriden with var-arg method only.
+✅ If we are trying to override with normal method then it will become overloading but not overriding.
+
+🧩 Overriding with respect to variables
+✅ Overriding concept is not applicable for variables.
+✅ Variable resolution is always takes care by compiler based on reference type.
+
+🧠 How many ways we can create object in Java
+🧪 By using new operator: Test test = new Test();
+🧪 By using new instance(): Test test = (Test)Class.forName("Test").newInstance();
+🧪 By using clone(): Test test = new Test(); TestNew testNew = (TestNew)test.clone();
+🧪 By using Factory Methods: Runtime runtime = Runtime.getRuntime();
+🧪 By using deserilization: FileInputStream fis = new FileInputStream("abc.text");
+                              ObjectInputStream ois = new ObjectInputStream(fis);
+                              Test test = (Test)ois.readObject()
