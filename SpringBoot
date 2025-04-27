@@ -120,34 +120,40 @@ Possible Maven dependency scopes are (5) :
   📌 5> system:  A Jar loaded from File System (like D:/abc/myjar/…)
               =>In this case we should also give <SystemPath> with location of JAR.Ex:-- <systemPath>D:/asf/lib/</systemPath>
       
-NOTE:-- There is a dependency jar which not existing in the maven centre but locally.After mvn clean install, this dependency jar can't be found from the fat jar. is this an 
-known-issue? the workaround is have to install it into local maven repo with command:
-    `mvn install:install-file -Dfile=lib/routines.jar -DgroupId=org.talend -DartifactId=routines -Dversion=1.0 -Dpackaging=jar`
-=>Then using normal dependency format in the pom.xml like this:
+💡 NOTE:-- 
+  ✅ There is a dependency jar which not existing in the maven centre but locally.
+      After mvn clean install, this dependency jar can't be found from the fat jar. is this an known-issue? 
+      the workaround is have to install it into local maven repo with command:
+      `mvn install:install-file -Dfile=lib/routines.jar -DgroupId=org.talend -DartifactId=routines -Dversion=1.0 -Dpackaging=jar`
+
+  ✅ Then using normal dependency format in the pom.xml like this:
    <dependency>
        <groupId>org.talend</groupId>
        <artifactId>routines</artifactId>
        <version>1.0</version>
     </dependency>
 
-Maven Goals Execution:
-**********************
-1> Maven clean:-- It is used to clear target folder in maven project. i.e delete all old files from target.
-2> Maven install :-- It will downloaded all required plugins and also
-  =>compile the source files.
-  =>load required properties.
-  =>Execute JUnit Test cases.
-  =>Create final build (.jar/.war).
+🧠 Maven Goals Execution:
+*************************
+🚀 1> Maven clean:-- It is used to clear target folder in maven project. i.e delete all old files from target.
+🚀 2> Maven install :-- It will downloaded all required plugins and also
+    => compile the source files.
+    => load required properties.
+    => Execute JUnit Test cases.
+    => Create final build (.jar/.war).
 
-Use of Starter class:
-*********************
-1> Define Spring Container.
-  =>Spring container holds all required beans (Objects), this is created using Impl class. AnnotationConfigApplicationContext (C) for simple (non-server) based application.
-  =>For server based Application, Impl class is : AnnotationConfigServletWebServerApplicationContext (C).
-2> Here “Starter class Package” behaves as basePackage, if nothing is provided by programmer.
-=>If Programmer writes externally @ComponentScan then Starter class package never taken as basePackage.
-=>Spring Boot starter class package behaves as base package for componentScan of all classes having annotated with @Component [or its equal].
-=>Annotations are : (class should have any one)
+🧠 Use of Starter class:
+************************
+🚀 1> Define Spring Container.
+✅ Spring container holds all required beans (Objects), this is created using Impl class. 
+✅ AnnotationConfigApplicationContext (C) for simple (non-server) based application.
+✅ For server based Application, Impl class is : AnnotationConfigServletWebServerApplicationContext (C).
+
+🚀 2> Here “Starter class Package” behaves as basePackage, if nothing is provided by programmer.
+✅ If Programmer writes externally @ComponentScan then Starter class package never taken as basePackage.
+✅ Spring Boot starter class package behaves as base package for componentScan of all classes having annotated with @Component 
+    [or its equal].
+✅ Annotations are : (class should have any one)
    a> @Component
    b> @Repository
    c> @Service
@@ -155,185 +161,182 @@ Use of Starter class:
    e> @RestController
    f> @Configuration
 
-3.> Every Spring Boot Application Starter class itself Component. i.e @SpringBootApplication is having @Component annotation internally.
-    => It is only highest Priority component by default, if app has multiple components.
+🚀 3.> Every Spring Boot Application Starter class itself Component. 
+        i.e @SpringBootApplication is having @Component annotation internally.
+✅ It is only highest Priority component by default, if app has multiple components.
         Ex:- We can convert starter even as Runner.
 
-4> Auto-Detect and Execute Configuration classes [Auto-Load Configuration files]
-  =>Every Spring Boot starter class itself A configuration class (@Configuration) which auto detects other Config Classes even without @Import annotation.
+🚀 4> Auto-Detect and Execute Configuration classes [Auto-Load Configuration files]
+✅ Every Spring Boot starter class itself A configuration class (@Configuration) which auto detects other Config Classes 
+    even without @Import annotation.
     i.e. We can define @Bean (Objects creation in Starter class).
-  =>All Spring (Java based) Configuration files are loaded into container with @Configuration.
-  =>All Spring (java based) Configuration files are loaded into container by spring boot if classes are annotated with @Configuration.
-  =>Not required to pass as ApplicationContext input (as like Spring f/w)
-
-
+✅ All Spring (Java based) Configuration files are loaded into container with @Configuration.
+✅ All Spring (java based) Configuration files are loaded into container by spring boot if classes are annotated with @Configuration.
+✅ Not required to pass as ApplicationContext input (as like Spring f/w)
 
 *************************************************** SB DATA JPA***************************************************************************************************************************
-#1:- Data JPA provides @NoRepositoryBean (S) which is auto configured and self logic implemented for basic operations i.e : Programmer not required to write any logic for basic 
-operations (No Implementation class and method)..
-    =>Configuration for DataSource (I), SessionFactory (I), HibernateTemplate (C) Hibernate TransactionManger (C) all are not required.
-    =>When we add bellow dependency in pom.xml it will download Jars and above Config code given from parent Project.
+🧩 ✅ #1:- Data JPA provides @NoRepositoryBean (S) which is auto configured and self logic implemented for basic operations 
+    i.e : Programmer not required to write any logic for basic operations (No Implementation class and method)..
+✅ Configuration for DataSource (I), SessionFactory (I), HibernateTemplate (C) Hibernate TransactionManger (C) all are not required.
+✅ When we add bellow dependency in pom.xml it will download Jars and above Config code given from parent Project.
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>Spring-boot-starter-data-jpa</artifactId>
     </dependency>
 
-#2:- Data JPA provides “Embedded Database Support”. It means Database provided in application itself.
-    =>It is not required to download and Install, not even properties required (like driver class, url, user, password).
-    =>Spring Boot supports 3 Embedded DBs. Those are : H2, HSQLDB, Apache Derby.
-    =>We can use any one Embedded Database which runs in RAM (Temp memory).
-    =>It uses hbm2ddl.auto=create-drop i.e Tables created when App starts and deleted before App Stops.
-    =>These DBs are used in both Development and Testing Environment, but not in Production.
+🧩 ✅ #2:- Data JPA provides “Embedded Database Support”. It means Database provided in application itself.
+✅ It is not required to download and Install, not even properties required (like driver class, url, user, password).
+✅ Spring Boot supports 3 Embedded DBs. Those are : H2, HSQLDB, Apache Derby.
+✅ We can use any one Embedded Database which runs in RAM (Temp memory).
+✅ It uses hbm2ddl.auto=create-drop i.e Tables created when App starts and deleted before App Stops.
+✅ These DBs are used in both Development and Testing Environment, but not in Production.
+✅ Spring Boot also supports Both SQL (MySQL, Oracle) and NoSQL (MongoDB)Database etc.. also.
+✅ Data JPA Supports Special concept “Query Methods an easy way to code and fetch data from DB” (ex : findBy, @Query).
+✅ Data JPA supports Easy Connection Pooling (Auto Config) concept.
+✅ Data JPA supports Cache Management (AutoConfig)
 
-#3:- Spring Boot also supports Both SQL (MySQL, Oracle) and NoSQL (MongoDB)Database etc.. also.
+🧠 Repository Interfaces:
+*************************
+✅ Data JPA has provided Repository Interfaces in package “org.springframework.data.repository”.
+✅ Primary key data Type must be Wrapper class or any other classes which implements java.io.Serializable.
+✅ Primitive Types are not accepted as PK DataType for model & for Repository Coding.
 
-#4:- Data JPA Supports Special concept “Query Methods an easy way to code and fetch data from DB” (ex : findBy, @Query).
-
-#5:- Data JPA supports Easy Connection Pooling (Auto Config) concept.
-
-#6:- Data JPA supports Cache Management (AutoConfig)
-
-Repository Interfaces:
-*********************
-=>Data JPA has provided Repository Interfaces in package “org.springframework.data.repository”.
-=>Primary key data Type must be Wrapper class or any other classes which implements java.io.Serializable.
-=>Primitive Types are not accepted as PK DataType for model & for Repository Coding.
-
-Method Descriptions:
-********************
-1> save (obj) :-- Behaves like save or update, If PK exist in DB table then “UPDATE” else “INSERT”.
-2> findById(ID): Optional<T> :-- It will return one row as one Object based on Primary key in Optional <T> format.
+🧠 Method Descriptions:
+***********************
+✅ 1> save (obj) :-- Behaves like save or update, If PK exist in DB table then “UPDATE” else “INSERT”.
+✅ 2> findById(ID): Optional<T> :-- It will return one row as one Object based on Primary key in Optional <T> format.
     =>use methods isPresent() to check record is exist or not? If exist use method get() : T to read object.
-3> finadAll () :-- It returns Collection of Objects (=no Of rows in DB Table)
+✅ 3> finadAll () :-- It returns Collection of Objects (=no Of rows in DB Table)
     =>In simple select * from tableName;
-4> deleteById(ID) :-- To delete one Row based on PK.
-5> deleteAll() :-- To delete all Rows [One by one row]
-6> deleteAllInBatch () :-- To delete All rows at a time ex: delete from <tableName>
+✅ 4> deleteById(ID) :-- To delete one Row based on PK.
+✅ 5> deleteAll() :-- To delete all Rows [One by one row]
+✅ 6> deleteAllInBatch () :-- To delete All rows at a time ex: delete from <tableName>
 
-2.2 Query Method in Spring Boot Data:
-*************************************
-=>Spring Data generates a query based on method written in Repository by Programmer.
-  Types of Query Methods (3):
-    1> findBy
-    2> @Query (manual Query)
-    3> Special Parameters/ReturnTypes
-        =>These are used to specify our columns (Projections) and rows (restrictions) details.
-        1> findBy :-- It will generate select query based on abstract method given by programmer. We can provide columns and rows details.
-            =>It will be converted to equal SQL query based on Database at runtime.
-            Syntax:--
-              RT findBy______(Parameters …);
-                Here, RT = ReturnType, ex: List<T>, T, Object, Page<T>, Slice<T>, Object[], Specific Projection etc.
+🧠 2.2 Query Method in Spring Boot Data:
+****************************************
+✅ Spring Data generates a query based on method written in Repository by Programmer.
+Types of Query Methods (3):
+🚀 1> findBy
+🚀 2> @Query (manual Query)
+🚀 3> Special Parameters/ReturnTypes
+   
+✅ 1. findBy :
+⚡ It will generate select query based on abstract method given by programmer. We can provide columns and rows details.
+⚡ It will be converted to equal SQL query based on Database at runtime.
+⚡ Syntax:--
+      RT findBy______(Parameters …);
+      Here, RT = ReturnType, ex: List<T>, T, Object, Page<T>, Slice<T>, Object[], Specific Projection etc.
 
-        2> @Query(“hql”):
-          => This is used to perform (Hibernate Query Language) operations, works for both select and non-select operations.
-          =>To pass where clause inputs use positional parameters in style ?1, ?2, ?3…. Or Named parameters in style [:name]:a, :b, :c, :hello, : mydata
-          =>But variable name must be same as named parameter.
-          =>Providing package name for Model class in @Query is optional. i.e. select p from com.app.model.Product, select p from Product (are same)
-          =>To perform non-select operation define HQL(Query) and apply @Modifying and @Transaction over @Query method.
-          =>@Transaction can be applied over repository method or in service layer method.
+✅ 2. @Query(“hql”):
+⚡ This is used to perform (Hibernate Query Language) operations, works for both select and non-select operations.
+⚡ To pass where clause inputs use positional parameters in style ?1, ?2, ?3…. Or 
+    Named parameters in style [:name]:a, :b, :c, :hello, : mydata
+⚡ But variable name must be same as named parameter.
+⚡ Providing package name for Model class in @Query is optional. i.e. select p from com.app.model.Product, select p from Product (are same)
+⚡ To perform non-select operation define HQL(Query) and apply @Modifying and @Transaction over @Query method.
+⚡ @Transaction can be applied over repository method or in service layer method.
 
-        3. PROJECTIONS:  
-          =>By default every Query method (findBy__) return all columns (full loading).
-          =>Here Projections are used to select few columns (variables).
-          => Projections are two types
-             Static Projections
-             Dynamic Projections
+✅ 3. PROJECTIONS:  
+⚡ By default every Query method (findBy__) return all columns (full loading).
+⚡ Here Projections are used to select few columns (variables).
+⚡ Projections are two types
+   🚀 1. Static Projections      🚀 2. Dynamic Projections
 
-              1. Static Projections:-- This concept is used for always fixed types of columns selection for multiple runs (or calls).
-                    Steps to implements static Projections:
-                        Step#1:- Define one child interface (inner interface) in Repository interface with any name. (OR) Create one public interface & use that inside
-                                  RepositoryInterface as DataType
-                        Step#2:- Copy variable equal getter method (getMethods()) from model class to child interface.
-                        Step#3:- Use that child Interface as ReturnType for findBy() findBy methods.
-                        Format:
-                          SYNTAX:
-                            Interface _______Repository extends JpaRepository<…>{
-                              Interface <childType> {
-                                DataType getVariable();
-                                DataType getVariable();
-                              }
-                              List<childType>findBy___(…);
-                            }
-                          Example:
-                              Entity Class
-                              ------------
-                              @Entity public class Product {
-                                @Id
-                                private Integer prodId;
-                                private String vendorCode;
-                                private String prodName;
-                                private Double prodCost;
-                                //constructors, getter&setters, toString
-                              }
-                              Repo
-                              -----
-                              public interface ProductRepository extends JpaRepository <Product, Integer> {
-                                interface MyView {
-                                  //Copy from getter method (RT and methodName)
-                                  String getVendorCode();
-                                  String getProdName();
-                                  Double getProdCost();
-                                }
-                                  //select code, cost from prodtab where ven_code=?
-                                  List<MyView> findByVendorCode(String vc);
-                              }
-                              Main Method:
-                              ------------
-                              List<MyView> p = repo.findByVendorCode("B");
-
-              2. Dynamic Projections: In this case findBy(___) method return type is decided at runtime (i.e It is Generics)
-                  Format & Syntax:
-                      <T> List<T> findBy___(...,Class<T>clz); //fixed Line
-                      Note:-- Here “T” is child interface type, provide at runtime                                
+🧠 1. Static Projections:
+✅ This concept is used for always fixed types of columns selection for multiple runs (or calls).
+✅ Steps to implements static Projections:
+⚡ Step#1:- Define one child interface (inner interface) in Repository interface with any name. 
+            (OR) Create one public interface & use that inside RepositoryInterface as DataType
+⚡ Step#2:- Copy variable equal getter method (getMethods()) from model class to child interface.
+⚡ Step#3:- Use that child Interface as ReturnType for findBy() findBy methods.
+Format:
+  SYNTAX:
+  Interface _______Repository extends JpaRepository<…>{
+    Interface <childType> {
+      DataType getVariable();
+      DataType getVariable();
+    }
+    List<childType>findBy___(…);
+  }
+  Example:
+  @Entity 
+  public class Product {
+          @Id
+          private Integer prodId;
+          private String vendorCode;
+          private String prodName;
+          private Double prodCost;
+          //constructors, getter&setters, toString
+  }
+  
+  public interface ProductRepository extends JpaRepository <Product, Integer> {
+         interface MyView {
+                  //Copy from getter method (RT and methodName)
+                  String getVendorCode();
+                  String getProdName();
+                  Double getProdCost();
+          }
+          //select code, cost from prodtab where ven_code=?
+          List<MyView> findByVendorCode(String vc);
+  }
+  
+🧠 2. Dynamic Projections: 
+✅ In this case findBy(___) method return type is decided at runtime (i.e It is Generics)
+✅ Format & Syntax: 
+    <T> List<T> findBy___(...,Class<T>clz); //fixed Line
+    Note:-- Here “T” is child interface type, provide at runtime                                
                 
-                          Example:
-                              Entity Class
-                              ------------
-                              @Entity public class Product {
-                                @Id
-                                private Integer prodId;
-                                private String vendorCode;
-                                private String prodName;
-                                private Double prodCost;
-                                //constructors, getter&setters, toString
-                              }
-                              Repo
-                              -----
-                              public interface ProductRepository extends JpaRepository <Product, Integer> {
-                                 //2. Dynamic Projection Code
-                                interface MyViewTwo {
-                                     //Copy from getter method (RT and methodName)
-                                     Integer getProdId();
-                                     Double getProdCost();
-                                }
-                                interface MyView {
-                                  //Copy from getter method (RT and methodName)
-                                  String getVendorCode();
-                                  String getProdName();
-                                  Double getProdCost();
-                                }
-                                  //select code, cost from prodtab where ven_code=?
-                                  List<MyView> findByVendorCode(String vc);
-                              }
-                              Main Method:
-                              ------------
-                              repo.findByVendorCode("V3",MyViewTwo.class).stream().map((ob)->ob.getProdId()+","+ob.getProdCost()).forEach(System.out::println);
+✅ Example:
+Entity Class: 
+       @Entity 
+        public class Product {
+                      @Id
+                      private Integer prodId;
+                      private String vendorCode;
+                      private String prodName;
+                      private Double prodCost;
+                      //constructors, getter&setters, toString
+          }
+Repo: 
+    public interface ProductRepository extends JpaRepository <Product, Integer> {
+           //2. Dynamic Projection Code
+           interface MyViewTwo {
+             //Copy from getter method (RT and methodName)
+             Integer getProdId();
+             Double getProdCost();
+           }
+           interface MyView {
+                     //Copy from getter method (RT and methodName)
+                     String getVendorCode();
+                     String getProdName();
+                     Double getProdCost();
+           }
+           //select code, cost from prodtab where ven_code=?
+           List<MyView> findByVendorCode(String vc);
+    }
+Main Method:
+    repo.findByVendorCode("V3",MyViewTwo.class).stream().map((ob)->ob.getProdId()+","+ob.getProdCost()).forEach(System.out::println);
 
-Note:--
-=>Dynamic Projections are slow compare to static Projections.
-=>For dynamic Projections “Type selection, validate and execution” done at Runtime, where as for static select and validate done at compile time, only execution done at runtime.
-=>Static Projections also called as compile time (selected) Projections and Dynamic Projections also called as Runtime (selected) Projections.
+⚡ Note:--
+🔹 Dynamic Projections are slow compare to static Projections.
+🔹 For dynamic Projections “Type selection, validate and execution” done at Runtime, where as for static select and validate done at 
+    compile time, only execution done at runtime.
+🔹 Static Projections also called as compile time (selected) Projections and Dynamic Projections also called as Runtime (selected) 
+    Projections.
 
-Special Types in Query methods:
-*******************************
-1. Page<T>
-2. Slice<T>
-3. Stream<T>
+🧠 Special Types in Query methods:
+**********************************
+🚀 1. Page<T>
+🚀 2. Slice<T>
+🚀 3. Stream<T>
 
-=>These are Special type outputs for Query methods to get “Pagination data”.
-  1. Streamable(I):-- It will help to return Collection data (one page only) in Stream<T> (java.util) format,where we can apply functions like filter, sort, map and collect…etc
-  2. Slice(I):-- It is used to provide current page data and links with previous and next page details ** It never holds all pages details like total no.of pages and total Elements.
-  3. Page(I):-- It is extension to Slice and holds even total no.of pages (links to other pages) and total Elements (total rows details)
+These are Special type outputs for Query methods to get “Pagination data”.
+ ✅ 1. Streamable(I):-- It will help to return Collection data (one page only) in Stream<T> (java.util) format,
+        where we can apply functions like filter, sort, map and collect…etc
+ ✅ 2. Slice(I):-- It is used to provide current page data and links with previous and next page details ** 
+        It never holds all pages details like total no.of pages and total Elements.
+ ✅ 3. Page(I):-- It is extension to Slice and holds even total no.of pages (links to other pages) and 
+        total Elements (total rows details)
 
     Page(and Slice):
     ***************
@@ -343,19 +346,21 @@ Special Types in Query methods:
       Step#3:- In Runner class call method and print details like, isEmpty?, first?, last?....etc 
                 Streaming:-- Streaming is process of Read  filter  sort  map  collect
       =>Over collection data which uses Streams concept given in JDK 1.8.
-      =>Streams are used to execute series of operations in one or less Iterations, which reduces execution time to normal programmer iterations.
-  4. Connection Pooling in SpringBootData:
-      =>SpringBoot 1.X works on Tomcat Connection pooling as default and Boot2.X works on Hikari connection pooling which is very fast in service.
-      **This is not required to be configured by developer. By default spring boot configures using class input “HikariConfig” with all default values (milli sec time).
-      **To provide Programmer specific values use key spring.datasource.hikari.* in 
-  application.properties.
-  =-=-=-=application.properties=--=-=-=
-    spring.datasource.hikari.connection-timeout=20000
-    spring.datasource.hikari.minimum-idle=5
-    spring.datasource.hikari.maximum-pool-size =12
-    spring.datasource.hikari.idle-timeout =300000
-    spring.datasource.hikari.max-lifetime =12000
-    spring.datasource.hikari.auto-commit =true
+      =>Streams are used to execute series of operations in one or less Iterations, which reduces execution time to normal programmer 
+        iterations.
+  ✅ 4. Connection Pooling in SpringBootData:
+      🔹 SpringBoot 1.X works on Tomcat Connection pooling as default and Boot2.X works on Hikari connection pooling which is very 
+          fast in service.
+      🔹 This is not required to be configured by developer. By default spring boot configures using class input “HikariConfig” 
+        with all default values (milli sec time).
+      🔹 To provide Programmer specific values use key spring.datasource.hikari.* in 
+      🔹 application.properties.
+          spring.datasource.hikari.connection-timeout=20000
+          spring.datasource.hikari.minimum-idle=5
+          spring.datasource.hikari.maximum-pool-size =12
+          spring.datasource.hikari.idle-timeout =300000
+          spring.datasource.hikari.max-lifetime =12000
+          spring.datasource.hikari.auto-commit =true
 
 
 ********************************************************** SB WEB MVC ******************************************************************************************************************
