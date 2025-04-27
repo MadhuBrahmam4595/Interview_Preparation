@@ -1,0 +1,137 @@
+
+Ways to Reverse an Array in Java (with Explanations)
+----------------------------------------------------
+
+1. Two Pointer Approach (In-Place Swap)
+----------------------------------------
+int[] arr = {1, 2, 3, 4, 5};
+int left = 0, right = arr.length - 1;
+while (left < right) {
+    int temp = arr[left];
+    arr[left] = arr[right];
+    arr[right] = temp;
+    left++;
+    right--;
+}
+Comment: Swap first and last elements, then move inward.
+
+2. Using a New Array
+---------------------
+int[] arr = {1, 2, 3, 4, 5};
+int[] reversed = new int[arr.length];
+for (int i = 0; i < arr.length; i++) {
+    reversed[i] = arr[arr.length - 1 - i];
+}
+Comment: Copy elements from end of original array to new array.
+
+3. Using Collections.reverse() (For Integer[])
+-----------------------------------------------
+Integer[] arr = {1, 2, 3, 4, 5};
+List<Integer> list = Arrays.asList(arr);
+Collections.reverse(list);
+Comment: Works with Integer[], not int[]. Converts to List and uses Collections utility.
+
+4. Using Stack
+--------------
+int[] arr = {1, 2, 3, 4, 5};
+Stack<Integer> stack = new Stack<>();
+for (int num : arr) {
+    stack.push(num);
+}
+for (int i = 0; i < arr.length; i++) {
+    arr[i] = stack.pop();
+}
+Comment: Push all elements onto a stack, then pop back to array (LIFO order).
+
+5. Using Streams (Java 8+)
+---------------------------
+Integer[] arr = {1, 2, 3, 4, 5};
+Integer[] reversed = IntStream.rangeClosed(1, arr.length)
+                              .mapToObj(i -> arr[arr.length - i])
+                              .toArray(Integer[]::new);
+Comment: Functional way using Java Streams to reverse.
+
+6. Using Recursion
+-------------------
+void reverse(int[] arr, int left, int right) {
+    if (left >= right) return;
+    int temp = arr[left];
+    arr[left] = arr[right];
+    arr[right] = temp;
+    reverse(arr, left + 1, right - 1);
+}
+// Usage:
+int[] arr = {1, 2, 3, 4, 5};
+reverse(arr, 0, arr.length - 1);
+Comment: Swap outer elements recursively until middle is reached.
+
+7. Using ArrayDeque
+--------------------
+int[] arr = {1, 2, 3, 4, 5};
+Deque<Integer> deque = new ArrayDeque<>();
+for (int num : arr) {
+    deque.addFirst(num);
+}
+int index = 0;
+for (int num : deque) {
+    arr[index++] = num;
+}
+Comment: Deque allows fast addFirst operations.
+
+8. Manual Swap Using For Loop
+------------------------------
+int[] arr = {1, 2, 3, 4, 5};
+for (int i = 0; i < arr.length / 2; i++) {
+    int temp = arr[i];
+    arr[i] = arr[arr.length - 1 - i];
+    arr[arr.length - 1 - i] = temp;
+}
+Comment: Same as two-pointer, written compactly with a for loop.
+
+Super Optimized for Huge Arrays (Millions of Elements)
+------------------------------------------------------
+
+Option 1: System.arraycopy + In-Place Reverse
+----------------------------------------------
+public class ReverseArrayOptimized {
+    public static void main(String[] args) {
+        int[] arr = new int[1_000_000]; // 1 million elements
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = i + 1;
+        }
+
+        int[] reversed = new int[arr.length];
+        System.arraycopy(arr, 0, reversed, 0, arr.length);
+
+        for (int i = 0, j = reversed.length - 1; i < j; i++, j--) {
+            int temp = reversed[i];
+            reversed[i] = reversed[j];
+            reversed[j] = temp;
+        }
+
+        System.out.println(reversed[0]); // 1_000_000
+        System.out.println(reversed[reversed.length - 1]); // 1
+    }
+}
+Comment: Copy array using fast native method and then reverse with two pointers.
+
+Option 2: Pure In-Place Reverse (No Copy)
+------------------------------------------
+public class ReverseArrayInPlace {
+    public static void main(String[] args) {
+        int[] arr = new int[1_000_000];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = i + 1;
+        }
+
+        for (int i = 0, j = arr.length - 1; i < j; i++, j--) {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+
+        System.out.println(arr[0]); // 1_000_000
+        System.out.println(arr[arr.length - 1]); // 1
+    }
+}
+Comment: Fastest if original array can be modified directly (no need to duplicate).
