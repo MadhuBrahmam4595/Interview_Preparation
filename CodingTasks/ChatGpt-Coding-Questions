@@ -1,0 +1,376 @@
+Level-1 Java Interview Coding Questions
+=======================================
+1. Reverse a String
+2. Check if a String is a Palindrome
+3. Find the Factorial of a Number
+4. Find the Largest Element in an Array
+5. Fibonacci Series up to N terms
+6. Check if a Number is Prime
+7. Swap Two Numbers Without Using a Third Variable
+8. Find Duplicate Elements in an Array
+9. Count the Occurrences of Each Character in a String
+10. Check for Armstrong Number
+
+Level-2 Java Interview Coding Questions
+=======================================
+1. Find the First Non-Repeating Character in a String
+2. Sort a List of Strings by Length
+3. Find Maximum Element in a List Using Streams
+4. Custom Sorting with Comparator (Employee salary sorting)
+5. Deadlock Example in Java
+6. Producer-Consumer Problem (Using wait/notify)
+7. Immutable Class Example
+8. Count Words in a String
+9. Convert List to Map (Java 8 Stream)
+10. Singleton Design Pattern (Thread Safe)
+
+Level-3 Java Interview Coding Challenges
+========================================
+1. Custom Implementation of HashMap (Basic Version)
+2. Java 8 map() vs flatMap() Example
+3. Multithreaded ExecutorService Example
+4. SOLID Principles Coding Example (Single Responsibility + Open-Closed)
+5. Find Second Highest Number in an Array Without Sorting
+6. Detect Cycle in LinkedList (Floyd's Cycle Algorithm)
+7. Find Missing Number from 1 to N (Sum Formula)
+8. Immutable Map in Java 8
+9. Java 8 Filter and Collect Example
+10. Callable and Future Example (Get result from thread)
+
+🔥 Real Java Interview Asked Questions
+=======================================
+🧠 Core Java
+What happens if you override equals() but not hashCode()?
+
+Risk of breaking HashSet, HashMap contracts. May store duplicates.
+
+What is the difference between == and equals() in Java?
+
+Explain StringBuilder vs StringBuffer. Why is StringBuffer slower?
+
+What is the output of:
+
+String s1 = "abc";
+String s2 = new String("abc");
+System.out.println(s1 == s2);
+How does Java achieve memory management? Explain GC, Heap, Stack.
+
+Write a Java program to detect palindrome without using reverse function.
+
+
+⚙️ OOPS and Design Patterns
+What is SOLID Principle? Explain with real-life example.
+
+Difference between Abstract Class and Interface? When will you use Abstract Class?
+
+Design a CoffeeMachine class using Factory Design Pattern.
+
+Explain Dependency Injection. How is it used in Spring Framework?
+
+What is Singleton Pattern? Can you break it using Reflection? How to prevent that?
+
+🌐 Java 8 (Streams, Functional Interface)
+What is the difference between map() and flatMap() in Java 8?
+
+Explain method reference (ClassName::methodName) with an example.
+
+Given a List of Strings, write code to group by first character.
+
+What is Optional in Java 8? How is it better than checking for null?
+
+How to sort a list of Employees by salary descending and then by name ascending using Streams?
+
+⚡ Multithreading and Concurrency
+Difference between synchronized block and synchronized method?
+
+What is volatile keyword? Why and when should you use it?
+
+What is a Deadlock? How can you prevent deadlocks?
+
+Explain Callable vs Runnable in Java.
+
+What is ExecutorService? How is it better than manually creating Threads?
+
+What is ThreadLocal in Java? Give a real-world use case.
+
+🏛️ Spring Boot (Very Hot Topics)
+What is @Component, @Repository, @Service, @Controller — differences?
+
+Explain the flow of Spring Boot application startup.
+
+What is the difference between @Autowired field injection and constructor injection? Why constructor injection is preferred?
+
+How to handle exceptions globally in Spring Boot? (Hint: @ControllerAdvice + @ExceptionHandler)
+
+What is Spring Boot Starter? Explain it.
+
+📚 Database (SQL + JPA)
+What is the difference between INNER JOIN and LEFT JOIN?
+
+What is the N+1 select problem in Hibernate? How do you solve it?
+
+Explain the lifecycle of a JPA Entity.
+
+How to write a custom query in JPA Repository? (with @Query)
+
+Explain Lazy Loading vs Eager Loading in JPA.
+
+🔥 Some Rapid-Fire Java Questions (They ask fast)
+Checked Exception vs Unchecked Exception?
+
+final vs finally vs finalize?
+
+Serialization vs Deserialization?
+
+Immutable class example in Java?
+
+What is the output of: System.out.println(10 + 20 + "Hello" + 10 + 20);
+
+Why is String immutable in Java?
+
+Can we override private methods? (No.)
+
+🧠 Top 50 Java 8 Coding Challenges (with short hints)
+🎯 1-10: Stream Basic Operations
+Find even numbers from a list.
+
+Convert list of Strings to uppercase.
+
+Find distinct elements from a list.
+
+Sort a list of integers in ascending and descending order.
+
+Count elements greater than 10 in a list.
+
+Find the maximum and minimum value from a list.
+
+Square all numbers and remove duplicates.
+
+Sum all numbers in a list using reduce().
+
+Check if all elements are even.
+
+Check if any element is greater than 100.
+
+🎯 11-20: String and Collections Processing
+Group words by their first letter.
+
+Find duplicate elements in a list.
+
+Partition list into even and odd numbers.
+
+Find the first non-repeated character in a string.
+
+Reverse each word in a sentence.
+
+Count occurrences of each character in a string.
+
+Find common elements between two lists.
+
+Remove empty strings from a list.
+
+Merge two lists and remove duplicates.
+
+Sort a list of strings by length.
+
+🎯 21-30: Advanced Collectors and Mapping
+Find frequency of each element using groupingBy.
+
+Partition a list of employees by gender.
+
+Find highest paid employee in each department.
+
+Group employees by department.
+
+Calculate average salary of employees.
+
+Join all strings with a delimiter (like comma).
+
+Convert a List into a Map with ID as key and object as value.
+
+Find the second highest number from a list.
+
+Sort Map by values.
+
+Filter Map based on value condition (e.g., salary > 50000).
+
+🎯 31-40: Optional, Date API, Parallel Streams
+Handle null values using Optional.ofNullable().
+
+Return default value if Optional is empty.
+
+Throw custom exception if Optional is empty.
+
+Convert String to LocalDate.
+
+Find difference between two dates.
+
+Sort employees by date of joining.
+
+Use parallel stream to sum large list elements.
+
+Find duplicate words in a sentence.
+
+Flatten nested list into a single list using flatMap.
+
+Convert List of Integers to primitive int[].
+
+🎯 41-50: Real World Business Problems
+Find the department with maximum employees.
+
+Find average age of male and female employees separately.
+
+List youngest male employee in each department.
+
+Partition employees into experienced (>5 years) and freshers.
+
+Group transactions by year and month.
+
+Sort employees by name, then by salary.
+
+Check if a list is sorted.
+
+Find employees who joined before 2015.
+
+Get top 3 highest paid employees.
+
+Custom collector: Summarize salaries into a String.
+
+🧠 Top 30 Advanced Java 8 Coding Problems
+🚀 1-10: Advanced Streams, Collectors, Functional
+Find the nth highest salary from Employee list.
+
+Flatten nested Map<String, List<String>> into List<String>.
+
+Implement a custom Collector to collect elements into a TreeSet.
+
+Given a list of students with marks, group by pass and fail. (pass >= 40)
+
+Partition transactions based on amount > 10000.
+
+Find all anagrams from a list of strings.
+
+Convert List<String> into a single comma-separated String in sorted order.
+
+Sort a list of Employees first by department, then by salary descending.
+
+Find duplicate numbers without using extra memory (using frequency in Streams).
+
+Create a Map<EmployeeName, Salary> from List<Employee>, handling duplicate keys by taking max salary.
+
+🚀 11-20: Parallelism, DateTime, FlatMaps
+Use parallelStream() to improve performance for summing 10 million integers.
+
+Given a list of products, group by category and then calculate average price per category.
+
+Convert List<Employee> to Map<Department, List<Employee>> and filter by salary > 50000.
+
+Find the first element in a Stream that satisfies two conditions.
+
+Implement your own filter() method using Functional Interface.
+
+Find all palindromic words in a list.
+
+Find total number of working days between two LocalDates (ignore weekends).
+
+Sort employees by seniority (using joining date) and then salary.
+
+Find the maximum element in a list without using max() function (use reduce).
+
+Reverse a Stream without using collections (HARD).
+
+🚀 21-30: Complex Real-world Scenarios
+Find Top 3 most frequent words in a paragraph.
+
+Convert a List<List<String>> into a flattened List<String> removing duplicates.
+
+Group books by author and sort books in each group by title.
+
+Count employees joined in each year.
+
+Given list of transactions, find total transaction value by customer name.
+
+Detect duplicate Employees based on name + DOB combination.
+
+Find the employee with the earliest joining date in each department.
+
+Find all prime numbers between 1 to 100 using Java 8 streams.
+
+Sort employees by last name (assuming full name is a String).
+
+Given a huge CSV file (>1GB), read and process line by line using streams efficiently.
+
+🎯 Sample Advanced Code Examples
+✅ Find nth Highest Salary
+
+java
+Copy
+Edit
+Optional<Integer> nthSalary = salaries.stream()
+    .distinct()
+    .sorted(Comparator.reverseOrder())
+    .skip(n - 1)
+    .findFirst();
+✅ Group Students by Pass/Fail
+
+java
+Copy
+Edit
+Map<Boolean, List<Student>> partitioned = students.stream()
+    .collect(Collectors.partitioningBy(s -> s.getMarks() >= 40));
+✅ Top 3 Frequent Words in Paragraph
+
+java
+Copy
+Edit
+Map<String, Long> freq = Arrays.stream(paragraph.split("\\s+"))
+    .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+freq.entrySet().stream()
+    .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+    .limit(3)
+    .forEach(System.out::println);
+✅ Find All Anagrams Together
+
+java
+Copy
+Edit
+Map<String, List<String>> groupedAnagrams = words.stream()
+    .collect(Collectors.groupingBy(word -> {
+        char[] chars = word.toCharArray();
+        Arrays.sort(chars);
+        return new String(chars);
+    }));
+
+📚 Examples of Some Key Codes
+✅ Find Even Numbers from List
+
+java
+Copy
+Edit
+List<Integer> evens = numbers.stream()
+                             .filter(n -> n % 2 == 0)
+                             .collect(Collectors.toList());
+✅ Group by First Character
+
+java
+Copy
+Edit
+Map<Character, List<String>> grouped = words.stream()
+        .collect(Collectors.groupingBy(word -> word.charAt(0)));
+✅ Find Maximum Salary Employee
+
+java
+Copy
+Edit
+Optional<Employee> highestPaid = employees.stream()
+        .max(Comparator.comparing(Employee::getSalary));
+✅ Find Duplicates
+
+java
+Copy
+Edit
+Set<Integer> duplicates = list.stream()
+    .filter(i -> Collections.frequency(list, i) > 1)
+    .collect(Collectors.toSet());
+
