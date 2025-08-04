@@ -1,0 +1,157 @@
+🌟 🔁 ⚡ 🧩 🧠 ✅ 🎯 🌐 📌 🆚 🔥 🚦 🧪 📦 ⚙️ 🚀 🔍 🔧 🎁 📁 🔐 ➡️ ❌ 🧭 🔹 🎨 🧱 📱 ♿ ⛔ 💡 📡 ♻️ 🔗 👋 📚 
+
+🧠 1. What is Exception Handling in Spring Boot?
+
+🌐 Exception Handling in Spring Boot is the mechanism to:
+⚡ Catch runtime/application errors
+⚡ Log them
+⚡ Send appropriate HTTP responses to the client
+⚡ Avoid exposing internal details (stack traces, DB errors)
+
+🧠 2. Why Handle Exceptions in Spring Boot?
+
+| Purpose                    | Benefit                                         |
+| -------------------------- | ----------------------------------------------- |
+| Centralized error handling | Cleaner code, no repetitive try-catch           |
+| Better client feedback     | Sends meaningful HTTP responses (e.g. 404, 400) |
+| Secure the app             | Avoid leaking internal implementation           |
+| Logging and monitoring     | Easier to debug with meaningful logs            |
+
+🧠 3. Types of Exceptions in Spring Boot
+
+| Type of Exception        | Example                                                                     |
+| ------------------------ | --------------------------------------------------------------------------- |
+| **Checked** Exceptions   | `IOException`, `SQLException`                                               |
+| **Unchecked** Exceptions | `NullPointerException`, `IllegalArgumentException`                          |
+| **Custom** Exceptions    | `UserNotFoundException`, `InvalidRequestException`                          |
+| **Spring Exceptions**    | `HttpRequestMethodNotSupportedException`, `MethodArgumentNotValidException` |
+
+🧠 4. Exception Handling Approaches in Spring Boot
+
+🔹 Approach 1: Using @ControllerAdvice with @ExceptionHandler (Most Recommended)
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleResourceNotFound(ResourceNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationErrors(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+            errors.put(error.getField(), error.getDefaultMessage()));
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleGeneric(Exception ex) {
+        return new ResponseEntity<>("Something went wrong", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+
+🔹 Approach 2: Custom Exception Class
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}
+Throw it like this in a service:
+User user = userRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+
+🔹 Approach 3: Using @ResponseStatus on Exception Class
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}
+No need for explicit handler if used like this. But limited customization.
+
+🔹 Approach 4: Handle Validation Errors (@Valid + @ExceptionHandler)
+DTO:
+public class UserDto {
+    @NotBlank(message = "Name is mandatory")
+    private String name;
+
+    @Email(message = "Invalid email format")
+    private String email;
+}
+
+Controller:
+@PostMapping("/users")
+public ResponseEntity<User> createUser(@Valid @RequestBody UserDto dto) {
+    // Save logic
+}
+
+Handled in @ControllerAdvice:
+@ExceptionHandler(MethodArgumentNotValidException.class)
+public ResponseEntity<Map<String, String>> handleValidationErrors(MethodArgumentNotValidException ex) {
+    Map<String, String> errors = new HashMap<>();
+    ex.getBindingResult().getFieldErrors().forEach(error ->
+        errors.put(error.getField(), error.getDefaultMessage()));
+    return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+}
+
+🧠 5. Best Practices
+✅ Centralize all exceptions using @RestControllerAdvice
+✅ Always define custom exceptions for business logic
+✅ Do not expose internal errors to clients
+✅ Log exceptions (use Logger or SLF4J)
+✅ Handle validation and type mismatch errors cleanly
+✅ Return proper HTTP status codes (400, 404, 500, etc.)
+
+🧠 6. ResponseEntity Format Example
+JSON:
+{
+  "timestamp": "2025-07-07T10:00:00",
+  "status": 404,
+  "error": "Not Found",
+  "message": "User not found with id: 5",
+  "path": "/users/5"
+}
+To return this format, you can build a custom error response model:
+public class ErrorResponse {
+    private LocalDateTime timestamp;
+    private int status;
+    private String error;
+    private String message;
+    private String path;
+
+    // Constructor, Getters, Setters
+}
+Then in handler:
+@ExceptionHandler(ResourceNotFoundException.class)
+public ResponseEntity<ErrorResponse> handleNotFound(ResourceNotFoundException ex, WebRequest request) {
+    ErrorResponse error = new ErrorResponse(
+        LocalDateTime.now(),
+        HttpStatus.NOT_FOUND.value(),
+        "Not Found",
+        ex.getMessage(),
+        ((ServletWebRequest) request).getRequest().getRequestURI()
+    );
+    return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+}
+
+🧠 7. Exception Handling Tools in Spring
+| Tool/Annotation                   | Purpose                                     |
+| --------------------------------- | ------------------------------------------- |
+| `@RestControllerAdvice`           | Centralized exception handler               |
+| `@ExceptionHandler`               | Method-level handler for exceptions         |
+| `@ResponseStatus`                 | Mark exception with HTTP status             |
+| `BindingResult`                   | Captures validation errors                  |
+| `MethodArgumentNotValidException` | Triggered by `@Valid` failed DTO validation |
+| `HttpMessageNotReadableException` | JSON parse errors                           |
+
+🧠 8. Interview FAQs
+| Question                                                           | Short Answer                                              |
+| ------------------------------------------------------------------ | --------------------------------------------------------- |
+| How to handle exceptions globally?                                 | Use `@RestControllerAdvice` + `@ExceptionHandler`         |
+| Difference between `@ControllerAdvice` and `@RestControllerAdvice` | The latter combines `@ControllerAdvice` + `@ResponseBody` |
+| How to handle validation errors?                                   | Use `@Valid` + `MethodArgumentNotValidException`          |
+| How to send custom response body?                                  | Create a custom class like `ErrorResponse`                |
+| How to handle unknown exceptions?                                  | Catch `Exception.class` in the global handler             |
+
+
