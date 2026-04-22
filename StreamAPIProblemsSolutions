@@ -1,0 +1,34 @@
+🌟 🔁 ⚡ 🧩 🧠 ✅ 🎯 🌐 📌 🆚 🔥 🚦 🧪 📦 ⚙️ 🚀 🔍 🔧 🎁 📁 🔐 ➡️ ❌ 🧭 🔹 🎨 🧱 📱 ♿ ⛔ 💡 📡 ♻️ 🔗 👋 📚 
+
+🧠 1. Given a sentence, find the word that has the highest length?
+📌 Input: String s = "I am learning Streams API in Java"
+💡 Output: learning
+🔥 String longestWord2 = Arrays.stream(str.split(" ")).max(Comparator.comparing(String::length)).get();
+
+🧠 2. Remove duplicates from the string and return in the same order?
+📌 Input: String s = "dabcadefg"
+💡 Output: dabcefg
+🔥 s.chars().distinct().mapToObj(c -> (char) c).forEach(System.out::print);
+
+🧠 3. Given a sentence, find the word that has the 2nd (Nth) highest length?
+📌 Input: String s = "I am learning Streams API in Java"
+💡 Output: Streams
+🔥 String result = Arrays.stream(str.split(" ")).sorted(Comparator.comparing(String::length).reversed()).skip(1).findFirst().orElse(null);
+
+🧠 4. Find the 2nd highest length word in a sentence?
+📌 Input: String s = "I am learning Streams API in Java"
+💡 Output: 7
+🔥 int result = Arrays.stream(str.split(" ")).map(x-> x.length()).sorted(Comparator.reverseOrder()).skip(1).findFirst().get();
+
+🧠 5. Given a sentence, find the occurances of each word?
+📌 Input: String s = "I am learning Streams API in Java"
+💡 Output: { Java=2, in=1, API=1, learning=1, am=1, Streams=1 }
+🔥 Map<String, Long> result = Arrays.stream(str.split(" ")).collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+
+
+
+
+
+
+
