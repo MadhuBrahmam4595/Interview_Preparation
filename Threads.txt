@@ -1,0 +1,29 @@
+🌟 🔁 ⚡ 🧩 🧠 ✅ 🎯 🌐 📌 🆚 🔥 🚦 🧪 📦 ⚙️ 🚀 🔍 🔧 🎁 📁 🔐 ➡️ ❌ 🧭 🔹 🎨 🧱 📱 ♿ ⛔ 💡 📡 ♻️ 🔗 👋 📚 
+
+🌟 Threads Introduction
+------------------------
+✅ A thread is the smallest unit of execution within a program.
+✅ It's lightweight subprocess that runs concurrently with other threads, sharing the same memory space of the process it belongs to.
+✅ This allows multiple tasks to execute simultaneously, improving application performance and responsiveness.
+
+
+🌟 Core ways to create threads
+-------------------------------
+✅ Java provides two primary methods for creating a new thread:
+
+💡 Implementing the Runnable Interface: Create a class that implements Runnable, override the run() method, and pass this object to a Thread constructor.
+🔹 Advantage: This is generally preferred as it allows the class to extend another class, circumventing Java's lack of multiple inheritance.
+
+💡 Extending the Thread Class: Create a class that extends Thread and override run() method.
+🔹 Advantage: Simpler for basic tasks.
+
+🌟 Essential Lifecycle States
+------------------------------
+✅ A thread transitions through several states from creation to termination.
+
+1. New: The thread object is created but start() hasn't been called.
+2. Runnable: The thread is ready to run and waiting for CPU allocation.
+3. Running: The thread is currently executing the code in its run() method.
+4. Blocked/Waiting: The thread is temporarily paused while waiting for a  resource or another thread's signal.
+5. Terminated: The thread has finished executing its task and cannot be restarted.
+
